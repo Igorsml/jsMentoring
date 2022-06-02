@@ -3,12 +3,13 @@
 function getCount(str) {
   let vowelsCount = 0;
   let vowelsArr = ['a', 'e', 'i', 'o', 'u']
-  
-  for(let i = 0; i <= str.length; i++) {
-    for(let j = 0; j < vowelsArr.length; j++)
-    if (str[i] == vowelsArr[j]) {
-      vowelsCount++;
+
+  for (let i = 0; i <= str.length; i++) {
+    for (let j = 0; j < vowelsArr.length; j++) {
+      if (str[i] == vowelsArr[j]) {
+        vowelsCount++;
+      }
     }
+    return vowelsCount;
   }
-  return vowelsCount;
 }
