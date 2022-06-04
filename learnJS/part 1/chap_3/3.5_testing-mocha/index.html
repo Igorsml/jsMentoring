@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- добавим стили mocha для отображения результатов -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.css">
+  <!-- добавляем сам фреймворк mocha -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.2.0/mocha.js"></script>
+  <script>
+    // включаем режим тестирования в стиле BDD
+    mocha.setup('bdd');
+  </script>
+  <!-- добавим chai -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
+  <script>
+    // chai предоставляет большое количество функций. Объявим assert глобально
+    let assert = chai.assert;
+  </script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BDD testing</title>
+</head>
+
+<body>
+  <script>
+    function pow(x, n) {
+      if (n < 0) return NaN;
+      if (Math.round(n) != n) return NaN;
+      let result = 1;
+
+      for (let i = 0; i < n; i++) {
+        result *= x;
+      }
+
+      return result;
+    }
+  </script>
+
+  <!-- скрипт со спецификацией (describe, it...) -->
+  <script src="/jsMentoring/learnJS/part 1/chap_3/3.5_testing-mocha/test.js"></script>
+  <!-- элемент с id="mocha" будет содержать результаты тестов -->
+  <div id="mocha"></div>
+  <!-- запускаем тесты! -->
+  <script>
+    mocha.run();
+  </script>
+</body>
+
+</html>
