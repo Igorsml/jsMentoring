@@ -1,4 +1,4 @@
-# Roadmap answer
+# JS cheat sheet
 
 ## Сколько типов данных в JS?
 
@@ -163,35 +163,24 @@ switch (a) {
 
 Нужно отметить, что проверка на равенство всегда строгая. Значения должны быть одного типа, чтобы выполнялось равенство.
 
+```jsx
 let number = +prompt('Enter number from 0 to 3', '')
 
-switch(number) {
-
-case '0':
-
-alert('You typed 0');
-
-break;
-
-case 1:
-
-alert('You typed 1');
-
-break
-
-case 2:
-
-case 3:
-
-alert('You typed 2 or 3');
-
-break;
-
-default:
-
-alert('Looks it\'\s not number between 0 and 3');
-
+switch (number) {
+  case '0':
+    alert('You typed 0');
+    break;
+  case 1:
+    alert('You typed 1');
+    break
+  case 2:
+  case 3:
+    alert('You typed 2 or 3');
+    break;
+  default:
+    alert('Looks it\'\s not number between 0 and 3');
 }
+```
 
 ### Function Declaration (Объявление Функции):
 
@@ -284,15 +273,11 @@ welcome();
 
 Шпаргалка с правилами синтаксиса (подробнее смотрите ниже по тексту):
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6e8f0d9f-026c-4641-90e0-17f320dbd8a2/Untitled.png)
-
 Максимальную длину строки согласовывают в команде. Обычно это `80` или `120` символов.
 
 ## [Комментарии](https://learn.javascript.ru/comments) (//, /* */)
 
 Комментарии нужны для для читаемости кода, но лучше чтобы код был *самодокументированным,* то есть задавать понятные имен переменным, дробить функции для лучшего понимания происходящего. Комментарии стоит указывать обобщенные, для лучшего понимания или если в них есть острая необходимость, где *самодокументированного* кода будет недостаточно. Также стоит учитывать перспективу рефакторинга, чтобы вернуться к коду завтра или через неделю и комментарии помогли разобраться в собственном коде.
-
- **
 
 ### Ниндзя код
 
