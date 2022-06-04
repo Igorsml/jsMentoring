@@ -11,7 +11,7 @@ function checkAge(age) {
 }
 */
 
-The else block is optional. You can have if without else
+// The else block is optional.You can have if without else
 
 /* Task 2 - if else to ? ternar operator
 
@@ -26,5 +26,26 @@ function checkAge(age) {
 const checkAge = (age) => (age > 18) ? true : confirm('Родители разрешили?');
 
 function checkAge(age) {
-  return (age > 18) || confirm('Родители разрешили?');
+  return (age > 18) || confirm('Parents confirm?');
+}
+
+// Task 3 - Напишите функцию min(a,b), которая возвращает меньшее из чисел a и b.
+const findLowNumber = (a, b) => {
+  return (a < b) ? a : b
+}
+findLowNumber(1, 2);
+
+//task 4 
+
+const pow = (a, b) => {
+  return a ** b;
+}
+
+let x = prompt('Type x', '');
+let n = prompt('Type n', '');
+
+if (n < 1) {
+  alert(`${n} is not natural number`)
+} else {
+  alert(pow(x, n));
 }
