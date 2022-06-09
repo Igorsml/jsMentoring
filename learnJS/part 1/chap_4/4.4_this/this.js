@@ -108,6 +108,17 @@ pets.showDog() // object pets
 pets.showDogAge() // 8
 
 
+//Arrow in array method
+const printer = {
+  items: [1, 'aboba', NaN],
+  print() {
+    this.items.forEach(() => console.log(this.items))
+  },
+};
+
+printer.print(); // x3 [1, 'aboba', NaN]
+
+
 const animal = {
   weight: '100k',
   waterResist: 5,
