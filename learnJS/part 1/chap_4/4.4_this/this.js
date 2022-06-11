@@ -60,7 +60,7 @@ console.log('cat.getName():', cat.getName()) // Myriam
 //Вызов той же самой функции из другого объекта привел к смене объекта, на который ссылается this. Эта особенность называется поздним связыванием. Значение this ссылается на тот объект, из которого происходит вызов метода. !Вопрос - выходит можно в одном объекте прописать метод, может быть в темплейте и далее по другим объектам им пользоваться?
 
 const company = {
-  name: 'Aboba',
+  nameA: 'Aboba',
   country: {
     name: 'Abobastan',
     getName: function getName() {
@@ -69,7 +69,7 @@ const company = {
   },
 };
 
-console.log('company.country.getName():', company.country.getName()) // Abobastan
+console.log('company.country.getName():', company.country.getName()) // Abobastan, this.nameA - undefined
 
 // Short method 
 const company = {
@@ -124,11 +124,11 @@ const animal = {
   waterResist: 5,
   sound: 'Meow',
   canFly() {
-    const canSwim = () => {
+    canSwim = () => {
       console.log(this.sound)
       return canSwim();
     }
   }
-}
+};
 
 console.log('canFly:', canSwim()) // undefined
