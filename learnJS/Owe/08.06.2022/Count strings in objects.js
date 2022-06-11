@@ -57,7 +57,7 @@ const strCount = (obj, counter = 0) => {
 
     if (typeof value === 'object' && value !== null) {
       counter = strCount(value, counter)
-    } // покрываем ключи fourth, seventh, nine, deep
+    } // покрываем ключи fourth, seventh, nine, deep, typeof(null) = object
   }
   return counter
 }
