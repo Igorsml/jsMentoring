@@ -1,5 +1,18 @@
 'use strict'
 
+function sayHi() {
+  alert(this);
+}
+
+sayHi(); // [Object object]
+
+// 'use strict'
+function sayHi() {
+  alert(this);
+}
+
+sayHi(); //undefined
+
 const company = {
   name: 'Abobapple',
   employees: [],
