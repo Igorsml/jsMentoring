@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>JavaScript Debugging</title>
+  <script src="./debugger.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <h1 style="text-align: center;">Калькулятор</h1>
+
+    <div class="row">
+      <div class="input-field col s6 offset-s3">
+        <input type="number" placeholder="Число 1" id="num1" />
+      </div>
+
+      <div class="input-field col s6 offset-s3">
+        <input type="number" placeholder="Число 2" id="num2" />
+      </div>
+      <div class="col s6 offset-s3" style="margin-bottom: 1rem;">
+        <button class="btn" id="add" style="background: #c2185b;">+</button>
+        <button class="btn" id="sub" style="background: #7b1fa2;">-</button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="card col s6 offset-s3" style="display: none;">
+        <div class="card-content">
+          <div class="card-title" id="output"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
