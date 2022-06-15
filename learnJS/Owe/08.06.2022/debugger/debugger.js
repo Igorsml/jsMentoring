@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const output = document.querySelector('#output')
 
   function getInputValues() {
+    debugger
     const value1 = +num1.value;
     const value2 = parseInt(num2.value);
 
@@ -45,4 +46,5 @@ document.addEventListener('DOMContentLoaded', () => {
 2) Escape in source open console 
 3) Deactivate breakpoints
 4) Watch values 
+5) change breakpoint (like value only > 50)
 */
