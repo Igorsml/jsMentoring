@@ -1,5 +1,6 @@
 const expect = require('chai').expect
-// const assert = require('assert'); 
+const assert = require('assert')
+
 const {
   sum,
   makeUpperCase
@@ -14,6 +15,14 @@ describe('SUM', () => {
   it('calculate sum with negative numbers', () => {
     expect(sum(-40, -2)).equal(-42)
   })
+
+  it('should be numbers', () => {
+    assert.strictEqual(sum(5, 5), '10'); // test string value
+  })
+
+  it('should do not NaN', () => {
+    assert.equal(isNaN(sum), true); // test string value
+  })
 })
 
 describe('makeUpperCase', () => {
@@ -24,6 +33,3 @@ describe('makeUpperCase', () => {
     expect(makeUpperCase(['a', 'A', 'abob'])).eql(['A', 'A', 'ABOB'])
   });
 });
-// it('calculate sum with negative numbers', () => {
-//   assert.isTrue(checkAbobus())
-// })
