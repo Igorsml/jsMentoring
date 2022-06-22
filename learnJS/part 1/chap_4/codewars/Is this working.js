@@ -8,9 +8,8 @@ function Counter() {
   };
 }
 
-// Best practices
-function Counter() {
-  this.count = 0;
-
-  this.updateCount = () => this.count++;
-}
+let counter = new Counter();
+counter.updateCount.call({});
+let fn = counter.updateCount;
+fn();
+counter.count;
