@@ -1,23 +1,23 @@
 'use strict'
 
-// const obj1 = {}
-// const obj2 = {}
+const obj1 = {}
+const obj2 = {}
 
-// console.log(obj1 + obj2) // [object Object][object Object]
-// console.log(obj1 - obj2) // NaN
-// console.log('obj1:', obj1) // obg1 {}
+console.log(obj1 + obj2) // [object Object][object Object]
+console.log(obj1 - obj2) // NaN
+console.log('obj1:', obj1) // obg1 {}
 
-// // Number
-// let date1 = new Date(2021 - 6 - 25)
-// let date2 = new Date(2022 - 6 - 22)
+// Number
+let date1 = new Date(2021 - 6 - 25)
+let date2 = new Date(2022 - 6 - 22)
 
 
-// let result = date2 - date1;
-// console.log(result) // 4
+let result = date2 - date1;
+console.log(result) // 4
 
 //hints = number, string, default
 const obj = {}
-alert(obj); // alert expected String → '[object Object]'
+console.log(obj); // alert expected String → '[object Object]'
 
 let newObj = {}
 newObj[obj] = 42;
@@ -37,20 +37,20 @@ let user = {
   money: 1000,
 
   [Symbol.toPrimitive](hint) {
-    alert(`hint: ${hint}`);
+    console.log(`hint: ${hint}`);
     return hint == "string" ? `{name: "${this.name}"}` : this.money;
   }
 };
 
-alert(user); // hint: string -> {name: "Igor"}
-alert(+user); // hint: number -> 1000
-alert(user + 500); // hint: default -> 1500
+console.log(user); // hint: string -> {name: "Igor"}
+console.log(+user); // hint: number -> 1000
+console.log(user + 500); // hint: default -> 1500
 
 let dog = {
   name: 'Miley',
 }
-alert(dog); // '[object Object]'
-alert(dog.valueOf()) // object dog
+console.log(dog); // '[object Object]'
+console.log(dog.valueOf()) // object dog
 
 // Symbol.toPrimitive is more safety (return error or primitive)
 

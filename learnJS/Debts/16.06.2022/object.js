@@ -48,3 +48,13 @@ obj.arr = 20; // arr: 20,
 obj[arr] = 30; // '': 30; → string(arr) → '': 30
 null.toString() // error
 String(null) // 'null'
+
+// this in obj property
+function Car(make, model, year) {
+  // this = {};  (неявно)
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  // return this (неявно)
+}
+let mycar = new Car("Ford", "Fusion", 2008);
