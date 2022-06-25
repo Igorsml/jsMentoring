@@ -21,9 +21,10 @@ describe('SUM', () => {
   })
 
   it('should do not NaN', () => {
-    assert.equal(isNaN(sum), true); // test string value
+    assert.equal(isNaN(sum), true); // test NaN
   })
 })
+
 
 describe('makeUpperCase', () => {
   it('input all lower cases', () => {
@@ -32,9 +33,33 @@ describe('makeUpperCase', () => {
   it('input all upper cases', () => {
     expect(makeUpperCase(['A', 'A', 'ABOB'])).eql(['A', 'A', 'ABOB'])
   });
+  it('arr has length > 2', () => {
+    expect(makeUpperCase(['A', 'A', 'ABOB'])).to.have.lengthOf(2);
+  });
 });
 // equal doesn't work with arr, eql work with comparing arr https://medium.com/building-ibotta/testing-arrays-and-objects-with-chai-js-4b372310fe6d
 
 
-
 // source https://youtu.be/dhLCXsDd6bo
+
+const obj = {
+  a: 1,
+  b: 2
+};
+
+describe('Obj', () => {
+  it('check obj property', () => {
+    expect({
+      a: 1,
+      b: 2
+    }).to.have.property('b');
+  })
+  it('should do not NaN', () => {
+    expect({
+      a: 1,
+      b: 2
+    }).to.have.keys(['a', 'b']);
+  })
+})
+
+// assert API 
