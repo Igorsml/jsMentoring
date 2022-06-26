@@ -12,8 +12,13 @@ console.log(dog.like poop); // poop Unexpected identifier
 console.log(dog['like poop']); // true
 console.log(dog['like cat after drink 3l water']); // false
 
+// обращение к переменной _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+
 let key = 'like keys'
-dog[key] = true; // dog['like keys']
+dog[key] = true; // dog['like keys'] = true
+
+console.log(dog['like keys']) // true
+console.log(dog) // {like keys: true}
 
 let car = {
   brand: 'ford fusion',
@@ -41,20 +46,10 @@ const obj = {}
 obj[null] = 20; // 20
 obj[[]] = 30; // 30
 
-console.log(obj);
+console.log(obj); //
 
 let arr = [];
 obj.arr = 20; // arr: 20,
 obj[arr] = 30; // '': 30; → string(arr) → '': 30
 null.toString() // error
 String(null) // 'null'
-
-// this in obj property
-function Car(make, model, year) {
-  // this = {};  (неявно)
-  this.make = make;
-  this.model = model;
-  this.year = year;
-  // return this (неявно)
-}
-let mycar = new Car("Ford", "Fusion", 2008);

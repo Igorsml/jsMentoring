@@ -1,14 +1,14 @@
 //https://learn.javascript.ru/object-methods#tasks
 
-// Task 1 - Каким будет результат выполнения этого кода?
-// let user = {
-//   name: "Джон",
-//   go: function () {
-//     console.log(this.name)
-//   }
-// }; //Missed ; string # 9
+Task 1 - Каким будет результат выполнения этого кода ?
+  let user = {
+    name: "Джон",
+    go: function () {
+      console.log(this.name)
+    }
+  }; //Missed ; string # 9
 
-// user.go()
+user.go()
 
 /* 
 Task 2 - В представленном ниже коде мы намерены вызвать obj.go() метод 4 раза подряд.

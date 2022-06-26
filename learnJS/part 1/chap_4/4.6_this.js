@@ -10,10 +10,10 @@ console.log('user.address.street:', user.address.street)
 // document.querySelector('.elem') равен null, если элемента нет
 let html = document.querySelector('.elem').innerHTML; // Cannot read properties of null
 
-// fix woth ?.
+// fix with ?.
 
 let user = {}; //
-console.log(user ? .address ? .street); // undefined, чтобы код смог продолжить работу?
+console.log(user ? .address ? .street); // undefined, чтобы код смог продолжить работу
 
 const user = {
   address: '1st road',
