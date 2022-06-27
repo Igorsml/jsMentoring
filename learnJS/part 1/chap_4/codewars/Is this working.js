@@ -12,12 +12,9 @@ function Counter() {
 
 let counter = new Counter();
 console.log(counter); // count 0
-
 counter.updateCount.call({});
-console.log('counter.updateCount.call:', counter.updateCount.call({});)
 let fn = counter.updateCount;
 fn();
-console.log('fn():', fn();)
 counter.count; // 2
 
 /*

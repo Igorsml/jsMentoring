@@ -40,16 +40,20 @@ let bag = {
 
 console.log(bag.apple); // {apple: 1142}
 
-// from youtube _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+// Массив в виде ключа, преобразование в строку _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 const obj = {}
-obj[null] = 20; // 20
+obj['empty arr'] = 20; // 20
 obj[[]] = 30; // 30
 
-console.log(obj); //
+console.log(obj); // {empty arr: 20, "": 30}
 
+
+const obj = {}
 let arr = [];
+
 obj.arr = 20; // arr: 20,
 obj[arr] = 30; // '': 30; → string(arr) → '': 30
-null.toString() // error
-String(null) // 'null'
+console.log(obj) // {arr: 20, "": 30}
+// Ключи объектов это строки. Массив в качестве ключа — происходит приведение типов. 
+// Пустой массив к строке = пустая строка.
