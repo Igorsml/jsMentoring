@@ -1,17 +1,23 @@
 //https://www.codewars.com/kata/559f8d487fa8511c43000118/train/javascript
 
 function Counter() {
+  // this = {};
   this.count = 0;
 
   this.updateCount = () => {
     this.count++
   };
+  // return this;
 }
 
 let counter = new Counter();
+console.log(counter); // count 0
+
 counter.updateCount.call({});
+console.log('counter.updateCount.call:', counter.updateCount.call({});)
 let fn = counter.updateCount;
 fn();
+console.log('fn():', fn();)
 counter.count; // 2
 
 /*

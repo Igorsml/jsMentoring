@@ -1,5 +1,7 @@
 'use strict'
 
+<<<<<<< HEAD
+=======
 function fun() {
   this = {} // this у функции уже существует | SyntaxError: Invalid left-hand side in assignment
 }
@@ -8,6 +10,7 @@ function fun() {
   console.log('this === window:', this === window) // true
 }
 
+>>>>>>> 3898ed4b5261a061eb6300f48daf76d91aa89ec7
 // This в стрелке / объекте
 
 const shape = {
