@@ -2,22 +2,21 @@
 
 const obj1 = {}
 const obj2 = {}
-
-console.log(obj1 + obj2) // [object Object][object Object]
+let result = obj1 + obj2;
+console.log(result) // [object Object][object Object]
+console.log(typeof(result)) // string
 console.log(obj1 - obj2) // NaN
 console.log('obj1:', obj1) // obg1 {}
 
 // Number
 let date1 = new Date(2021 - 6 - 25)
 let date2 = new Date(2022 - 6 - 22)
-
-
 let result = date2 - date1;
 console.log(result) // 4
 
 //hints = number, string, default
 const obj = {}
-console.log(obj); // alert expected String → '[object Object]'
+console.log(obj); // 
 
 let newObj = {}
 newObj[obj] = 42;
@@ -83,3 +82,69 @@ let obj2 = {
 console.log(+obj2); // 10        -- hint is "number"
 console.log(`${obj2}`); // "hello"   -- hint is "string"
 console.log(obj2 + ''); // "true"    -- hint is "default"
+
+function Person(name, age) {
+  this.name = name,
+  this.age = age,
+
+  this[Symbol.toPrimitive] = (hint) => {
+    // hint: string, number, default
+    if('string' === hint) {
+      return this.name;
+    }
+    if('number' === hint) {
+      return this.age;
+    }
+    return 'default' // базово number
+  }
+}
+
+const igor = newPerson(name: 'Dave', age: '29');
+const timmy = newPerson(name: 'Timmy', age: '8');
+console.log(String(igor)) // Igor
+console.log(Number(igor)) // 29
+console.log(igor - timmy) // 21
+console.log(igor + timmy) // 21
+
+// source https://youtu.be/vgB5eNMvXBk
+
+// 1. Простой объект
+const obj1 = {}
+obj1.valueOf() // {}
+obj1.toString() // "[object Object]"
+
+// Чтобы «сложить» число с объектом,
+// вначале будет вызван obj1.valueOf().
+// Он вернёт объект (непримитив),
+// после чего будет вызван obj1.toString().
+
+1 + obj1
+// 1 + "[object Object]"
+// "1" + "[object Object]"
+// "1[object Object]"
+
+// 2. Объект с указанным .valueOf()
+const obj2 = {}
+obj2.valueOf = () => "obj2"
+obj2.valueOf() // "obj2";
+obj2.toString() // "[object Object]"
+
+// Теперь, когда мы объявили метод .valueOf(),
+// при вызове он будет возвращать строку.
+// Так как строка — примитив,
+// она и будет использована при «сложении».
+
+1 + obj2
+// 1 + "obj2"
+// "1" + "obj2"
+// "1obj2"
+
+// 2.1. Если же мы будем возвращать число
+const obj2 = {}
+obj2.valueOf = () => 42
+obj2.valueOf() // 42
+obj2.toString() // "[object Object]"
+
+1 + obj2
+// 1 + 42
+// 43
