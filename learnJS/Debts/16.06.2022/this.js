@@ -137,13 +137,16 @@ console.log(company.name) // 'Abobapple'
 company.getName(); // 'Abobapple'
 company.name = 'lol'
 company.getName(); // expected lol, received Abobapple
-// Метод возвращает строку и никак не использует данные объекта. Если поменяется имя, то метод продолжит возвращать "зашитое" в него значение, а не текущее имя компании внутри объекта.
+// Метод возвращает строку и никак не использует данные объекта. Если поменяется имя, 
+// то метод продолжит возвращать "зашитое" в него значение, а не текущее имя компании внутри объекта.
 
 //Fix with this
 const company = {
   name: 'Abobapple',
   employees: [],
 };
+console.log(company); // {name: 'Abobapple', employees: Array(0)}
+
 // Создание функции, которая сразу же присваивается свойству getName и становится методом
 company.getName = function getName() {
   return this.name;

@@ -19,7 +19,7 @@ const obj = {}
 console.log(obj); // 
 
 let newObj = {}
-newObj[obj] = 42;
+newObj[obj] = 42; // obj: 42
 console.log(typeof (newObj[obj])); // number
 
 let str = '1';
