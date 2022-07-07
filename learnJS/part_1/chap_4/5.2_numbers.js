@@ -45,7 +45,7 @@ console.log(Math.trunc(num)); // 43, Производит удаление др�
 console.log(Math.trunc(numMinus)); // -42, Производит удаление дробной части без округления
 
 let num = 42.234;
-console.log(num.toFixed(1)); // 42.2
+console.log(num.toFixed(1)); // '42.2'
 console.log(typeof(num.toFixed(1))); // string
 console.log(typeof(+num.toFixed(1))); // number
 console.log(num.toFixed(10)); // 42.2340000000 , если n больше количества дробной части он накидывает нулей

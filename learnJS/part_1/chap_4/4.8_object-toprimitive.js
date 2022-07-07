@@ -99,12 +99,12 @@ function Person(name, age) {
   }
 }
 
-const igor = newPerson(name: 'Dave', age: '29');
-const timmy = newPerson(name: 'Timmy', age: '8');
-console.log(String(igor)) // Igor
-console.log(Number(igor)) // 29
-console.log(igor - timmy) // 21
-console.log(igor + timmy) // 21
+const igor = new Person(name: 'Igor', age: '29');
+const timmy = new Person(name: 'Timmy', age: '8');
+console.log(String(igor)) // 'Igor'
+console.log(Number(igor)) // 29 
+console.log(igor - timmy) // 21, number
+console.log(igor + timmy) // 'IgorTimmy'
 
 // source https://youtu.be/vgB5eNMvXBk
 
