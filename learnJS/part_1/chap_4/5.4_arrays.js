@@ -20,7 +20,7 @@ console.log(soup[soup.length - 1]()); // 'Hello! I'm in arr'
 console.log(soup.at(-1)()); // 'Hello! I'm in arr'
 console.log(soup.at(-4)); // { a: 1 }
 
-// pop/push
+// pop/push - быстрее 
 let pets = ['Timmy', 'Miley', 'Miriam'];
 console.log(pets.pop()); // 'Miriam', удаляет последний элемент из массива и возвращает его
 console.log(pets.length); // 2
@@ -121,10 +121,39 @@ console.log([] == []); // false
 console.log([''] == [[]]); // false
 console.log([undefined] == [null]); // false
 
-let color = ['white', 'grey', 'orange']
+let color = ['white', 'grey', 'orange'];
 let linkToArr1 = color;
 let linkToArr2 = color;
 console.log(linkToArr1 == linkToArr2); // true, переменные ссылаются на один и тот же массив
 
 console.log(0 == []); // true, преобразование в примитив, [] в пустую строку '' и далее пустая строка в ноль.
 console.log('0' == []); // false, разные строки '0' != ''
+
+
+const animals = ['cats', 'dogs', 'birds'];
+delete animals[1]; // удаляем элемент под индексом 1
+console.log(animals); // => ['cats', <1 empty item>, 'birds']
+console.log(animals.length); // 3, длина осталась прежней, delete опасно использовать
+
+// copy methods array
+// method #1 - spread operator [...array]
+const iWatched = ['GameOfThrones', 'Breaking Bad'];
+const igorWatched = iWatched.slice();
+
+igorWatched.push('Friends');
+console.log(iWatched); // ['GameOfThrones', 'Breaking Bad']
+console.log(igorWatched); // [ 'GameOfThrones', 'Breaking Bad', 'Friends' ]
+
+// method #2 - spread operator [...array]
+const iWatched = ['GameOfThrones', 'Breaking Bad'];
+const newArr = [...iWatched];
+newArr.push('Friends');
+console.log(iWatched); // [ 'GameOfThrones', 'Breaking Bad' ]
+console.log(newArr); // [ 'GameOfThrones', 'Breaking Bad', 'Friends' ]
+
+// method #3 - Array.from()
+const sheeps = ['🐑', '🐑', '🐑'];
+const sheepsPlusWolf = Array.from(sheeps);
+sheepsPlusWolf.push('🐺');
+console.log(sheepsPlusWolf); // [ '🐑', '🐑', '🐑', '🐺' ]
+console.log('sheeps'sheeps); // [ '🐑', '🐑', '🐑', '🐺' ]
