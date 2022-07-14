@@ -3,9 +3,9 @@
 function disemvowel(str) {
   var vowels = ['a', 'e', 'i', 'o', 'u'];
 return str
-  .split('')
-  .filter(el => vowels.indexOf(el.toLowerCase()) == -1)
-  .join('');
+  .split('') // массив из букв
+  .filter(el => vowels.indexOf(el.toLowerCase()) == -1) // убираем гласные
+  .join(''); // соединяем обратно в строку
 }
 
 disemvowel("This website is for losers LOL!"); // "Ths wbst s fr lsrs LL!"

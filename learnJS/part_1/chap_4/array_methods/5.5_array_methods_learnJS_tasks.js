@@ -6,16 +6,30 @@ camelize("background-color") == 'backgroundColor';
 camelize("list-style-image") == 'listStyleImage';
 camelize("-webkit-transition") == 'WebkitTransition';
 
-const camelize = (str) => [...str].join('');
-console.log(camelize("list-style-image"));
+const camelize = (str) => {
+  return str
+  .split('-') // массив слов
+  .map((word, index) => index == 0 ? word : word[0].toUpperCase() + word.slice(1))
+  .join(' '); 
+};
+
+console.log(camelize("list-style-image")); // list Style Image
 
 
 // Task 2 - Напишите функцию filterRange(arr, a, b), которая принимает массив arr, ищет в нём элементы между a и b и отдаёт массив этих элементов.
 // Функция должна возвращать новый массив и не изменять исходный.Example:
 let arr = [5, 3, 8, 1];
 let filtered = filterRange(arr, 1, 4);
-console.log( filtered ); // 3,1 (совпадающие значения)
-console.log( arr ); // 5,3,8,1 (без изменений)
+console.log(filtered); // 3,1 (совпадающие значения)
+console.log(arr); // 5,3,8,1 (без изменений)
+
+
+let arr = [5, 3, 8, 1];
+function filterRange(arr, a, b) {
+  return arr.filter(num => (a <= num && num <= b));
+}
+let filtered = filterRange(arr, 1, 4);
+console.log(filtered); // 1, 3
 
 
 /* Task 3 - Напишите функцию filterRangeInPlace(arr, a, b), которая принимает массив arr и удаляет из него все значения кроме тех, которые находятся между a и b. То есть, проверка имеет вид a ≤ arr[i] ≤ b.
@@ -27,6 +41,12 @@ console.log( arr ); // [3, 1]
 
 // Task 4 - ортировать в порядке по убыванию
 let arr = [5, 2, 1, -10, 8];
+
+function sortDown (arr) {
+  return arr.sort((a, b) => b - a);
+}
+
+sortDown(arr); // [8, 5, 2, 1, -10]
 
 // Task 5 - Скопировать и отсортировать массив. У нас есть массив строк arr. Нужно получить отсортированную копию, но оставить arr неизменённым.
 // Создайте функцию copySorted(arr), которая будет возвращать такую копию.

@@ -1,17 +1,18 @@
 'use strict'
-
+// isFinite - Число, не являющееся бесконечностью (+-Infinity) и не являющееся NaN
 // В отличии от глобальной функции isFinite(), этот метод принудительно не преобразует параметр в число.
 
-console.log(Number.isFinite('42'));
-console.log(Number.isFinite(42));
-console.log(isFinite('42'));
-console.log(isFinite(42));
+console.log(Number.isFinite('42')); // false
+console.log(Number.isFinite(42)); // true
+console.log(isFinite('42')); // true
+console.log(isFinite(42)); // true
 
 Number.isFinite(3.14) // true
 Number.isFinite(10e5) // true
 Number.isFinite(0) // true
 
 Number.isFinite(-Infinity) // false
+Number.isFinite(Infinity) // false
 Number.isFinite([]) // false
 Number.isFinite("Двадцать пять") // false
 
