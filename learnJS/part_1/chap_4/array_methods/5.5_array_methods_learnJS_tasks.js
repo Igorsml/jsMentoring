@@ -6,6 +6,10 @@ camelize("background-color") == 'backgroundColor';
 camelize("list-style-image") == 'listStyleImage';
 camelize("-webkit-transition") == 'WebkitTransition';
 
+const camelize = (str) => [...str].join('');
+console.log(camelize("list-style-image"));
+
+
 // Task 2 - Напишите функцию filterRange(arr, a, b), которая принимает массив arr, ищет в нём элементы между a и b и отдаёт массив этих элементов.
 // Функция должна возвращать новый массив и не изменять исходный.Example:
 let arr = [5, 3, 8, 1];
