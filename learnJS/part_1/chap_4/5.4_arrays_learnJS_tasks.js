@@ -63,7 +63,7 @@ function sumInpit() {
   let sum = 0;
   let input = prompt('Enter your number', '');
 
-  whyle((input === null || input != '' || isFinite(input))) {
+  while((input === null || input != '' || isFinite(input))) {
     result.push(Number(input));
     result.forEach(arg => {
       sum += arg;
