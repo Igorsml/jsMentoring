@@ -57,8 +57,77 @@ obj[Symbol.iterator] = function() {
   };
 };
 
-
-
 for (let values of obj) {
   console.log(values); // Igor, 29, Saint-Petersburg
 }
+
+// строка - перебираемый объект
+const str = 'Abobus 🅰️🅱️🅾️🅱️🅰️'
+for (let char of str) {
+  console.log(char); // a, b...🅱️🅰️
+}
+
+//manual iteration
+const strGreeting = 'Hello'
+
+let iterator = strGreeting[Symbol.iterator]();
+
+while (true) {
+  let result = iterator.next();
+  if(result.done) break;
+  console.log(result.value); // H, e, l, l, o
+}
+
+// Псевдомассив, но отсутствует Symbol.iterator
+let arrayLike = {
+  name: 'Igor',
+  city: 'Saint-Petersburg',
+  length: 2,
+}
+
+for (let item of arrayLike) {} // TypeError: arrayLike is not iterable
+
+function makeIterator(array) {
+  let nextIndex = 0
+
+  return {
+    next: function () {
+      if (nextIndex < array.length) {
+        const result = { value: array[nextIndex], done: false }
+        nextIndex++
+        return result
+      } else {
+        return { done: true }
+      }
+    }
+  }
+}
+let iterator = makeIterator(['Hello', 'world'])
+console.log(iterator.next().value)
+// 'Hello'
+console.log(iterator.next().value)
+// 'world'
+console.log(iterator.next().done)
+// true
+
+// Чтобы работать с объектом как с массивом - Array.from(arrayLike[, mapFn[, thisArg]])
+let arrayLike2 = {
+  0: 'Igor',
+  1: 'Saint-Petersburg',
+  length: 2,
+}
+
+let NowYouAreAnArray = Array.from(arrayLike2);
+console.log(NowYouAreAnArray.pop()); // 'Saint-Petersburg'
+
+// mapFn функция необязательный аргумент
+let arrayLike3 = {
+  0: 'Igor',
+  1: 'Saint-Petersburg',
+  length: 2,
+}
+
+let nowYouAreAnArray = Array.from(arrayLike3, str => str.toUpperCase());
+console.log(nowYouAreAnArray); // [ 'IGOR', 'SAINT-PETERSBURG' ]
+
+Array.from() // TypeError: undefined is not iterable (cannot read property Symbol(Symbol.iterator))

@@ -1,5 +1,7 @@
 'use strict'
 
+const { boolean } = require("yargs");
+
 // Task 1 - Напишите функцию camelize(str), которая преобразует строки вида «my-short-string» в «myShortString».
 //То есть дефисы удаляются, а все слова после них получают заглавную букву. Example:
 camelize("background-color") == 'backgroundColor';
@@ -36,8 +38,24 @@ console.log(filtered); // 1, 3
 Функция должна изменять принимаемый массив и ничего не возвращать. Example */
 let arr = [5, 3, 8, 1];
 filterRangeInPlace(arr, 1, 4); // удалены числа вне диапазона 1..4
-console.log( arr ); // [3, 1]
+console.log(arr); // [3, 1]
 
+
+function filterRangeInPlace(arr, start, end) {
+  for(let i = 0; i < arr.length; i++) {
+    let val = arr[i];
+
+    if (val < start || val > end) {
+      arr.splice(i, 1);
+      i--;
+    }
+  }
+}
+
+let arr = [5, 3, 8, 1];
+
+filterRangeInPlace(arr, 1, 4);
+console.log(arr); // [3, 1]
 
 // Task 4 - ортировать в порядке по убыванию
 let arr = [5, 2, 1, -10, 8];

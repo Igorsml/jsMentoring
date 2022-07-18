@@ -1,16 +1,16 @@
 // https://www.codewars.com/kata/5a3dd29055519e23ec000074/train/javascript
 
-function checkExam(array1, array2) {
+const checkExam = (correctAnswers, studentAnswers) => {
   let score = 0;
-  console.log(array1, array2);
   
-  forEach()
+  studentAnswers.forEach((el, i) => {
+  if (el == "") {
+    score += 0;
+  } else (score += (el == correctAnswers[i] ? 4 : -1));
+  })
 
-
-  return score;
+  return score > 0 ? score : 0;
 }
-
-
 
 console.log(checkExam(["a", "a", "b", "b"], ["a", "c", "b", "d"])); // 6
 console.log(checkExam(["a", "a", "c", "b"], ["a", "a", "b",  ""])); // 7
@@ -39,7 +39,7 @@ function checkExam(array1, array2) {
   }
   return score;
 }
-*/
+}
 
 return array2.reduce(function (results, index, array1) {
   if(array1[index] == array2[index]) {
@@ -54,15 +54,23 @@ return array2.reduce(function (results, index, array1) {
   return results;
 }); 
 
-for(let i = 0; i <= arrayOfArray.length; i += 1) {
-  if (array1[i] == array2[i]) {
-     score += 4;
-  } else if (array2[i] == '') {
-     score += 0;
-  } else if (array1[i] != array2[i]) {
-    score -= 1;
-} else {
-  (score < 0) 
-  return 0;
+const checkExam = (correctAnswers, studentAnswers) => {
+  let score = 0;
+
+  for(let i = 0; i <= correctAnswers.length; i += 1) {
+    if (correctAnswers[i] == studentAnswers[i]) {
+       score += 4;
+    } else if (studentAnswers[i] === '') {
+       score += 0;
+    } else {
+      score -= 1;
+    }
+  
+   if (score < 0) {
+    score = 0;
+    }
   }
+  return score;
 }
+
+*/
