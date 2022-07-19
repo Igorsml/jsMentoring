@@ -1,4 +1,4 @@
-'use strict'
+"use strict";
 
 // Task 1 — Что выведет следующий код?
 
@@ -9,8 +9,8 @@ let shoppingCart = fruits;
 shoppingCart.push("Банан");
 
 // что в fruits?
-console.log(fruits.length); // 4 
-console.log(fruits); // ["Яблоки", "Груша", "Апельсин", "Банан"]; , push() суёт в конец 
+console.log(fruits.length); // 4
+console.log(fruits); // ["Яблоки", "Груша", "Апельсин", "Банан"]; , push() суёт в конец
 // Обе переменные shoppingCart и fruits являются ссылками на один и тот же массив.
 
 /* Task 2 — 
@@ -29,23 +29,23 @@ console.log(fruits); // ["Яблоки", "Груша", "Апельсин", "Ба
 Классика, Рок-н-ролл
 Рэп, Регги, Классика, Рок-н-ролл
 */
-let styles = ['Jazz', 'Blues']
-styles.push('Rock\'n Roll'); 
+let styles = ["Jazz", "Blues"];
+styles.push("Rock'n Roll");
 console.log(styles); // [ 'Jazz', 'Blues', "Rock'n Roll" ]
 
-styles.splice(1, 1, 'Classic')
+styles.splice(1, 1, "Classic");
 console.log(styles); // [ 'Jazz', 'Classic', "Rock'n Roll" ]
 
-styles.shift()
+styles.shift();
 console.log(styles); // [ 'Classic', "Rock'n Roll" ]
 
-styles.unshift('Rap', 'Reggie');
+styles.unshift("Rap", "Reggie");
 console.log(styles); // [ 'Rap', 'Reggie', 'Classic', "Rock'n Roll" ]
 
 // Task 3 — Каков результат? Почему?
 let arr = ["a", "b"];
 
-arr.push(function() {
+arr.push(function () {
   console.log(this);
 });
 
@@ -57,23 +57,26 @@ arr[2](); // [ 'a', 'b', [Function (anonymous)] ], arr[2] - вызов функ�
 Подсчитывает и возвращает сумму элементов массива.
 P.S. Ноль 0 – считается числом, не останавливайте ввод значений при вводе «0».
 */
-
-function sumInpit() {
+function sumInput() {
   let result = [];
   let sum = 0;
-  let input = prompt('Enter your number', '');
+  let input = prompt("Enter your number");
 
-  while((input === null || input != '' || isFinite(input))) {
+  while (input !== null && input != "" && !isNaN(input)) {
     result.push(Number(input));
-    result.forEach(arg => {
-      sum += arg;
-    })
-    return sum;
+    input = prompt("Enter your number");
+
+    console.log(input);
   }
+
+  result.forEach((arg) => {
+    sum += arg;
+  });
+
+  alert(sum);
 }
 
-sumInpit() //
-
+sumInput();
 
 /* Task 5 — 
 На входе массив чисел, например: arr = [1, -2, 3, 4, -9, 6].
@@ -96,19 +99,19 @@ getMaxSubSum([-1, -2, -3]) = 0
 const getMaxSubSum = (arr) => {
   let sum = 0;
   let maxNumber = Math.max(...arr);
-  console.log('maxNumber', maxNumber);
+  console.log("maxNumber", maxNumber);
 
   for (num of arr) {
-      if (num > 0) {
+    if (num > 0) {
       sum += num;
-     }
+    }
     if (sum > maxNumber) {
       return sum;
     }
-    console.log('sum', sum)
+    console.log("sum", sum);
   }
   return maxNumber;
-}
+};
 
 console.log(getMaxSubSum([-1, 2, 3, -9])); // 5
 console.log(getMaxSubSum([2, -1, 2, 3, -9])); // 6
@@ -116,4 +119,3 @@ console.log(getMaxSubSum([-1, 2, 3, -9, 11])); // 11
 console.log(getMaxSubSum([-2, -1, 1, 2])); // 3
 console.log(getMaxSubSum([100, -9, 2, -3, 5])); // 100
 console.log(getMaxSubSum([1, 2, 3])); // 6
-
