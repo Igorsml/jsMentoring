@@ -4,7 +4,7 @@
 
 function incrementString(strng) {
   const arrOfDigits = Array.from(strng, Number);
-  const arrOfStrings = Array.from(arrOfDigitsstrng, String);
+  const arrOfStrings = Array.from(arrOfDigits, String);
   console.log(arrOfDigits);
   console.log(arrOfStrings);
   let result = [];
