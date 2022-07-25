@@ -143,3 +143,20 @@ console.timeEnd("Object"); // 0.209ms
 console.time("Map");
 map.set(n, n);
 console.timeEnd("Map"); // 0.016ms
+
+// save on link
+const dataObject = { position: 'left' }
+const sameObject = dataObject
+
+console.log(dataObject === sameObject); // true
+
+const map = new Map()
+map.set(dataObject, 'value for dataObject')
+map.set(sameObject, 'value for sameObject')
+
+console.log(map.size); // 1
+console.log(map);
+
+console.log(map.get(dataObject)); // value for sameObject
+
+console.log(map.get(sameObject)); // value for sameObject
