@@ -1,7 +1,8 @@
+// https://www.codewars.com/kata/536950ffc8a5ca9982001371/train/javascript
+
 "use strict";
 
 function solution(a) {
-  console.log(a);
   let result = 0;
   debugger;
   for (let i = 1; i <= a.length; i++) {
