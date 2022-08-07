@@ -3,4 +3,4 @@ const adaptiveNameTask = (str) =>
 
 console.log(adaptiveNameTask("6 kyuSorting by bits"));
 console.log(adaptiveNameTask("6 kyu The Supermarket Queue"));
-console.log(adaptiveNameTask("________"));
+console.log(adaptiveNameTask("8 kyu Is there a vowel in there?"));
