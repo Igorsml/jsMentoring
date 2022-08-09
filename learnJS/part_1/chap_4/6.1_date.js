@@ -23,3 +23,20 @@ console.log(today.getFullYear()); // 2013
 // удобно что у дат есть автоисправление
 const dateMyBirthday = new Date(2013, 0, 99);
 console.log(dateMyBirthday.getFullYear()); // 2013-04-08T20:00:00.000Z
+
+// Date.parse(str) считывает дату из строки
+const timestamp = new Date(2013, 0, 0, 0);
+console.log(timestamp); // 2012-12-30T20:00:00.000Z
+console.log(Date.parse(timestamp)); // 1356897600000
+console.log(new Date(Date.parse(timestamp))); // 2012-12-30T20:00:00.000Z
+
+// compare dates
+const firstDate = new Date("2022-03-15");
+const secondDate = new Date("2022-03-13");
+
+console.log(firstDate < secondDate); // false
+console.log(firstDate > secondDate); // true
+
+const equalDate1 = new Date("2022-03-13");
+const equalDate2 = new Date("2022-03-13");
+console.log(equalDate1.getTime() == equalDate2.getTime()); // true
