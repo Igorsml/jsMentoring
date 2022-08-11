@@ -1,4 +1,5 @@
-"use strict";
+import moment from "moment";
+("use strict");
 
 // создадим объект Date через конструктор new Date, получим текуюущую дату и время
 const currentDate = new Date();
@@ -40,3 +41,13 @@ console.log(firstDate > secondDate); // true
 const equalDate1 = new Date("2022-03-13");
 const equalDate2 = new Date("2022-03-13");
 console.log(equalDate1.getTime() == equalDate2.getTime()); // true
+
+// Если нужно получить сегодняшнюю дату в формате строки
+console.log(new Date().toLocaleDateString()); // '11.08.1992'
+
+// Текущее время пользователя
+console.log(new Date().toLocaleTimeString()); // 10:12:08
+console.log(new Date().toLocaleTimeString().slice(0, -3)); // 10:12
+
+// am/pm to 24hr | npm install moment
+console.log(moment("10:15 PM", ["h:mm A"]).format("HH:mm")); // 22:15
