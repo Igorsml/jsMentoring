@@ -1,4 +1,4 @@
-import moment from "moment";
+// import moment from "moment";
 ("use strict");
 //  JSON очень удобно использовать для получения данных в сети. Например, один из популярных сервисов прогноза погоды, Open Weather, может отдавать данные в JSON через API.
 let timezone = 3600;
