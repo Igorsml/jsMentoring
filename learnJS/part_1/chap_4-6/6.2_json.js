@@ -57,3 +57,12 @@ JSON.stringify(meetings, function replacer(key, value) {
   console.log(`${key}: ${value}`);
   return key == "occupiedBy" ? undefined : value;
 });
+
+// JSON.parse() для конвертации обратно в объект
+let json =
+  '{"name":"Igor","height":"182","mass":"undefined","hair_color":"brown","skin_color":"fair","gender":"male"}';
+let backToObject = JSON.parse(json);
+
+console.log(backToObject.name); // Luke Skywalker
+console.log(backToObject.gender); // male
+console.log(backToObject.mass); // undefined
