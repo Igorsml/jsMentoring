@@ -79,22 +79,29 @@ arr.filter(inArray([1,2,3])) – выбирает только элементы,
 
 let arr = [1, 2, 3, 4, 5, 6, 7];
 
+function inBetween(start, end) {
+  return function (num) {
+    return num >= start && num <= end;
+  };
+}
+
+function inArray(arr) {
+  return function (num) {
+    return arr.includes(num);
+  };
+}
+
+let nums = [1, 2, 10];
+
 console.log(arr.filter(inBetween(3, 6))); // 3,4,5,6
 console.log(arr.filter(inArray([1, 2, 10]))); // 1,2
+console.log(arr.filter((num) => nums.includes(num))); // 1,2
 
 /* Task # 6 Сортировать по полю
 У нас есть массив объектов, который нужно отсортировать:
-
-let users = [
-  { name: "John", age: 20, surname: "Johnson" },
-  { name: "Pete", age: 18, surname: "Peterson" },
-  { name: "Ann", age: 19, surname: "Hathaway" }
-];
 Обычный способ был бы таким:
-
 по имени (Ann, John, Pete)
 users.sort((a, b) => a.name > b.name ? 1 : -1);
-
 по возрасту (Pete, Ann, John)
 users.sort((a, b) => a.age > b.age ? 1 : -1);
 Можем ли мы сделать его короче, скажем, вот таким?
@@ -104,6 +111,20 @@ users.sort(byField('age'));
 То есть, чтобы вместо функции, мы просто писали byField(fieldName).
 
 Напишите функцию byField, которая может быть использована для этого. */
+let users = [
+  { name: "John", age: 20, surname: "Johnson" },
+  { name: "Pete", age: 18, surname: "Peterson" },
+  { name: "Ann", age: 19, surname: "Hathaway" },
+];
+
+function byField(fieldName) {
+  return (a, b) => (a[fieldName] > b[fieldName] ? 1 : -1);
+}
+
+users.sort(byField("name"));
+users.forEach((user) => console.log(user.name)); // Ann, John, Pete
+users.sort(byField("age"));
+users.forEach((user) => console.log(user.name)); // Pete, Ann, John
 
 // Task # 7 Армия функций
 // Следующий код создаёт массив из стрелков (shooters).
