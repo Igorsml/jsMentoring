@@ -13,11 +13,13 @@ const fn = function fn(number) {
   return number + this.number;
 };
 
-const bind = () => {
-  let args = 
+function bind(context, fn) {
+  return function (...args) {
+    fn.apply(context, args);
+  };
 }
 
 const fnWithContext = bind(obj, fn);
 
 // Принимает столько же аргументов сколько и исходная функция
-fnWithContext(3); // 8
+console.log(fnWithContext(3)); // 8
