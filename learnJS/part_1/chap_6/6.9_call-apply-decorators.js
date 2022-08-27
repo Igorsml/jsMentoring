@@ -41,22 +41,6 @@ function hash() {
 
 hash(1, 2, 3); // 1, 2, 3
 
-// JavaScript — асинхронный язык программирования. Из-за этого функции часто вызываются как колбеки других функций. Особенно много этого в браузере, где колбек на колбеке и колбеком погоняет.
-const seyHelloToConsole = {
-  name: "console",
-  print(greeting = "aloha") {
-    console.log(`${greeting}, ${this.name}`);
-  },
-};
-
-seyHelloToConsole.print(); // aloha, console
-setTimeout(seyHelloToConsole.print, 1e3); // aloha, undefined
-
-// fix with bind
-const bindedHello = seyHelloToConsole.print.bind(seyHelloToConsole);
-bindedHello(); // aloha, console
-setTimeout(bindedHello, 1e3); // aloha, console
-
 // func.apply(thisArg, [ argsArray]) _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8];
 const max = Math.max.apply(null, numbers);
@@ -72,31 +56,3 @@ function bar() {
 }
 
 bar(); // [ 'a', 'b', 'c', 'd', 'e', 'f' ]
-
-//
-function hello() {
-  console.log("Hello", this);
-}
-
-const person = {
-  name: "Igor",
-  age: 30,
-  sayHello: hello,
-  sayHelloWindow: hello.bind(this),
-  logInfo: function () {
-    console.group(`${this.name} info:`);
-    console.log(`Name is ${this.name}`);
-    console.log(`Age is ${this.age}`);
-    console.log(`IQ is ${this.iq}`);
-    console.groupEnd();
-  },
-};
-
-const person2 = {
-  name: "Nika",
-  age: 27,
-  iq: 100500,
-};
-
-const fnPerson2InfoLog = person.logInfo.bind(person2);
-fnPerson2InfoLog(); //  Name is Nika, Age is 27, IQ is 100500
