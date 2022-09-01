@@ -6,3 +6,12 @@ function findShort(s) {
   const result = arr.reduce((a, b) => (a.length <= b.length ? a : b));
   return result.length;
 }
+
+// CW solution
+
+function findShort(s) {
+  return Math.min.apply(
+    null,
+    s.split(" ").map((w) => w.length)
+  );
+}
