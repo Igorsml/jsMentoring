@@ -5,11 +5,11 @@ function Counter() {
   this.count = 0;
 
   this.updateCount = () => {
-    this.count++
+    this.count++;
   };
   // return this;
 }
-
+/*
 let counter = new Counter();
 console.log(counter); // count 0
 counter.updateCount.call({});
@@ -17,7 +17,6 @@ let fn = counter.updateCount;
 fn();
 counter.count; // 2
 
-/*
 Ну например я делаю запросы на сервер и мне надо считать эти запросы - сколько я их сделал
 Могу просто завести переменную requestCount = 0 и делать ей ++ после каждого запроса
 А могу сделать const requestsCounter = new Counter() и делать .updateCount() каждый раз

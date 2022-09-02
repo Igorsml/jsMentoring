@@ -66,4 +66,49 @@ Object.defineProperties(pet, {
 });
 
 // copy the object with flags
-const clone = Object.defineProperties({}, Object.getOwnPropertyDescriptor(pet));
+const pet = {
+  name: "Timmy",
+  age: 8,
+};
+
+const clone = Object.defineProperties(
+  {},
+  Object.getOwnPropertyDescriptors(pet)
+);
+console.log(clone); // { name: 'Timmy', age: 8 }
+
+// methods freeze properties
+
+//Object.preventExtensions(obj) - add new properties to object
+const pet = {
+  name: "Timmy",
+  age: 8,
+};
+
+Object.preventExtensions(pet);
+console.log(Object.isExtensible(pet)); // false
+delete pet.name; // delete ok
+pet.height = 35; // TypeError: Cannot add property height, object is not extensible
+
+// Object.seal(obj) | configurable: false
+const pet = {
+  name: "Timmy",
+  age: 8,
+};
+
+Object.seal(pet);
+Object.isSealed(pet); // true
+pet.height = 35; // TypeError: Cannot add property height, object is not extensible
+delete pet.name; // TypeError: Cannot delete property 'name' of #<Object>
+
+// Object.freeze(obj) | configurable: false, writable: false
+const pet = {
+  name: "Timmy",
+  age: 8,
+};
+
+Object.freeze(pet);
+Object.isFrozen(pet); // true
+delete pet.name; // TypeError: Cannot delete property 'name'
+pet.name = "Miley"; // TypeError: Cannot assign to read only property 'name' of object
+pet.height = 35; // TypeError: Cannot add property height, object is not extensible
