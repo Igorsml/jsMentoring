@@ -50,3 +50,14 @@ console.log("ABOBUS".toLowerCase().toUpperCase()); // 'abobus' → ABOBUS
 const arr = [1, "2", 3];
 console.log(arr.toString()); // '1,2,3'
 console.log(strForConcat.trim()); // 'asap'
+
+function factorial(n) {
+  if (n <= 1) {
+    return n;
+  }
+  if (n == 0) {
+    return 0;
+  }
+
+  return n * factorial(n - 1);
+}

@@ -15,16 +15,17 @@ function Order() {
   this.sum = 0;
   this.shoppingList = {};
   this.isLocked = false;
+  // console.log("new.target:", new.target);
 
-  console.log("new.target:", new.target);
-
-  this.addItem = function (item, count) {
+  this.addItem = function (item, count, price) {
     if (this.isLocked) {
       console.log("You can't add item");
     }
     // добавить итем в чек (+ имя +цена)
-    this.shoppingList[item.name] = item.price;
-    this.price = item.price;
+    this.item = item;
+    this.count = count;
+    this.price = price;
+    this.sum = price * count;
   };
 
   this.removeItem = function (item, count) {
@@ -32,7 +33,7 @@ function Order() {
     // Нельзя убрать больше чем было в чеке
   };
 
-  this.getCheck = function () {
+  this.getCheck = function (count, price) {
     return this.count;
     // получить информацию сколько каких итемов в чеке, общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
     // Формат произвольный, чтобы был читабельный
@@ -57,7 +58,7 @@ console.log(order);
 1. написать функцию конструктор для заказа в магазине.
 Новый инстанс - новый заказ
 у него будут методы
-addItem(item, count) - добавить итем в чек (+ имя +цена)
+addItem(item, count) - добавить итем в чек (+ имя + цена)
 removeItem(item, count) - убрать из чека count итемов (если не указано сколько - убрать все). Нельзя убрать больше чем было в чеке
 getCheck() - получить информацию сколько каких итемов в чеке, общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р). Формат произвольный, чтобы был читабельный
 lockOrder() - после вызова метода функции addItem/removeItem не должны делать что-либо. Можно как-то сообщать об ошибке, можно просто молча.
