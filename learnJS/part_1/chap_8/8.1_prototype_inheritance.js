@@ -65,3 +65,22 @@ for (let prop in cat) {
 
   isOwn ? console.log(`Own: ${isOwn}`) : console.log(`Inherited: ${prop}`); // Own: true | Inherited: eats
 }
+
+// obj __proto__
+const man = {}; // man.__proto__
+const woman = {}; //woman.__proto__
+console.log(man.__proto__ === woman.__proto__); // true
+
+// arr
+const users = []; // users.__proto__ | new Array
+const animals = []; // animals.__proto__
+console.log(users.__proto__ === animals.__proto__); // true
+
+const age = 25 + 5; // age.__proto__ | new Array |  примитив, но если к примитиву обращаемся как к объекту, то в памяти временно создается объектная версия примитива
+const trueOrFalse = true; // true.__proto__ | new Boolean | в памяти создается временный объект
+const greeting = "Aloha, Abobus!"; // greeting.__proto__ | new String
+console.log(trueOrFalse.__proto__ === greeting.__proto__); // false
+
+function checkIQ() {} // checkIQ.__proto__ | new Function
+const checkWeight = () => {}; // checkWeight.__proto__ | new Function
+console.log(checkIQ.__proto__ === checkWeight.__proto__); // true
