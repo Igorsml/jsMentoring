@@ -12,20 +12,19 @@ const item2 = {
 
 function Order() {
   this.count = 0;
+  this.countByName = {};
   this.sum = 0;
   this.shoppingList = {};
   this.isLocked = false;
   // console.log("new.target:", new.target);
 
-  this.addItem = function (item, count, price) {
+  this.addItem = function (item) {
     if (this.isLocked) {
       console.log("You can't add item");
     }
     // добавить итем в чек (+ имя +цена)
-    this.item = item;
-    this.count = count;
-    this.price = price;
-    this.sum = price * count;
+    this.shoppingList[item.name] = item.price;
+    this.count = item.name != undefined ? (this.count += 1) : 0;
   };
 
   this.removeItem = function (item, count) {
@@ -51,7 +50,9 @@ function Order() {
 }
 
 const order = new Order(item1);
-order.addItem();
+order.addItem(item1);
+order.addItem(item2);
+order.addItem(item1);
 console.log(order);
 
 /* [Конструктор заказа. Основы. learnjs 1.1..1.4]

@@ -47,3 +47,31 @@ const count = 42;
 console.log(count.__proto__ === ???); 
 console.log(count.__proto__ === Number.prototype); // true
 
+console.log((0).__proto__ === Number.prototype); // true
+console.log(false.__proto__ === Boolean.prototype); // true
+console.log("string".__proto__ === String.prototype); // true
+console.log((new Date).__proto__ === Date.prototype); // true
+console.log((function(){}/* new Function */).__proto__ === Function.prototype); // true
+
+
+const numbers1 = [1, 3];
+
+// Как только выполнится этот код, все массивы,
+// включая уже созданные, обзаведутся методом last
+Array.prototype.last = function last() {
+  // Такое обращение законно, ведь this это ссылка на сам объект,
+  // который в нашем случае массив
+  return this[this.length - 1];
+}
+
+numbers1.last(); // 3
+
+const numbers2 = [10, 0, -2];
+numbers2.last(); // -2
+
+// Пример замены
+Array.prototype.map = function map() {
+  return 'Ehu!';
+}
+
+numbers1.map(); // "Ehu!"
