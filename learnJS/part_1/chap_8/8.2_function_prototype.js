@@ -69,9 +69,3 @@ numbers1.last(); // 3
 const numbers2 = [10, 0, -2];
 numbers2.last(); // -2
 
-// Пример замены
-Array.prototype.map = function map() {
-  return 'Ehu!';
-}
-
-numbers1.map(); // "Ehu!"
