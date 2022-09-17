@@ -14,38 +14,36 @@ function Order() {
   this.count = 0;
   this.sum = 0;
   this.shoppingList = {};
-  this.shoppingItemCount = {};
+  this.listPrice = Object.values(this.shoppingList);
+  this.sumShoppingListItems = {};
   this.isLocked = false;
   // console.log("new.target:", new.target);
 
   this.addItem = function (item) {
     if (this.isLocked) {
       console.log("You can't add item");
+      return;
     }
     // добавить итем в чек (+ имя +цена)
     this.shoppingList[item.name] = item.price;
-    this.count = item.name != undefined ? (this.count += 1) : 0;
-    this.shoppingItemCount[item.name] =
-      (this.shoppingItemCount[item.name] || 0) + 1;
+    this.count = item.name ? (this.count += 1) : 0;
+    this.sumShoppingListItems[item.name] =
+      (this.sumShoppingListItems[item.name] || 0) + 1;
   };
 
   this.removeItem = function (item, deleteCount) {
     // Нельзя убрать больше чем было в чеке
-    if (this.isLocked || this.shoppingItemCount[item.name] < deleteCount) {
+    if (this.isLocked || this.sumShoppingListItems[item.name] < deleteCount) {
       console.log("You can't delete items more then is in check");
       return;
     }
 
     // убрать из чека count итемов (если не указано сколько - убрать все)
-    if (
-      deleteCount === undefined ||
-      deleteCount === null ||
-      typeof deleteCount !== "number"
-    ) {
+    if (!deleteCount || typeof deleteCount !== "number") {
       delete this.shoppingList[item.name];
-      this.shoppingItemCount[item.name] = 0;
+      this.sumShoppingListItems[item.name] = 0;
     } else {
-      this.shoppingItemCount[item.name] -= deleteCount;
+      this.sumShoppingListItems[item.name] -= deleteCount;
       this.count -= deleteCount;
     }
   };
@@ -53,7 +51,38 @@ function Order() {
   this.getCheck = function () {
     // получить информацию сколько каких итемов в чеке,
     // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
-    console.log("================================");
+    this.getSum = function () {
+      let countItems = [];
+      let priceItems = [];
+      for (const value in this.sumShoppingListItems) {
+        countItems.push(this.sumShoppingListItems[value]);
+      }
+      for (const value in this.sumShoppingListItems) {
+        priceItems.push(this.shoppingList[value]);
+      }
+      this.sum = countItems.reduce(
+        (acc, currentValue, index) => acc + currentValue * priceItems[index],
+        0
+      );
+    };
+    function replacer(key, value) {
+      let a = key;
+      let b = value;
+      console.log(`${a}: ${b}₽`);
+      return a, b;
+    }
+    function replacerItem(key, value) {
+      let a = key;
+      let b = value;
+      console.log(`${a}: ${b}`);
+      return a, b;
+    }
+
+    console.log("========Big check === big dick========");
+    JSON.stringify(this.shoppingList, replacer, false);
+    JSON.stringify(this.sumShoppingListItems, replacerItem);
+    console.log(`Order quantity: ${this.count}`);
+    console.log(`Order sum: ${this.sum}`);
   };
 
   this.lockOrder = function () {
@@ -71,11 +100,16 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
 order.addItem(item1); // add 'Suppserf' 1 pc
-order.removeItem(item1); // clear all item
-order.removeItem(item1); // remove add 'Suppserf' 1 pc
+order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+// order.removeItem(item1); // clear all item
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
-console.log(order);
+// order.lockOrder(); // Oops, looks like order is locked
+// order.addItem(item1); // You can't add item
+// order.unlockOrder(); //
+// order.addItem(item1); // add 'Suppserf' 1 pc
+order.getCheck();
+// console.log(order);
 
 /* [Конструктор заказа. Основы. learnjs 1.1..1.4]
 1. написать функцию конструктор для заказа в магазине.
