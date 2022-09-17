@@ -17,7 +17,7 @@ function Order() {
   this.listPrice = Object.values(this.shoppingList);
   this.sumShoppingListItems = {};
   this.isLocked = false;
-  // console.log("new.target:", new.target);
+  const currency = "₽";
 
   this.addItem = function (item) {
     if (this.isLocked) {
@@ -48,41 +48,44 @@ function Order() {
     }
   };
 
+  // получить информацию сколько каких итемов в чеке,
+  // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   this.getCheck = function () {
-    // получить информацию сколько каких итемов в чеке,
-    // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
     this.getSum = function () {
       let countItems = [];
       let priceItems = [];
+
       for (const value in this.sumShoppingListItems) {
         countItems.push(this.sumShoppingListItems[value]);
-      }
-      for (const value in this.sumShoppingListItems) {
         priceItems.push(this.shoppingList[value]);
       }
+
       this.sum = countItems.reduce(
         (acc, currentValue, index) => acc + currentValue * priceItems[index],
         0
       );
     };
+    this.getSum();
+
     function replacer(key, value) {
       let a = key;
       let b = value;
-      console.log(`${a}: ${b}₽`);
+      console.log(`${a}: ${b}${currency}`);
       return a, b;
     }
     function replacerItem(key, value) {
       let a = key;
       let b = value;
-      console.log(`${a}: ${b}`);
+      console.log(`${a}: ${b} pc`);
       return a, b;
     }
 
-    console.log("========Big check === big dick========");
-    JSON.stringify(this.shoppingList, replacer, false);
+    console.log("======== Big check === big dick ========");
+    JSON.stringify(this.shoppingList, replacer);
     JSON.stringify(this.sumShoppingListItems, replacerItem);
-    console.log(`Order quantity: ${this.count}`);
-    console.log(`Order sum: ${this.sum}`);
+    console.log("================================");
+    console.log(`Order quantity: ${this.count} pcs`);
+    console.log(`Order sum: ${this.sum}${currency}`);
   };
 
   this.lockOrder = function () {
@@ -100,7 +103,7 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
 order.addItem(item1); // add 'Suppserf' 1 pc
-order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+// order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
 // order.removeItem(item1); // clear all item
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
