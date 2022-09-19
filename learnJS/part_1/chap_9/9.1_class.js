@@ -1,5 +1,5 @@
 "use strict";
-
+// Class — это разновидность функции
 class myFirstClass {
   constructor(name) {
     this.name = name;
@@ -13,44 +13,53 @@ class myFirstClass {
 const user = new myFirstClass("Igor");
 user.sayHi(); // Hi, Igor!
 console.log(typeof myFirstClass); // function
+myFirstClass(); // TypeError: Class constructor myFirstClass cannot be invoked without 'new'
 console.log(myFirstClass === myFirstClass.prototype.constructor); // true | это метод constructor
 console.log(Object.getOwnPropertyNames(myFirstClass.prototype)); // [ 'constructor', 'sayHi' ]
 console.log(Object.getOwnPropertyDescriptors(myFirstClass)); // )); // writable: false, enumerable: false,configurable: true
 
-class Budget {
-  constructor(amount, daysCount) {
-    /* ... */
-  }
+class User {
+  constructor(name) {
+    this.name = name;
+  } // без конструктора и просто "this.name = name" не работает
 
-  // Перенесём деление в Бюджет:
-  get perDay() {
-    return this.amount / this.daysCount;
-  }
-}
-
-class History {
-  records = [];
-
-  addRecord() {
-    /* ... */
-  }
-
-  // А вычисление потраченного сегодня — в Историю:
-  get spentToday() {
-    return this.records.reduce((result, record) => {
-      return (result += isToday(record.dateTime) ? record.amount : 0);
-    }, 0);
+  sayHi() {
+    console.log(this.name);
   }
 }
 
-// Теперь мы можем использовать поля perDay и spentToday
-// на объектах, которые передадим в класс DailyAmount:
-class DailyAmount {
-  constructor() {
-    /* ... */
+// Использование:
+let user = new User("Igor");
+user.sayHi();
+
+// можем записать в класс (Names Class Extension)
+const Pet = class petClass {
+  makePee() {
+    console.log(petClass);
+  }
+};
+
+new Pet().makePee(); // [class petClass]
+console.log(petClass); // ReferenceError: petClass is not defined
+
+// в классы можно совать get / set
+class Person {
+  constructor(name) {
+    this.name = name;
   }
 
-  get valueOf() {
-    return this.budget.perDay - this.history.spentToday;
+  get name() {
+    return this._name;
+  }
+
+  set name(value) {
+    value.length < 4
+      ? console.log("Name is too short")
+      : console.log("Beatiful name!");
+    this._name = value;
   }
 }
+
+const user = new Person("Igor");
+console.log(user.name); // 'Beatiful name!' 'Igor'
+const user2 = new Person("Abs"); // 'Name is too short'
