@@ -3,11 +3,27 @@
 function winner(deckSteve, deckJosh) {
   let Steve = 0;
   let Josh = 0;
-  "J".charCodeAt(0) = 11;
-  "Q".charCodeAt(0) = 12;
-  "K".charCodeAt(0) = 13;
-  "A".charCodeAt(0) = 14;
- 
+  let indexJ = deckSteve.indexOf("J");
+  let indexQ = deckSteve.indexOf("Q");
+  let indexK = deckSteve.indexOf("K");
+  let indexA = deckSteve.indexOf("A");
+
+  if (indexJ !== -1) {
+    deckSteve[index] = "10";
+    deckJosh[index] = "10";
+  }
+  if (indexQ !== -1) {
+    deckSteve[index] = "11";
+    deckJosh[index] = "11";
+  }
+  if (indexK !== -1) {
+    deckSteve[index] = "12";
+    deckJosh[index] = "12";
+  }
+  if (indexA !== -1) {
+    deckSteve[index] = "13";
+    deckJosh[index] = "13";
+  }
 
   let result = deckSteve.every(function (element, i) {
     if (element === deckJosh[i]) {
