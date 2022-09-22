@@ -12,6 +12,7 @@ class Animal {
 
 class Rabbit extends Animal {
   constructor(name) {
+    super(name); // fix: Чтобы конструктор Rabbit работал, он должен вызвать super() до того, как использовать this
     this.name = name;
     this.created = Date.now();
   }
@@ -61,3 +62,22 @@ class Clock {
 // Создайте новый класс ExtendedClock, который будет наследоваться от Clock и добавьте параметр precision – количество миллисекунд между «тиками». Установите значение в 1000 (1 секунда) по умолчанию.
 // Сохраните ваш код в файл extended-clock.js
 // Не изменяйте класс clock.js. Расширьте его.
+
+class ExtendedClock extends Clock {
+  constructor(options, precision) {
+    super(options);
+    this.precision = precision || 1000;
+  }
+
+  start() {
+    this.render();
+    this.timer = setInterval(() => this.render(), this.precision);
+  }
+}
+
+let lowResolutionClock = new ExtendedClock({
+  template: "h:m:s",
+  precision: 10000,
+});
+
+lowResolutionClock.start();

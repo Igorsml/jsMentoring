@@ -8,22 +8,29 @@ function winner(deckSteve, deckJosh) {
   let indexK = deckSteve.indexOf("K");
   let indexA = deckSteve.indexOf("A");
 
+  let joshDeckindexJ = deckSteve.indexOf("J");
+  let indexQ = deckSteve.indexOf("Q");
+  let indexK = deckSteve.indexOf("K");
+  let indexA = deckSteve.indexOf("A");
+
   if (indexJ !== -1) {
-    deckSteve[index] = "10";
-    deckJosh[index] = "10";
+    deckSteve[indexJ] = "10";
+    deckJosh[indexJ] = "10";
   }
   if (indexQ !== -1) {
-    deckSteve[index] = "11";
-    deckJosh[index] = "11";
+    deckSteve[indexQ] = "11";
+    deckJosh[indexQ] = "11";
   }
   if (indexK !== -1) {
-    deckSteve[index] = "12";
-    deckJosh[index] = "12";
+    deckSteve[indexK] = "12";
+    deckJosh[indexK] = "12";
   }
   if (indexA !== -1) {
-    deckSteve[index] = "13";
-    deckJosh[index] = "13";
+    deckSteve[indexA] = "13";
+    deckJosh[indexA] = "13";
   }
+
+  console.log(indexK);
 
   let result = deckSteve.every(function (element, i) {
     if (element === deckJosh[i]) {
