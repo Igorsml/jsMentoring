@@ -3,34 +3,16 @@
 function winner(deckSteve, deckJosh) {
   let Steve = 0;
   let Josh = 0;
-  let indexJ = deckSteve.indexOf("J");
-  let indexQ = deckSteve.indexOf("Q");
-  let indexK = deckSteve.indexOf("K");
-  let indexA = deckSteve.indexOf("A");
 
-  let joshDeckindexJ = deckSteve.indexOf("J");
-  let indexQ = deckSteve.indexOf("Q");
-  let indexK = deckSteve.indexOf("K");
-  let indexA = deckSteve.indexOf("A");
-
-  if (indexJ !== -1) {
-    deckSteve[indexJ] = "10";
-    deckJosh[indexJ] = "10";
+  function changeDeckValue(deck) {
+    for (let i = 10; i < deck.length; i++) {
+      if (indexOf(deck[i]) !== -1) {
+        deck[i] += 1;
+      }
+      return deck;
+    }
   }
-  if (indexQ !== -1) {
-    deckSteve[indexQ] = "11";
-    deckJosh[indexQ] = "11";
-  }
-  if (indexK !== -1) {
-    deckSteve[indexK] = "12";
-    deckJosh[indexK] = "12";
-  }
-  if (indexA !== -1) {
-    deckSteve[indexA] = "13";
-    deckJosh[indexA] = "13";
-  }
-
-  console.log(indexK);
+  changeDeckValue(deckSteve, deckJosh);
 
   let result = deckSteve.every(function (element, i) {
     if (element === deckJosh[i]) {
