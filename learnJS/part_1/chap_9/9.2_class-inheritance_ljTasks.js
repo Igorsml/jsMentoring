@@ -77,7 +77,7 @@ class ExtendedClock extends Clock {
 
 let lowResolutionClock = new ExtendedClock({
   template: "h:m:s",
-  precision: 10000,
+  precision: 1000,
 });
 
 lowResolutionClock.start();
