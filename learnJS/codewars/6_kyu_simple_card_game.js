@@ -4,83 +4,62 @@ function winner(deckSteve, deckJosh) {
   let Steve = 0;
   let Josh = 0;
 
-  function swapValueDeckSteve(deckSteve) {
-    deckSteve.map((elem) => {
-      if (elem === "T") {
-        return 10;
-      }
-      if (elem === "J") {
-        return 11;
-      }
-      if (elem === "Q") {
-        return 12;
-      }
-      if (elem === "K") {
-        return 13;
-      }
-      if (elem === "A") {
-        return 14;
-      }
-    });
-  }
+  const swappedValueDeckSteve = deckSteve.map((elem) => {
+    if (elem === "T") {
+      return 10;
+    }
+    if (elem === "J") {
+      return 11;
+    }
+    if (elem === "Q") {
+      return 12;
+    }
+    if (elem === "K") {
+      return 13;
+    }
+    if (elem === "A") {
+      return 14;
+    } else {
+      return elem;
+    }
+  });
 
-  function swapValueDeckSteve(deckJosh) {
-    deckJosh.map((elem) => {
-      if (elem === "T") {
-        return 10;
-      }
-      if (elem === "J") {
-        return 11;
-      }
-      if (elem === "Q") {
-        return 12;
-      }
-      if (elem === "K") {
-        return 13;
-      }
-      if (elem === "A") {
-        return 14;
-      }
-    });
-  }
+  const swappedValueDeckJosh = deckJosh.map((elem) => {
+    if (elem === "T") {
+      return 10;
+    }
+    if (elem === "J") {
+      return 11;
+    }
+    if (elem === "Q") {
+      return 12;
+    }
+    if (elem === "K") {
+      return 13;
+    }
+    if (elem === "A") {
+      return 14;
+    } else {
+      return elem;
+    }
+  });
 
-  deckSteve.every(function (element, i) {
-    if (element === deckJosh(i)) {
-      ("Tie");
-    } else if (element > deckJosh(i)) {
+  console.log(swappedValueDeckSteve, swappedValueDeckJosh);
+
+  swappedValueDeckSteve.forEach((value, i) => {
+    const value2 = swappedValueDeckJosh[i];
+
+    if (value > value2) {
       Steve += 1;
-    } else if (element < deckSteve(i)) {
+    }
+    if (value < value2) {
       Josh += 1;
     }
   });
+
+  if (Steve === Josh) return "Tie";
+
   return Steve > Josh
-    ? `Steve win ${Steve} to ${Josh}`
-    : `Josh win ${Josh} to ${Steve}`;
+    ? `Steve wins ${Steve} to ${Josh}`
+    : `Josh wins ${Josh} to ${Steve}`;
 }
-
-winner([
-  ["A", "7", "8"],
-  ["K", "5", "9"],
-]); // 'Steve wins 2 to 1'
-
-// for (let i = 0; i <= deckSteve.length; i++) {
-//   for (let j = 0; j <= deckJosh.length; j++) {
-//     if (deckSteve[i] > deckJosh[j]) {
-//       Steve += 1;
-//     } else {
-//       Josh += 1;
-//     }
-//   }
-// }
-
-// for (let i = 0; i <= deckSteve.length; i++) {
-//   if (deckSteve[i] > deckJosh[i]) {
-//     Steve += 1;
-//   } else if (deckSteve[i] === deckJosh[i]) {
-//     return "Tie";
-//   } else {
-//     Josh += 1;
-//   }
-//   result = `Steve wins ${Steve} to ${Josh}`;
-// }
-// return result;
