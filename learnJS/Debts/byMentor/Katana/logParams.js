@@ -11,4 +11,5 @@ function logParams(first, second, first) {
 }
 logParams(); // undefined
 
-// https://medium.com/swlh/function-with-duplicate-parameters-your-turn-js-ffd42944dfe4
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
+// Still, this hiding makes little sense and is probably undesirable (it might hide a typo, for example), so in strict mode duplicate argument names are a syntax error:

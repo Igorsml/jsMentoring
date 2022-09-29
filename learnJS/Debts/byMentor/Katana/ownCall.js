@@ -26,3 +26,4 @@ const person = {
 };
 
 goSleep.ownCall(person, "name"); // Igor go to zZzZzz
+console.log(person);
