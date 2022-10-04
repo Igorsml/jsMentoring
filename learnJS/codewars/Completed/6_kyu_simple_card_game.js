@@ -46,9 +46,21 @@ console.log(winner(["T", "7", "8"], ["K", "5", "9"]));
 
 // потом переписать на объект ключ-значение, убедиться что работает
 function winner(deckSteve, deckJosh) {
-  const ranks = {
-    ...["2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K", "A"],
-  };
+  const ranks = [
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "T",
+    "J",
+    "Q",
+    "K",
+    "A",
+  ];
   const deckSteveObj = { ...deckSteve };
   const deckJoshObj = { ...deckJosh };
 
@@ -56,11 +68,15 @@ function winner(deckSteve, deckJosh) {
     Josh = 0;
 
   for (const value in deckSteveObj) {
-    if (deckSteveObj[value] > ranks[value]) {
+    if (
+      ranks.indexOf(deckSteveObj[value]) > ranks.indexOf(deckJoshObj[value])
+    ) {
       Steve += 1;
     }
-    if (deckSteveObj[value] < ranks[value]) {
-      Steve += 1;
+    if (
+      ranks.indexOf(deckSteveObj[value]) < ranks.indexOf(deckJoshObj[value])
+    ) {
+      Josh += 1;
     }
   }
 
