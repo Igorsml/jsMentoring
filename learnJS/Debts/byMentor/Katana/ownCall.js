@@ -17,15 +17,16 @@ function goSleep() {
 }
 
 Function.prototype.ownCall = function (context, ...args) {
-  // let fun = Symbol();
-  // [fun] = this;
+  if (context.hasOwnProperty("fun")) {
+    const sym = Symbol();
+    context[fun] = this;
+  }
   context.fun = this;
   context.fun(...args);
 };
 
 const person = {
   name: "Igor",
-  test: fun,
 };
 
 goSleep.ownCall(person, "name"); // Igor go to zZzZzz
