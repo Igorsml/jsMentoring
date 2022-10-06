@@ -5,12 +5,12 @@ function cleanString(s) {
   const strArr = s.split("");
   let result = [];
 
-  strArr.map((elem, i) => {
-    if (elem === "#") {
-      result.push(strArr.splice(i - 1, 1));
-    }
-  });
-  return result.join("");
+  let char = "#";
+
+  if (strArr.includes((elem) => elem === char || char > 1)) {
+    strArr.pop(elem);
+  }
+  return strArr.join("");
 }
 
 console.log(cleanString("abc#d##c")); // 'ac'
