@@ -1,14 +1,13 @@
+"use strict";
 // https://www.codewars.com/kata/5264d2b162488dc400000001/train/javascript
 
 function spinWords(string) {
-  let splittedArr = string.split(" ");
-  console.log(splittedArr);
-
-  for (word of string) {
-    if (word.length > 5) {
-      [...word].reverse().join("");
-    }
-    console.log(word.length);
-  }
-  return word;
+  return string
+    .split(" ")
+    .map((word) => {
+      return word.length >= 5 ? word.split("").reverse().join("") : word;
+    })
+    .join(" ");
 }
+
+console.log(spinWords("Hey fellow warriors"));

@@ -9,26 +9,26 @@ const deepCount = (arr = []) => {
 deepCount([[[[[[[[[]]]]]]]]]); // 8;
 
 function deepCount(a) {
-  let result = [];
-  a.forEach(function (element) {
-    if (!Array.isArray(element)) {
-      result.push(element);
-    } else {
-      result = result.concat(deepCount(element));
-    }
+  let result = 0;
+
+  a.forEach((element) => {
+    Array.isArray(element) ? (result += 1) : deepCount(element);
   });
+
   return result.length;
 }
+
+deepCount([[[[[[[[[]]]]]]]]]); // 8;
 
 function deepCount(a) {
   let result = 0;
 
   for (let i = 0; i <= a.length; i++) {
-    if (a.some(Array.isArray())) {
+    if (a[i].some(Array.isArray())) {
       result += 1;
     }
-    return result;
   }
+  return result;
 }
 
 deepCount([[[[[[[[[]]]]]]]]]); // 8;
