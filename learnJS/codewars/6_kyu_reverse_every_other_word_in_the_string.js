@@ -5,11 +5,10 @@ function reverse(str) {
   return str
     .split(" ")
     .map((word, i) => {
-      return str.split(" ").filter((el, i) => i % 2 !== 0)
-        ? word.split(" ").reverse().join(" ")
-        : word;
+      return i % 2 !== 0 ? word.split("").reverse().join("") : word;
     })
-    .join(" ");
+    .join(" ")
+    .trim("");
 }
 
 console.log(reverse("Reverse this string, please!")); //
