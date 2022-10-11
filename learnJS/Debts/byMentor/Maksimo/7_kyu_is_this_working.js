@@ -10,7 +10,22 @@ function Counter() {
   };
 }
 
-var counter = new Counter();
-counter.updateCount.call({});
-var fn = counter.updateCount;
-fn();
+const requestsCounter = new Counter();
+requestsCounter.updateCount();
+console.log(requestsCounter.count); // 1
+requestsCounter.updateCount();
+console.log(requestsCounter.count); // 2
+
+// Class version
+class Counter {
+  constructor() {
+    this.count = 0;
+  }
+  updateCount() {
+    return this.count++;
+  }
+}
+
+const counter1 = new Counter();
+counter1.updateCount();
+console.log(counter1.count); // 1
