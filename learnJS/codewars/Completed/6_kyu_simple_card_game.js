@@ -61,29 +61,34 @@ function winner(deckSteve, deckJosh) {
     "K",
     "A",
   ];
+
+  const ranksObj = { ...ranks };
   const deckSteveObj = { ...deckSteve };
   const deckJoshObj = { ...deckJosh };
 
-  let Steve = 0,
-    Josh = 0;
+  let steve = 0,
+    josh = 0;
 
   for (const value in deckSteveObj) {
+    console.log(deckSteveObj[value]);
     if (
-      ranks.indexOf(deckSteveObj[value]) > ranks.indexOf(deckJoshObj[value])
+      ranksObj.indexOf(deckSteveObj[value]) >
+      ranksObj.indexOf(deckJoshObj[value])
     ) {
-      Steve += 1;
+      steve += 1;
     }
     if (
-      ranks.indexOf(deckSteveObj[value]) < ranks.indexOf(deckJoshObj[value])
+      ranksObj.indexOf(deckSteveObj[value]) <
+      ranksObj.indexOf(deckJoshObj[value])
     ) {
-      Josh += 1;
+      josh += 1;
     }
   }
 
-  return Steve > Josh
-    ? `Steve wins ${Steve} to ${Josh}`
-    : Josh > Steve
-    ? `Josh wins ${Josh} to ${Steve}`
+  return steve > josh
+    ? `Steve wins ${steve} to ${josh}`
+    : josh > steve
+    ? `Josh wins ${josh} to ${steve}`
     : "Tie";
 }
 
