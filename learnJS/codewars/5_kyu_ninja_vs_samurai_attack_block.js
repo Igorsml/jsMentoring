@@ -14,10 +14,6 @@ function Warrior(name) {
   this.zombie = false;
 
   this.attack = function (enemy, position) {
-    enemy.deceased = false;
-    enemy.zombie = false;
-    // console.log("enemy block:", enemy.block);
-    // console.log("position", position);
     this.damage = 0;
 
     if (enemy.block !== position && position === "h") {
@@ -35,16 +31,20 @@ function Warrior(name) {
     }
 
     enemy.health -= this.damage;
-    if (this.health > 0) {
+
+    if (this.health <= 0) {
+      this.deceased = true;
       this.zombie = false;
+    }
+    if (this.deceased) {
+      this.zombie = true;
     }
 
     if (enemy.health <= 0) {
       enemy.deceased = true;
       enemy.zombie = false;
-    } else if (this.damage >= 1) {
-      console.log(enemy.zombie);
-      enemy.deceased = false;
+    }
+    if (enemy.deceased) {
       enemy.zombie = true;
     }
   };
