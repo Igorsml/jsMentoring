@@ -29,3 +29,28 @@ Function.prototype.ownBind = function (obj, ...args) {
 
 const fnWithContext = fn.ownBind(obj);
 fnWithContext(3); // 8
+
+// 3. Убедиться что проблема решена. В ownBind заюзать ownApply, а не apply
+const obj = {
+  number: 5,
+};
+
+const fn = function (number) {
+  console.log(number + this.number);
+};
+Function.prototype.ownApply = function (context, args) {
+  const sym = Symbol("ownApply symbol");
+  context[sym] = this;
+  context[sym](...args);
+};
+
+Function.prototype.ownBind = function (obj, ...args) {
+  const fun = this;
+
+  return function (...newArgs) {
+    fun.ownApply(obj, [...args, ...newArgs]);
+  };
+};
+
+const fnWithContext = fn.ownBind(obj);
+fnWithContext(3); // 8

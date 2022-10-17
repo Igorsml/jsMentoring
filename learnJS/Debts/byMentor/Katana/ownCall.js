@@ -31,7 +31,7 @@ const person = {
 
 goSleep.ownCall(person, "name"); // Igor go to zZzZzz
 
-// Понять что будет с объектом у которого есть свойство fun в твоем call/apply
+// 1. Понять что будет с объектом у которого есть свойство fun в твоем call/apply
 function goSleep() {
   console.log(`${this.name} go to zZzZzz`);
 }
@@ -42,43 +42,28 @@ Function.prototype.ownCall = function (context, ...args) {
 
 const person = {
   name: "Igor",
-  test: fun,
+  fun: "test",
 };
 
-goSleep.ownCall(person, "name"); // ReferenceError: fun is not defined
+goSleep.ownCall(person, "name"); //
+console.log(person.fun); // перезапись свойства fun | [Function: goSleep]
 
-// Заюзать тип Symbol в своем call/apply чтобы решить эту проблему
+// 2. Заюзать тип Symbol в своем call/apply чтобы решить эту проблему
 function goSleep() {
   console.log(`${this.name} go to zZzZzz`);
 }
 Function.prototype.ownCall = function (context, ...args) {
-  context.fun = this;
-  context.fun(...args);
+  const sym = Symbol("ownCall symbol");
+  context[sym] = this;
+  context[sym](...args);
 };
 
 const person = {
   name: "Igor",
-  [fun]: fun,
+  fun: "test",
+  sym: "test2",
 };
 
-goSleep.ownCall(person, "name"); // ReferenceError: fun is not defined
-
-/* 
-  fun[Symbol.iterator] = function () {
-    const properties = Object.keys(this);
-    let count = 0;
-
-    return {
-      next() {
-        if (count < properties.length) {
-          const key = properties[count];
-          let result = { done: false, value: obj[key] };
-          count += 1;
-          return result;
-        } else {
-          return { done: true };
-        }
-      },
-    };
-  };
-  */
+goSleep.ownCall(person, "name"); // Igor go to zZzZzz
+console.log(person.fun); // 'test'
+console.log(person.sym); // 'test2'
