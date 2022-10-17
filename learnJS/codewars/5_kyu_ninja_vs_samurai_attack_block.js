@@ -14,40 +14,36 @@ function Warrior(name) {
   this.zombie = false;
 
   this.attack = function (enemy, position) {
+    enemy.deceased = false;
+    enemy.zombie = false;
     this.damage = 0;
 
-    if (enemy.block !== position && position === "h") {
-      this.damage += 10;
-    }
-    if (enemy.block !== position && position === "l") {
-      this.damage += 5;
-    }
     if (enemy.block === position) {
-      this.damage += 0;
+      this.damage = 0;
+      return;
     }
-    // if enemy is not blocking at all then give more damage
-    if (enemy.block === "") {
+
+    position === "h" ? (this.damage += 10) : (this.damage += 5);
+
+    if (!enemy.block) {
       this.damage += 5;
     }
 
-    enemy.health -= this.damage;
-
-    if (this.health <= 0) {
-      this.deceased = true;
-      this.zombie = false;
-    }
-    if (this.deceased) {
-      this.zombie = true;
-    }
-
-    if (enemy.health <= 0) {
-      enemy.deceased = true;
-      enemy.zombie = false;
-    }
-    if (enemy.deceased) {
-      enemy.zombie = true;
-    }
+    setHealth.call(enemy, enemy.health - this.damage);
   };
+}
+
+function setHealth(value) {
+  this.health = Math.max(0, value);
+  if (this.health == 0 && this.step === undefined) {
+    this.deceased = true;
+    this.zombie = false;
+    this.step = true;
+  } else {
+    this.zombie = true;
+    this.deceased = true;
+    delete this.step;
+  }
 }
 
 // Expected samurai health to equal 90, instead got 100
@@ -66,9 +62,6 @@ ninja.attack(samurai, "h"); // 15
 // ninja.attack(samurai, "h"); // 10
 // samurai.block = "h";
 // ninja.attack(samurai, "l"); // 5
-console.log(samurai);
-// console.log(ninja);
-
 // ninja.block = "l";
 // samurai.attack(ninja, "l");
 // console.log(samurai);
