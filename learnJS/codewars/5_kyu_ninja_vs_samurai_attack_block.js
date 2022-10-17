@@ -60,9 +60,6 @@ ninja.attack(samurai, "h"); // 15
 // ninja.attack(samurai, "h"); // 10
 // samurai.block = "h";
 // ninja.attack(samurai, "l"); // 5
-console.log(samurai);
-// console.log(ninja);
-
 // ninja.block = "l";
 // samurai.attack(ninja, "l");
 // console.log(samurai);
