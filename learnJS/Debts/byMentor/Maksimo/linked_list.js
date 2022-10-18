@@ -22,15 +22,29 @@ let list2 = {
   previous: null,
   value: 1,
   next: {
-    // previous: this.value,
     value: 2,
     tail: {
-      // previous: this.value,
       value: 3,
       next: null,
     },
   },
 };
+
+list2.next.previous = list2;
+list2.next.tail.previous = list2.next;
+
+console.log(list2);
+
+// function linked list
+function createList(...o) {
+  for (let i = 0; i < o.length; i += 1) {
+    o[i].previous = o[i - 1] ?? null;
+    o[i].next = o[i + 1] ?? null;
+  }
+  return o[0];
+}
+let list = createList({ value: 1 }, { value: 2 }, { value: 3 });
+console.log(list); //
 
 // Class linked list
 class LinkedList {
