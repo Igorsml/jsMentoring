@@ -91,3 +91,12 @@ try {
 }
 
 console.log(`Complete in ${diff} ms`); // Complete in 8 ms
+
+// где хранится name, stack, message
+try {
+  someError;
+} catch (err) {
+  console.log("Error:"); // Error: ReferenceError: someError is not defined
+  console.log(Object.getOwnPropertyDescriptors(err)); // message, stack
+  console.log(Object.getOwnPropertyDescriptors(err.__proto__)); // message, name
+}

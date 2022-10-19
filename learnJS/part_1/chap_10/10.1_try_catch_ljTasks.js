@@ -31,10 +31,13 @@ function tetstTryCatch () {
     someError;
   } catch (err) {
     throw new Error('TetstTryCatch failedStrictCommands before starting');
-  } 
-
-  console.log('Clear workspace');
+  }  finally {
+    console.log('Clear workspace'); 
+  }
 }
+
+
+tetstTryCatch(); // 1. Start, 2. Clear workspace, 3. Error: TetstTryCatch failedStrictCommands before starting
 
 // fix 
 function tetstTryCatch () {
