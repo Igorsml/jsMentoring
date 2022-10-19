@@ -69,5 +69,25 @@ try {
 
   console.log(user.name);
 } catch (err) {
-  console.log("JSON Error: " + err.message); // JSON Error: user.name undefined in JSON
+  if (err instanceof SyntaxError) {
+    console.log("JSON Error: " + err.message); // JSON Error:user.name undefined in JSON
+  } else {
+    throw err; // проброс
+  }
 }
+
+// try...catch...finally
+const myVariable = 40;
+const start = Date.now();
+let diff;
+
+try {
+  console.log(myVariable + 2); // 42
+} catch (err) {
+  console.log("Oopsies -", err); // No errors
+} finally {
+  console.log("Runs no matter what"); // Runs no matter what
+  diff = Date.now() - start;
+}
+
+console.log(`Complete in ${diff} ms`); // Complete in 8 ms
