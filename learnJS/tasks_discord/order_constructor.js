@@ -48,25 +48,26 @@ function Order() {
     }
   };
 
+  // Получить сумму заказа
+  this.getSum = function () {
+    let countItems = [];
+    let priceItems = [];
+
+    for (const value in this.sumShoppingListItems) {
+      countItems.push(this.sumShoppingListItems[value]);
+      priceItems.push(this.shoppingList[value]);
+    }
+
+    this.sum = countItems.reduce(
+      (acc, currentValue, index) => acc + currentValue * priceItems[index],
+      0
+    );
+  };
+  this.getSum();
+
   // получить информацию сколько каких итемов в чеке,
   // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   this.getCheck = function () {
-    this.getSum = function () {
-      let countItems = [];
-      let priceItems = [];
-
-      for (const value in this.sumShoppingListItems) {
-        countItems.push(this.sumShoppingListItems[value]);
-        priceItems.push(this.shoppingList[value]);
-      }
-
-      this.sum = countItems.reduce(
-        (acc, currentValue, index) => acc + currentValue * priceItems[index],
-        0
-      );
-    };
-    this.getSum();
-
     function replacer(key, value) {
       let a = key;
       let b = value;
