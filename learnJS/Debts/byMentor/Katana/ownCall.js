@@ -18,7 +18,6 @@ function goSleep() {
 
 Function.prototype.ownCall = function (context, ...args) {
   if (context.hasOwnProperty("fun")) {
-    const sym = Symbol();
     context[fun] = this;
   }
   context.fun = this;
@@ -42,11 +41,19 @@ Function.prototype.ownCall = function (context, ...args) {
 
 const person = {
   name: "Igor",
+<<<<<<< HEAD
   fun: "test",
 };
 
 goSleep.ownCall(person, "name"); //
 console.log(person.fun); // перезапись свойства fun | [Function: goSleep]
+=======
+  fun: "test fun",
+};
+
+goSleep.ownCall(person, "name"); // 'Igor go to zZzZzz'
+console.log(person.fun); // свойство перезапишется | [Function: goSleep]
+>>>>>>> 1bcc78d2488a66810b92b7f26f21aea785b1adff
 
 // 2. Заюзать тип Symbol в своем call/apply чтобы решить эту проблему
 function goSleep() {
@@ -60,6 +67,7 @@ Function.prototype.ownCall = function (context, ...args) {
 
 const person = {
   name: "Igor",
+<<<<<<< HEAD
   fun: "test",
   sym: "test2",
 };
@@ -67,3 +75,12 @@ const person = {
 goSleep.ownCall(person, "name"); // Igor go to zZzZzz
 console.log(person.fun); // 'test'
 console.log(person.sym); // 'test2'
+=======
+  fun: "test fun",
+  sym: "test sym",
+};
+
+goSleep.ownCall(person, "name"); // 'Igor go to zZzZzz'
+console.log(person.fun); // 'test fun'
+console.log(person.sym); // 'test sym'
+>>>>>>> 1bcc78d2488a66810b92b7f26f21aea785b1adff

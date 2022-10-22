@@ -14,7 +14,6 @@ function Order() {
   this.count = 0;
   this.sum = 0;
   this.shoppingList = {};
-  this.listPrice = Object.values(this.shoppingList);
   this.sumShoppingListItems = {};
   this.isLocked = false;
   const currency = "₽";
@@ -48,43 +47,34 @@ function Order() {
     }
   };
 
-  // Получить сумму заказа
-  this.getSum = function () {
-    let countItems = [];
-    let priceItems = [];
-
-    for (const value in this.sumShoppingListItems) {
-      countItems.push(this.sumShoppingListItems[value]);
-      priceItems.push(this.shoppingList[value]);
-    }
-
-    this.sum = countItems.reduce(
-      (acc, currentValue, index) => acc + currentValue * priceItems[index],
-      0
-    );
-  };
-  this.getSum();
-
   // получить информацию сколько каких итемов в чеке,
   // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   this.getCheck = function () {
-    function replacer(key, value) {
-      let a = key;
-      let b = value;
-      console.log(`${a}: ${b}${currency}`);
-      return a, b;
-    }
-    function replacerItem(key, value) {
-      let a = key;
-      let b = value;
-      console.log(`${a}: ${b} pc`);
-      return a, b;
-    }
+    this.sum = 0;
+    this.discount = 10;
+    this.sumDiscount = 0;
 
     console.log("======== Big check === big dick ========");
-    JSON.stringify(this.shoppingList, replacer);
-    JSON.stringify(this.sumShoppingListItems, replacerItem);
+    for (const [key, value] of Object.entries(this.shoppingList)) {
+      this.sum += value;
+      const qty = this.sumShoppingListItems[key];
+      const qtySum = qty * this.shoppingList[key];
+      this.sumDiscount += this.shoppingList[key] / this.discount;
+      this.discountLeft = 100000 - this.sum;
+
+      console.log(
+        `x${qty} ${key} ${this.shoppingList[key]}  = ${qtySum}${currency}`
+      );
+    }
+    this.sum > 100000
+      ? (this.sum -= this.sumDiscount)
+      : console.log(`For discount left ${discountLeft}${currency}`);
+
     console.log("================================");
+    if (this.discount)
+      console.log(
+        `Wow! Your discount is: ${this.discount}% (${this.sumDiscount}${currency})`
+      );
     console.log(`Order quantity: ${this.count} pcs`);
     console.log(`Order sum: ${this.sum}${currency}`);
   };
@@ -124,7 +114,9 @@ removeItem(item, count) - убрать из чека count итемов (есл�
 getCheck() - получить информацию сколько каких итемов в чеке, общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р). Формат произвольный, чтобы был читабельный
 lockOrder() - после вызова метода функции addItem/removeItem не должны делать что-либо. Можно как-то сообщать об ошибке, можно просто молча.
 unlockOrder() - убрать блокировку заказа - снова можно добавлять итемы
-Формат item - объект с 1. названием итема 2. ценой за штуку. 2 итема с одинаковым именем считаем одной позицией в чеке
+Формат item - объект с 
+1. названием итема 
+2. ценой за штуку. 
+2 итема с одинаковым именем считаем одной позицией в чеке
 3. использовать отладку (debugger) при решении в хроме. Если получится без отладки - самому допустить ошибку и найти ее при отладке через интерфейс девтулзов 
-Формат item - объект с 1. названием итема 2. ценой за штуку.
-2 итема с одинаковым именем считаем одной позицией в чеке*/
+*/
