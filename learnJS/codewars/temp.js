@@ -51,18 +51,25 @@ function Order() {
   // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   this.getCheck = function () {
     this.sum = 0;
+    this.discount = 10;
     console.log("======== Big check === big dick ========");
     for (const [key, value] of Object.entries(this.shoppingList)) {
       this.sum += value;
       const qty = this.sumShoppingListItems[key];
       const qtySum = qty * this.shoppingList[key];
+      const discountLeft = this.sum - 100000;
+
+      this.sum >= 100000
+        ? this.sum - this.sum * this.discount
+        : console.log(`For discount left ${discountLeft}`);
 
       console.log(
-        `x${qty} ${key} ${this.shoppingList[key]} = ${qtySum}${currency}`
+        `x${qty} ${key} ${this.shoppingList[key]}  = ${qtySum}${currency}`
       );
     }
 
     console.log("================================");
+    if (this.discount) console.log(`Your discount is ${this.discount}%`);
     console.log(`Order quantity: ${this.count} pcs`);
     console.log(`Order sum: ${this.sum}${currency}`);
   };
