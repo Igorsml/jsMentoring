@@ -13,12 +13,9 @@ const item2 = {
 function Order() {
   this.count = 0;
   this.sum = 0;
-  this.qty = 0;
-  this.sumDiscount = 0;
   this.shoppingList = {};
   this.sumShoppingListItems = {};
   this.isLocked = false;
-  this.discount = 10;
   const currency = "₽";
 
   this.addItem = function (item) {
@@ -53,29 +50,26 @@ function Order() {
   // получить информацию сколько каких итемов в чеке,
   // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   this.getCheck = function () {
+    this.sum = 0;
+    this.discount = 10;
     console.log("======== Big check === big dick ========");
-
     for (const [key, value] of Object.entries(this.shoppingList)) {
-      const name = key;
-      this.discountLeft = this.sum - 100000;
       this.sum += value;
-      this.qty = this.sumShoppingListItems[key];
-      this.qtySum = this.qty * this.shoppingList[key];
-      this.positionCheckList = `x${this.qty} ${name} = ${this.qtySum}${currency}`;
-      console.log(this.positionCheckList);
-    }
-    console.log("================================");
-    if (this.sum > 100000) {
-      this.sumDiscount = this.sum / this.discount;
-      this.sum -= this.sumDiscount;
+      const qty = this.sumShoppingListItems[key];
+      const qtySum = qty * this.shoppingList[key];
+      const discountLeft = this.sum - 100000;
+
+      this.sum >= 100000
+        ? this.sum - this.sum * this.discount
+        : console.log(`For discount left ${discountLeft}`);
+
       console.log(
-        `Your discount is ${this.discount}% (${this.sumDiscount}${currency})`
+        `x${qty} ${key} ${this.shoppingList[key]}  = ${qtySum}${currency}`
       );
-    } else {
-      console.log(`For discount left ${this.discountLeft}`);
-      return;
     }
 
+    console.log("================================");
+    if (this.discount) console.log(`Your discount is ${this.discount}% `);
     console.log(`Order quantity: ${this.count} pcs`);
     console.log(`Order sum: ${this.sum}${currency}`);
   };
@@ -96,8 +90,7 @@ order.addItem(item1); // add 'Suppserf' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
 order.addItem(item1); // add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
-order.removeItem(item1); // clear all item
-// order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
+// order.removeItem(item1); // clear all item
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
 // order.lockOrder(); // Oops, looks like order is locked
