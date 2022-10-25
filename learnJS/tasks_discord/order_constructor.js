@@ -16,7 +16,7 @@ function Order() {
   this.qty = 0;
   this.sumDiscount = 0;
   this.shoppingList = {};
-  this.sumShoppingListItems = {};
+  this.itemCount = {};
   this.isLocked = false;
   this.discount = 10;
   const currency = "₽";
@@ -29,13 +29,13 @@ function Order() {
     // добавить итем в чек (+ имя +цена)
     this.shoppingList[item.name] = item.price;
     this.count = item.name ? (this.count += 1) : 0;
-    this.sumShoppingListItems[item.name] =
-      (this.sumShoppingListItems[item.name] || 0) + 1;
+    this.itemCount[item.name] = (this.itemCount[item.name] || 0) + 1;
+    this.sum += this.shoppingList[item.name];
   };
 
   this.removeItem = function (item, deleteCount) {
     // Нельзя убрать больше чем было в чеке
-    if (this.isLocked || this.sumShoppingListItems[item.name] < deleteCount) {
+    if (this.isLocked || this.itemCount[item.name] < deleteCount) {
       console.log("You can't delete items more then is in check");
       return;
     }
@@ -43,26 +43,26 @@ function Order() {
     // убрать из чека count итемов (если не указано сколько - убрать все)
     if (!deleteCount || typeof deleteCount !== "number") {
       delete this.shoppingList[item.name];
-      this.sumShoppingListItems[item.name] = 0;
+      this.itemCount[item.name] = 0;
+      this.sum = 0;
     } else {
-      this.sumShoppingListItems[item.name] -= deleteCount;
+      this.itemCount[item.name] -= deleteCount;
       this.count -= deleteCount;
+      this.sum - this.shoppingList[item.name];
     }
   };
 
   // получить информацию сколько каких итемов в чеке,
   // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   this.getCheck = function () {
+    console.log("sum start:", this.sum);
     console.log("======== Big check === big dick ========");
-
     for (const [key, value] of Object.entries(this.shoppingList)) {
       const name = key;
       this.discountLeft = this.sum - 100000;
-      this.sum += value;
-      this.qty = this.sumShoppingListItems[key];
+      this.qty = this.itemCount[key];
       this.qtySum = this.qty * this.shoppingList[key];
       this.positionCheckList = `x${this.qty} ${name} = ${this.qtySum}${currency}`;
-      console.log(this.positionCheckList);
     }
     console.log("================================");
     if (this.sum > 100000) {
@@ -95,8 +95,8 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
 order.addItem(item1); // add 'Suppserf' 1 pc
-// order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
-order.removeItem(item1); // clear all item
+order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+// order.removeItem(item1); // clear all item
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
