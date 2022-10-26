@@ -42,7 +42,7 @@ function Order() {
 
     // убрать из чека count итемов (если не указано сколько - убрать все)
     if (!deleteCount || typeof deleteCount !== "number") {
-      delete this.shoppingList[item.name];
+      this.shoppingList = [];
       this.itemCount[item.name] = 0;
       this.sum = 0;
     } else {
@@ -55,14 +55,14 @@ function Order() {
   // получить информацию сколько каких итемов в чеке,
   // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   this.getCheck = function () {
-    console.log("sum start:", this.sum);
     console.log("======== Big check === big dick ========");
     for (const [key, value] of Object.entries(this.shoppingList)) {
       const name = key;
       this.discountLeft = this.sum - 100000;
       this.qty = this.itemCount[key];
       this.qtySum = this.qty * this.shoppingList[key];
-      this.positionCheckList = `x${this.qty} ${name} = ${this.qtySum}${currency}`;
+      if (this.qty >= 1)
+        console.log(`x${this.qty} ${name} = ${this.qtySum}${currency}`);
     }
     console.log("================================");
     if (this.sum > 100000) {
