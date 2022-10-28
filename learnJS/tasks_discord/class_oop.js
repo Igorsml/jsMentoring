@@ -1,5 +1,5 @@
 "use strict";
-log = console.log();
+const log = console.log;
 // 1. Почему одни и те же имена свойств, но не ругается интерпретатор?
 // data как свойство инстанса и статическое свойство класса разные
 
@@ -10,22 +10,25 @@ log = console.log();
 
 class Item {
   // 4. Куда записывается каждое свойство?
-  data = 10; // data как свойство инстанса
+  data = 10; // свойство инстанса
   get() {} // геттер прототипа Item.prototype
-  static data = 20; // data как статическое свойство класса
+  static data = 20; // статическое свойство класса Item
   static get() {} // статический геттер класса Item
+  method() {}
 }
 
-// 5. Что выведется в результате выполнения for и spread? Почему?
+// 5. Что выведется в результате выполнения for? Почему?
 for (const key in Item) {
-  log(key); //
+  log(key); // static data, get как метод неитерируемый
 }
 for (const key in new Item()) {
-  log(key); //
+  log(key); // data
 }
 
 const item = new Item(); // экземпляр класса
 
-log({ ...new Item() }); //
-log({ ...Item }); //
-log(Object.keys(new Item())); //
+// 5. Что выведется в результате выполнения spread? Почему?
+log({ ...new Item() }); // { data: 10 }
+log({ ...Item }); // { data: 20 }
+
+// console.log("new Item", Object.getOwnPropertyDescriptors(Item)); //
