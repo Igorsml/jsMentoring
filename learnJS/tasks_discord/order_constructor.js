@@ -95,7 +95,7 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
 order.addItem(item1); // add 'Suppserf' 1 pc
-order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+// order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
 // order.removeItem(item1); // clear all item
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
