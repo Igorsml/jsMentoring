@@ -11,24 +11,27 @@ const log = console.log;
 class Item {
   // 4. Куда записывается каждое свойство?
   data = 10; // свойство инстанса
-  get() {} // геттер прототипа Item.prototype
+  get() {} //  метод прототипа Item.prototype
+  get name() {
+    return "Igor";
+  } // свойство геттер, в инстанс
+
   static data = 20; // статическое свойство класса Item
-  static get() {} // статический геттер класса Item
-  method() {}
+  static get() {} // статический метод класса Item
 }
 
 // 5. Что выведется в результате выполнения for? Почему?
 for (const key in Item) {
-  log(key); // static data, get как метод неитерируемый
+  log(key); // static data
 }
 for (const key in new Item()) {
-  log(key); // data
+  log(key); // data инстанса
 }
 
 const item = new Item(); // экземпляр класса
-
 // 5. Что выведется в результате выполнения spread? Почему?
-log({ ...new Item() }); // { data: 10 }
+log({ ...item }); // { data: 10 }
 log({ ...Item }); // { data: 20 }
+console.log(Item.prototype); //
 
 // console.log("new Item", Object.getOwnPropertyDescriptors(Item)); //
