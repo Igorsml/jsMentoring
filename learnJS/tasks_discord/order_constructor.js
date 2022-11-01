@@ -14,12 +14,14 @@ class Order {
   #count = 0;
   #sum = 0;
   #qty = 0;
+  #qtySum = 0;
   #sumDiscount = 0;
   #shoppingList = {};
   #itemCount = {};
   #isLocked = false;
   // размер скидки 10% при достижении суммы заказа 100 000₽
-  #count = 10;
+  #discount = 10;
+  #discountLeft = 0;
   #currency = "₽";
 
   addItem(item) {
@@ -49,7 +51,7 @@ class Order {
     } else {
       this.#itemCount[item.name] -= deleteCount;
       this.#count -= deleteCount;
-      this.#sum - this.#shoppingList[item.name];
+      this.#sum -= this.#shoppingList[item.name];
     }
   }
 
@@ -59,23 +61,29 @@ class Order {
     console.log("======== Big check === big dick ========");
     for (const [key, value] of Object.entries(this.#shoppingList)) {
       const name = key;
-      this.#countLeft = this.#sum - 100000;
+      this.#discountLeft = this.#sum - 100000;
       this.#qty = this.#itemCount[key];
       this.#qtySum = this.#qty * this.#shoppingList[key];
-      if (this.#qty >= 1) console.log(`x${this.#qty} ${name} = ${this.#qtySum}${this.#currency}`);
+      if (this.#qty >= 1)
+        console.log(`x${this.#qty} ${name} = ${this.#qtySum}${this.#currency}`);
     }
     console.log("================================");
     if (this.#sum > 100000) {
-      this.#sumDiscount = this.#sum / this.#count;
+      this.#sumDiscount = this.#sum / this.#discount;
       this.#sum -= this.#sumDiscount;
-      console.log(`Your discount is ${this.#count}% (${this.#sumDiscount}${this.#currency})`);
+      console.log(
+        `Your discount is ${this.#discount}% (${this.#sumDiscount}${
+          this.#currency
+        })`
+      );
     } else {
-      console.log(`For discount left ${this.#countLeft}`);
+      console.log(`For discount left ${this.#discountLeft}`);
+      console.log(`Order quantity: ${this.#count} pcs`);
+      console.log(`Order sum is: ${this.#sum}${this.#currency}`);
       return;
     }
 
-    console.log(`Order quantity: ${this.#count} pcs`);
-    console.log(`Order this.#sum: ${this.#sum}${currency}`);
+    console.log(`Order sum is: ${this.#sum}${this.#currency}`);
   }
 
   lockOrder() {
@@ -93,10 +101,10 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
 order.addItem(item1); // add 'Suppserf' 1 pc
-// order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
 // order.removeItem(item1); // clear all item
-// order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
-// order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
+order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
+order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
 // order.lockOrder(); // Oops, looks like order is locked
 // order.addItem(item1); // You can't add item
