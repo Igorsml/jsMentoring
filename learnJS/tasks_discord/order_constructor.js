@@ -48,6 +48,7 @@ class Order {
       this.#shoppingList = [];
       this.#itemCount[item.name] = 0;
       this.#sum = 0;
+      this.#count = 0;
     } else {
       this.#itemCount[item.name] -= deleteCount;
       this.#count -= deleteCount;
@@ -77,9 +78,9 @@ class Order {
         })`
       );
     } else {
-      console.log(`For discount left ${this.#discountLeft}`);
-      console.log(`Order quantity: ${this.#count} pcs`);
+      console.log(`For discount left ${this.#discountLeft}${this.#currency}`);
       console.log(`Order sum is: ${this.#sum}${this.#currency}`);
+      console.log(`Order quantity: ${this.#count} pcs`);
       return;
     }
 
@@ -93,6 +94,7 @@ class Order {
 
   unlockOrder() {
     this.#isLocked = false;
+    console.log("Order is unlocked");
     // убрать блокировку заказа - снова можно добавлять итемы
   }
 }
@@ -101,17 +103,15 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
 order.addItem(item1); // add 'Suppserf' 1 pc
-order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+// order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
 // order.removeItem(item1); // clear all item
-order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
-order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
+// order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
 // order.lockOrder(); // Oops, looks like order is locked
 // order.addItem(item1); // You can't add item
 // order.unlockOrder(); //
 // order.addItem(item1); // add 'Suppserf' 1 pc
 order.getCheck();
-// console.log(order);
 
 /* [Конструктор заказа. Основы. learnjs 1.1..1.4]
 1. написать функцию конструктор для заказа в магазине.

@@ -32,6 +32,6 @@ const item = new Item(); // экземпляр класса
 // 5. Что выведется в результате выполнения spread? Почему?
 log({ ...item }); // { data: 10 }
 log({ ...Item }); // { data: 20 }
-console.log(Item.prototype); //
+// console.log(Item.prototype); //
 
-// console.log("new Item", Object.getOwnPropertyDescriptors(Item)); //
+console.log("new Item", Object.getOwnPropertyDescriptors(Item.prototype)); //

@@ -1,55 +1,9 @@
 "use strict";
 
-// singly linked list
-let list = {
-  value: 1,
-  next: {
-    value: 2,
-    next: {
-      value: 3,
-      next: null,
-    },
-  },
-};
-
-console.log(list); // { value: 1, next: { value: 2, next: { value: 3, next: null } } }
-// add item
-list = { value: "New item", next: list };
-console.log(list); //  { value: 'New item',next: { value: 1, next: { value: 2, next: [Object] } }}
-
-// doubly linked list
-let list2 = {
-  previous: null,
-  value: 1,
-  next: {
-    value: 2,
-    tail: {
-      value: 3,
-      next: null,
-    },
-  },
-};
-
-list2.next.previous = list2;
-list2.next.tail.previous = list2.next;
-
-console.log(list2);
-
-// function linked list
-function createList(...o) {
-  for (let i = 0; i < o.length; i += 1) {
-    o[i].previous = o[i - 1] ?? null;
-    o[i].next = o[i + 1] ?? null;
-  }
-  return o[0];
-}
-let list = createList({ value: 1 }, { value: 2 }, { value: 3 });
-console.log(list); //
-
 // Class linked list
 class LinkedList {
   constructor() {
-    this.nodes = [];
+    this.head = null;
   }
 
   get size() {
@@ -109,6 +63,13 @@ class LinkedList {
   }
 }
 
+class Node {
+  constructor(data, next = null) {
+    this.data = data;
+    this.next = next;
+  }
+}
+
 const list3 = new LinkedList();
 
 list3.insertFirst(3);
@@ -127,3 +88,51 @@ console.log(list3.head.next.value); // 2
 list3.reverse(); // [ { value: 3, next: [Object] }, { value: 1, next: null } ]
 list3.clear();
 console.log(list3.size); // 0
+
+// https://codeburst.io/linked-lists-in-javascript-es6-code-part-1-6dd349c3dcc3
+
+// // singly linked list
+// let list = {
+//   value: 1,
+//   next: {
+//     value: 2,
+//     next: {
+//       value: 3,
+//       next: null,
+//     },
+//   },
+// };
+
+// console.log(list); // { value: 1, next: { value: 2, next: { value: 3, next: null } } }
+// // add item
+// list = { value: "New item", next: list };
+// console.log(list); //  { value: 'New item',next: { value: 1, next: { value: 2, next: [Object] } }}
+
+// // doubly linked list
+// let list2 = {
+//   previous: null,
+//   value: 1,
+//   next: {
+//     value: 2,
+//     tail: {
+//       value: 3,
+//       next: null,
+//     },
+//   },
+// };
+
+// list2.next.previous = list2;
+// list2.next.tail.previous = list2.next;
+
+// console.log(list2);
+
+// // function linked list
+// function createList(...o) {
+//   for (let i = 0; i < o.length; i += 1) {
+//     o[i].previous = o[i - 1] ?? null;
+//     o[i].next = o[i + 1] ?? null;
+//   }
+//   return o[0];
+// }
+// let list = createList({ value: 1 }, { value: 2 }, { value: 3 });
+// console.log(list); //
