@@ -16,8 +16,8 @@ class Order {
   #qty = 0;
   #qtySum = 0;
   #sumDiscount = 0;
-  #shoppingList = new Map();
-  #itemCount = new Map();
+  #shoppingList = { name: "", price: 1 };
+  #itemCount = {};
   #isLocked = false;
   // размер скидки 10% при достижении суммы заказа 100 000₽
   #discount = 10;
@@ -30,11 +30,10 @@ class Order {
       return;
     }
     // добавить итем в чек (+ имя +цена)
-    this.#shoppingList.set(item.name, item.price);
+    this.#shoppingList[item.name] = item.price;
     this.#count = item.name ? (this.#count += 1) : 0;
     this.#itemCount[item.name] = (this.#itemCount[item.name] || 0) + 1;
-    console.log(this.#itemCount);
-    this.#sum += item.price;
+    this.#sum += this.#shoppingList[item.name];
   }
 
   removeItem(item, deleteCount) {
@@ -102,11 +101,11 @@ class Order {
 
 const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc, 16000₽
-order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' 1 pc
+// order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
-order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
+// order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
 // order.addItem(item1); // add 'Suppserf' 1 pc
-// order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
 // order.removeItem(item1); // clear all item
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
