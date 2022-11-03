@@ -16,7 +16,7 @@ class Order {
   #qty = 0;
   #qtySum = 0;
   #sumDiscount = 0;
-  #shoppingList = { name: "", price: 1 };
+  #shoppingList = {};
   #itemCount = {};
   #isLocked = false;
   // размер скидки 10% при достижении суммы заказа 100 000₽
