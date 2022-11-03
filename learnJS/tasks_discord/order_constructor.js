@@ -88,33 +88,57 @@ class Order {
   }
 
   lockOrder() {
-    this.#isLocked = true;
-    console.log("Oops, looks like order is locked");
+    try {
+      this.#isLocked = true;
+      if (this.#isLocked === true) {
+        throw new Error("Error: oops, looks like order is locked!");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   unlockOrder() {
-    this.#isLocked = false;
-    console.log("Order is unlocked");
-    // убрать блокировку заказа - снова можно добавлять итемы
+    try {
+      this.#isLocked = false;
+      if (this.#isLocked !== true) {
+        throw new Error("Confirmed: order is unlocked!");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 }
 
 const order = new Order(item1);
+
+// добавляем 2 разных итема
 order.addItem(item1); // add 'Suppserf' 1 pc, 16000₽
-// order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' 1 pc
 order.addItem(item2); // add 'Oculus Rift S' 1 pc
-// order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
-// order.addItem(item1); // add 'Suppserf' 1 pc
-order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+
+// убираем 1 итем
+// order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+
+// убираем все итемы
 // order.removeItem(item1); // clear all item
+
+// тестируем если удаляем больше итемов чем в чеке
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
 // order.removeItem(item1, 1); // You can't delete items more then is in check
+
+// блокируем заказ и пытаемся добавить
 // order.lockOrder(); // Oops, looks like order is locked
 // order.addItem(item1); // You can't add item
-// order.unlockOrder(); //
-// order.addItem(item1); // add 'Suppserf' 1 pc
+
+// разблокируем заказ и пытаемся добавить
+order.unlockOrder(); //
+order.addItem(item1); // add 'Suppserf' 1 pc
+
 order.getCheck();
 
+// order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' 1 pc
+// order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
+// order.addItem(item1); // add 'Suppserf' 1 pc
 /* [Конструктор заказа. Основы. learnjs 1.1..1.4]
 1. написать функцию конструктор для заказа в магазине.
 Новый инстанс - новый заказ
