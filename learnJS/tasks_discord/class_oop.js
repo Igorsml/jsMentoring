@@ -12,9 +12,9 @@ class Item {
   // 4. Куда записывается каждое свойство?
   data = 10; // свойство инстанса
   get() {} //  метод прототипа Item.prototype
-  get name() {
+  get name2() {
     return "Igor";
-  } // свойство геттер, в инстанс
+  } // метод прототипа Item.prototype
 
   static data = 20; // статическое свойство класса Item
   static get() {} // статический метод класса Item
@@ -32,6 +32,6 @@ const item = new Item(); // экземпляр класса
 // 5. Что выведется в результате выполнения spread? Почему?
 log({ ...item }); // { data: 10 }
 log({ ...Item }); // { data: 20 }
-// console.log(Item.prototype); //
+console.log(Item.hasOwnProperty("name2")); //
 
-console.log("new Item", Object.getOwnPropertyDescriptors(Item.prototype)); //
+// console.log("new Item", Object.getOwnPropertyDescriptors(Item.prototype)); //

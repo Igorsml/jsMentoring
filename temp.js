@@ -1,86 +1,177 @@
-class LinkedList {
-  constructor() {
-    this.nodes = [];
-  }
+cackle_widget = window.cackle_widget || [];
+cackle_widget.push({
+  widget: "ReviewRecent",
+  id: 35567,
+  size: "100",
+  textSize: "150",
+  callback: {
+    ready: [
+      function (comment) {
+        console.log(comment);
+      },
+    ],
+  },
+});
+(function () {
+  var mc = document.createElement("script");
+  mc.type = "text/javascript";
+  mc.async = true;
+  mc.src =
+    ("https:" == document.location.protocol ? "https" : "http") +
+    "://cackle.me/widget.js";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(mc, s.nextSibling);
+})();
 
-  get size() {
-    return this.nodes.length;
-  }
+$(document).ready(function () {
+  OnReviewsLoad($("#mc-review-last .mc-comment"), function () {
+    onHomeReviews = new CackleReviewsWorker($("#mc-review-last .mc-comment"));
+    $("a.gallery_mc").fancybox({
+      maxWidth: 800,
+      maxHeight: 600,
+      fitToView: false,
+      width: "70%",
+      height: "70%",
+      autoSize: true,
+      closeClick: false,
+      openEffect: "fade",
+      closeEffect: "fade",
+    });
+    var height = document.getElementById("div1").offsetHeight;
+    $(".last-reviews").css("height", height);
+    $(".last-reviews").mCustomScrollbar({
+      theme: "dark",
+      setRight: "10px",
+      scrollbarPosition: "outside",
+      mouseWheel: { scrollAmount: 300 },
+    });
+  });
 
-  get head() {
-    return this.size ? this.nodes[0] : null;
-  }
+  $("body").on("click", ".mc-comment-footer a", function (event) {
+    event.preventDefault();
+    var new_url = $(this).attr("href").replace("#cr-", "#review-cr-");
+    window.open(new_url, "_blank");
+  });
+});
 
-  get tail() {
-    return this.size ? this.nodes[this.size - 1] : null;
-  }
+function OnReviewsLoad(blocks, callback) {
+  var wait = setInterval(function () {
+    if ($("#mc-review-last .mc-comment").length > 0) {
+      clearInterval(wait);
 
-  insertAt(index, value) {
-    const previousNode = this.nodes[index - 1] || null;
-    const nextNode = this.nodes[index] || null;
-    const node = { value, next: nextNode };
+      callback.apply(this);
+    }
+  }, 30);
+}
 
-    if (previousNode) previousNode.next = node;
-    this.nodes.splice(index, 0, node);
-  }
+CackleReviewsWorker = function ($reviews) {
+  var self = this,
+    init = function () {
+      $reviews.each(function (index, el) {
+        var media_string = "",
+          media = "",
+          video_available = 0,
+          review_text = $(this)
+            .find(".mc-comment-body")
+            .last()
+            .text()
+            .replace("ещё", "")
+            .replace(" ", ""),
+          video_params = "",
+          vide_block = "",
+          block_media = '<ul class="mc-comment-media1">',
+          count_blocks = 1;
 
-  insertFirst(value) {
-    this.insertAt(0, value);
-  }
+        $(this).find('.mc-comment-body:contains("Недостатки")').remove();
 
-  insertLast(value) {
-    this.insertAt(this.size, value);
-  }
+        media_string = cackle_widget[0].data.items[index].media;
 
-  getAt(index) {
-    return this.nodes[index];
-  }
+        if (
+          self.check_video(review_text) &&
+          self.check_video(review_text).length > 0
+        ) {
+          video_params = self.make_preview(review_text);
+          if (video_params) {
+            video_block =
+              '<li class="gal_mc_list vid_item" ><a rel="group" style="background-image:url(' +
+              video_params.thumbnail +
+              ')!important" class="gallery_mc fancybox.iframe" href="' +
+              video_params.url +
+              '"></a></li>';
+            video_available = 1;
+            count_blocks++;
+          }
+        }
+        if (video_available > 0) {
+          block_media += video_block;
+        }
+        if (
+          typeof media_string !== "undefined" &&
+          media_string != "" &&
+          media_string
+        ) {
+          media = media_string.split(" ");
 
-  removeAt(index) {
-    const previousNode = this.nodes[index - 1] || null;
-    const nextNode = this.nodes[index] || null;
-    if (previousNode) previousNode.next = nextNode;
+          if (media.length > 0) {
+            for (var i = 0; i < media.length; i++) {
+              if (count_blocks == 4) {
+                break;
+              }
+              block_media +=
+                '<li class="gal_mc_list"><a rel="group" style="background-image:url(' +
+                media[i] +
+                ') !important" class="gallery_mc" href="' +
+                media[i] +
+                '"></a></li>';
+              count_blocks++;
+            }
 
-    return this.nodes.splice(index, 1);
-  }
-
-  clear() {
-    this.nodes = [];
-  }
-
-  reverse() {
-    this.nodes = this.nodes.reduce(
-      (acc, { value }) => [{ value, next: acc[0] || null }, ...acc],
-      []
+            block_media += "</ul>";
+          }
+        }
+        if (
+          video_available > 0 ||
+          (typeof media_string !== "undefined" &&
+            media_string != "" &&
+            media_string)
+        ) {
+          $(this).find(".mc-comment-footer").before(block_media);
+        }
+      });
+    };
+  self.check_video = function (review_text) {
+    return review_text.match(
+      /(((\bhttps?:)?(\/\/)?(((www\.)?youtube\.com\/watch\?[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|((www\.)?youtu\.be\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(vimeo\.com\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*\/?(\d)*))))/gi
     );
-  }
+  };
 
-  *[Symbol.iterator]() {
-    yield* this.nodes;
-  }
-}
+  self.make_preview = function (text) {
+    var video_id = "",
+      source = "youtube.com";
 
-class Node {
-  constructor(data, next = null) {
-    (this.data = data), (this.next = next);
-  }
-}
+    if (text.indexOf("youtu.be") > -1) {
+      source = "youtu.be";
+    }
+    if (text.indexOf("vimeo.com") > -1) {
+      source = "vimeo.com";
+    }
 
-const list3 = new LinkedList();
+    if (source == "youtube.com") {
+      video_id = /v=([^\?\&]+)/.exec(text)[1].replace(" ", "");
+    }
+    if (source == "youtu.be") {
+      video_id = /([^\/]+)\/([^\/]+)/.exec(text)[2].replace(" ", "");
+    }
 
-list3.insertFirst(3);
-list3.insertFirst(2);
-list3.insertFirst(1);
-
-console.log(list3.size); // 3
-console.log(list3.head.value); // 1
-console.log(list3.head.next.value); // 2
-console.log(list3.tail.value); // 3
-
-console.log(list3.removeAt(1)); // [ { value: 2, next: { value: 3, next: null } } ]
-console.log(list3.getAt(1).value); // 3
-console.log(list3.head.next.value); // 2
-
-list3.reverse(); // [ { value: 3, next: [Object] }, { value: 1, next: null } ]
-list3.clear();
-console.log(list3.size); // 0
+    if (source == "youtube.com" || source == "youtu.be") {
+      return {
+        source: source,
+        url: "https://www.youtube.com/embed/" + video_id,
+        thumbnail: "//i.ytimg.com/vi/" + video_id + "/0.jpg",
+      };
+    } else {
+      return false;
+    }
+  };
+  init();
+};

@@ -53,4 +53,4 @@ let user1 = {
   } 
 };
 
-console.log(user); // // Unexpected token '.' in  Symbol.toPrimitive(hint) {
+console.log(user); // Unexpected token '.' in  Symbol.toPrimitive(hint) 

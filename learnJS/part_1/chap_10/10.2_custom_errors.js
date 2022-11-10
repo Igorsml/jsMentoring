@@ -12,7 +12,7 @@ class Error {
   constructor(message) {
     this.message = message;
     this.name = name;
-    this.stack = stack; // <call stack>
+    this.stack = stack; // stack trace
   }
 }
 

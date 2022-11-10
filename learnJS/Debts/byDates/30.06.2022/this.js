@@ -1,32 +1,36 @@
 "use strict";
 
 class Name {
-  constructor(props) {
-    this.props = props;
-    this.name = this.constructor.name;
+  constructor(name) {
+    this.name = name;
   }
 
   logName1 = () => {
-    console.log(this.name); //
+    console.log(this.name); // instance method
   };
 
   logName2() {
-    console.log(this.name); //
+    console.log(this.name); // prototype method
   }
 
   logName3 = () => {
     return function () {
-      console.log(this.name); //
+      console.log(this.name); // instance method
     };
   };
 
   logName4() {
-    return (name = () => {
-      console.log(this.name); //
+    return (this.name = () => {
+      console.log(this.name); // prototype method
     });
   }
 }
 
-const name = new Name("Igor");
+const nameIgor = new Name("Igor");
 
-name.logName1();
+nameIgor.logName1(); // 'Igor'
+Name.prototype.logName2(); // undefined
+console.log(nameIgor.logName3()); // function ()
+Name.prototype.logName4(); // ReferenceError: name is not defined
+
+// console.log("nameIgor", Object.getOwnPropertyDescriptors(Name.prototype));

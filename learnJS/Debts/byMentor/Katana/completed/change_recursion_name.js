@@ -24,8 +24,8 @@ function randomHappyThreeNumber(result = 0, count = 0) {
   }
   result = Math.floor(Math.random() * (10 - 1 + 1) + 1);
   count += 1;
-  randomHappyThreeNumber.name = nullFunctionName;
+  randomHappyThreeNumber.name = "nullFunctionName";
   randomHappyThreeNumber(result, count);
 }
 
-randomHappyThreeNumber(); // ReferenceError: nullFunctionName is not defined
+randomHappyThreeNumber(); // TypeError: Cannot assign to read only property 'name' of function

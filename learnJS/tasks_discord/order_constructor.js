@@ -131,8 +131,8 @@ order.addItem(item2); // add 'Oculus Rift S' 1 pc
 // order.addItem(item1); // You can't add item
 
 // разблокируем заказ и пытаемся добавить
-order.unlockOrder(); //
-order.addItem(item1); // add 'Suppserf' 1 pc
+// order.unlockOrder(); //
+// order.addItem(item1); // add 'Suppserf' 1 pc
 
 order.getCheck();
 
