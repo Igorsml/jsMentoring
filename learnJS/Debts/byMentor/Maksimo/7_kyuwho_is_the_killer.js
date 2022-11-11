@@ -2,9 +2,28 @@
 // Перерешать через Set
 
 function killer(suspectInfo, dead) {
-  let killerSet = new Set();
+  let killerSet;
 
-  for (const [name, list] of Object.entries(suspectInfo)) {
-    if (dead.every((e) => list.includes(e))) return name;
+  for (const killerName in suspectInfo) {
+    killerSet = new Set();
+
+    dead.forEach((elem) =>
+      killerSet.add(suspectInfo[killerName].includes(elem))
+    );
+
+    if (killerSet.size === 1 && killerSet.has(true)) {
+      return killerName;
+    }
   }
 }
+
+console.log(
+  killer(
+    {
+      James: ["Jacob", "Bill", "Lucas"],
+      Johnny: ["David", "Kyle", "Lucas"],
+      Peter: ["Lucy", "Kyle"],
+    },
+    ["Lucas", "Bill"]
+  )
+); // 'James'
