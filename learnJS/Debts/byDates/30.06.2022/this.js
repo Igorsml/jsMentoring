@@ -20,7 +20,7 @@ class Name {
   };
 
   logName4() {
-    return (this.name = () => {
+    return (name = () => {
       console.log(this.name); // prototype method
     });
   }
