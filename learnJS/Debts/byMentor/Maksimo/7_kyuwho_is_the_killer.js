@@ -11,11 +11,16 @@ function killer(suspectInfo, dead) {
       killerSet.add(suspectInfo[killerName].includes(elem))
     );
 
+    console.log(killerSet);
     if (killerSet.size === 1 && killerSet.has(true)) {
       return killerName;
     }
   }
 }
+
+// потому что ты используешь includes не в том направлении
+// ищешь в suspectinfo мертвых людей
+// если хочешь чтобы там и false был надо среди мертвых искать людей из suspectinfo
 
 console.log(
   killer(
