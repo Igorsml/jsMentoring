@@ -18,10 +18,6 @@ function killer(suspectInfo, dead) {
   }
 }
 
-// потому что ты используешь includes не в том направлении
-// ищешь в suspectinfo мертвых людей
-// если хочешь чтобы там и false был надо среди мертвых искать людей из suspectinfo
-
 console.log(
   killer(
     {
