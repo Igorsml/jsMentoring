@@ -26,24 +26,27 @@ class Order {
   // валюта чека
   #currency = "₽";
 
-  addItem(item, count, name) {
+  addItem(item, count) {
     if (this.#isLocked) {
       console.log("You can't add item");
       return;
     }
     // добавить итем в чек (+ имя, +цена, +количество)
-    this.#shoppingList[item.name] = item.price;
-    this.#count = count ? (this.#count += count) : 1;
-    this.#itemCount[item.name] = this.#count || 1;
-    // console.log(this.#itemCount[item.name]);
-    this.#sum += this.#shoppingList[item.name];
-    if (
-      item.name.toUpperCase() === item.name.toUpperCase() &&
-      item.price !== item.price
-    ) {
-      this.#qtySum += item.price;
-      this.#count += count;
+    console.log(this.#qtySum);
+    for (let [key, value] of Object.entries(this.#shoppingList)) {
+      let name = key;
+      let price = value;
+
+      if (name === item.name.toUpperCase() && price !== item.price) {
+        console.log("work");
+        this.#qtySum += price;
+        console.log(this.#qtySum);
+      }
     }
+    this.#shoppingList[item.name.toUpperCase()] = item.price;
+    this.#count = count ? (this.#count += count) : 1;
+    this.#itemCount[item.name.toUpperCase()] = this.#count || 1;
+    this.#sum += this.#shoppingList[item.name];
   }
 
   removeItem(item, deleteCount) {
@@ -74,7 +77,7 @@ class Order {
       const name = key;
       this.#discountLeft = this.#qtySum - 100000;
       this.#qty += this.#itemCount[key];
-      this.#qtySum = this.#qty * this.#shoppingList[key];
+      this.#qtySum += this.#qty * this.#shoppingList[key];
       if (this.#qty >= 1)
         console.log(
           `x${this.#qty} ${name.toUpperCase()} = ${this.#qtySum}${
@@ -93,7 +96,7 @@ class Order {
       );
     } else {
       console.log(`For discount left ${this.#discountLeft}${this.#currency}`);
-      console.log(`Order sum is: ${this.#qtySum}}${this.#currency}`);
+      console.log(`Order sum is: ${this.#qtySum}${this.#currency}`);
       return;
     }
 
@@ -128,11 +131,12 @@ const order = new Order(item1);
 
 // добавляем 2 разных итема
 order.addItem(item1); // add 'Suppserf' 1 pc, 16000₽
-order.addItem(item2, 10); // add 'Oculus Rift S' 10 pcs
-order.getCheck();
-// order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' 1 pc
-// order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
+// order.addItem(item2, 3); // add 'Oculus Rift S' 10 pcs
 // order.getCheck();
+order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' 1 pc
+// order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
+order.getCheck();
+
 // убираем 1 итем
 // order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
 
