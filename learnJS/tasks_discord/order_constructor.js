@@ -35,23 +35,28 @@ class Order {
     }
 
     // добавить итем в чек (+ имя, +цена)
-    this.#shoppingList.set(item.name.toUpperCase(), item.price);
+    this.#shoppingList = new Map(Object.entries(item));
 
-    for (const [name, price] of this.#shoppingList.entries()) {
-      if (name === item.name.toUpperCase()) {
-        // console.log("work diff");
-        this.#itemSum += price;
-        this.#shoppingList.set("quantity", count ?? 1);
-        this.#itemCount += count ? count : 1;
-      } else {
-        // console.log("work");
-        this.#itemSum += item.price;
-        this.#itemCount += count ? count : 1;
-      }
+    // console.log(this.#shoppingList);
+    this._name = this.#shoppingList.get("name");
+    this._price = this.#shoppingList.get("price");
+
+    if (this._name.toUpperCase() === this._name.toUpperCase()) {
     }
-    console.log(this.#shoppingList);
-    console.log("item sum:", this.#itemSum);
-    console.log("item count:", this.#itemCount);
+
+    // if (this._name.tuUpperCase() === this._name) {
+    //   this.#itemSum += item.price;
+    //   this.#itemCount += count ?? 1;
+    //   this.#itemSum += price * this.#itemCount;
+    // }
+
+    // } else {
+
+    // }
+    // console.log(this.#shoppingList);
+
+    // console.log("item sum (1 + 3 + 1= 5):", this.#itemSum);
+    // console.log("item count (2 + 1 + 1 = 4):", this.#itemCount);
   }
 
   // removeItem(item, deleteCount) {
@@ -140,7 +145,7 @@ order.addItem(item1, 2); // add 'Suppserf' 1 pc, 16000₽
 // order.addItem(item2, 3); // add 'Oculus Rift S' 10 pcs
 // order.getCheck();
 order.addItem({ name: "Suppserf", price: 3 }); // add 'Oculus Rift S' 1 pc
-// order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
+order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
 // order.getCheck();
 
 // убираем 1 итем
