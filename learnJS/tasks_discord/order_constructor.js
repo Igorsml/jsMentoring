@@ -2,22 +2,23 @@
 
 const item1 = {
   name: "Suppserf",
-  price: 16000,
+  price: 1,
 };
 
 const item2 = {
   name: "Oculus Rift S",
-  price: 89900,
+  price: 2,
 };
 
 class Order {
-  #count = 0;
+  // количество товара при добавлении
+  #itemCount = 0;
   #sum = 0;
   #qty = 0;
-  #qtySum = 0;
+  #orderSum = 0;
   #sumDiscount = 0;
   #shoppingList = {};
-  #itemCount = {};
+  #itemCountObj = {};
   #isLocked = false;
   // размер скидки 10% при достижении суммы заказа 100 000₽
   #discount = 10;
@@ -31,27 +32,25 @@ class Order {
       console.log("You can't add item");
       return;
     }
+
     // добавить итем в чек (+ имя, +цена, +количество)
-    console.log(this.#qtySum);
     for (let [key, value] of Object.entries(this.#shoppingList)) {
       let name = key;
       let price = value;
 
       if (name === item.name.toUpperCase() && price !== item.price) {
-        console.log("work");
-        this.#qtySum += price;
-        console.log(this.#qtySum);
+        this.#orderSum += price;
+        this.#itemCount = count ? (this.#itemCount += count) : 1;
       }
+      this.#sum += price;
     }
     this.#shoppingList[item.name.toUpperCase()] = item.price;
-    this.#count = count ? (this.#count += count) : 1;
-    this.#itemCount[item.name.toUpperCase()] = this.#count || 1;
-    this.#sum += this.#shoppingList[item.name];
+    this.#itemCountObj[item.name.toUpperCase()] = this.#itemCount || 1;
   }
 
   removeItem(item, deleteCount) {
     // Нельзя убрать больше чем было в чеке
-    if (this.#isLocked || this.#itemCount[item.name] < deleteCount) {
+    if (this.#isLocked || this.#itemCountObj[item.name] < deleteCount) {
       console.log("You can't delete items more then is in check");
       return;
     }
@@ -59,12 +58,12 @@ class Order {
     // убрать из чека this.#count итемов (если не указано сколько - убрать все)
     if (!deleteCount || typeof deleteCount !== "number") {
       this.#shoppingList = [];
-      this.#itemCount[item.name] = 0;
+      this.#itemCountObj[item.name] = 0;
       this.#sum = 0;
-      this.#count = 0;
+      this.#itemCount = 0;
     } else {
-      this.#itemCount[item.name] -= deleteCount;
-      this.#count -= deleteCount;
+      this.#itemCountObj[item.name] -= deleteCount;
+      this.#itemCount -= deleteCount;
       this.#sum -= this.#shoppingList[item.name];
     }
   }
@@ -75,20 +74,20 @@ class Order {
     console.log("======== Big check === big dick ========");
     for (const [key, value] of Object.entries(this.#shoppingList)) {
       const name = key;
-      this.#discountLeft = this.#qtySum - 100000;
-      this.#qty += this.#itemCount[key];
-      this.#qtySum += this.#qty * this.#shoppingList[key];
+      this.#qty += this.#itemCountObj[key];
+      this.#orderSum += this.#qty * this.#shoppingList[key];
+      this.#discountLeft = this.#orderSum - 100000;
       if (this.#qty >= 1)
         console.log(
-          `x${this.#qty} ${name.toUpperCase()} = ${this.#qtySum}${
+          `x${this.#itemCount} ${name.toUpperCase()} = ${this.#orderSum}${
             this.#currency
           }`
         );
     }
     console.log("================================");
     if (this.#sum > 100000) {
-      this.#sumDiscount = this.#qtySum / this.#discount;
-      this.#qtySum -= this.#sumDiscount;
+      this.#sumDiscount = this.#orderSum / this.#discount;
+      this.#orderSum -= this.#sumDiscount;
       console.log(
         `Your discount is ${this.#discount}% (${this.#sumDiscount}${
           this.#currency
@@ -96,12 +95,13 @@ class Order {
       );
     } else {
       console.log(`For discount left ${this.#discountLeft}${this.#currency}`);
-      console.log(`Order sum is: ${this.#qtySum}${this.#currency}`);
+      console.log(`Order quantity: ${this.#itemCount} pcs`);
+      console.log(`Order sum is: ${this.#orderSum}${this.#currency}`);
       return;
     }
 
-    console.log(`Order quantity: ${this.#qty} pcs`);
-    console.log(`Order sum is: ${this.#qtySum}${this.#currency}`);
+    console.log(`Order quantity: ${this.#itemCount} pcs`);
+    console.log(`Order sum is: ${this.#orderSum}${this.#currency}`);
   }
 
   lockOrder() {
@@ -133,7 +133,7 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' 1 pc, 16000₽
 // order.addItem(item2, 3); // add 'Oculus Rift S' 10 pcs
 // order.getCheck();
-order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' 1 pc
+order.addItem({ name: "Suppserf", price: 3 }); // add 'Oculus Rift S' 1 pc
 // order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' 1 pc
 order.getCheck();
 
