@@ -26,13 +26,14 @@ class Order {
   // валюта чека
   #currency = "₽";
 
+  // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽
   addItem(item, count) {
     if (this.#isLocked) {
       console.log("You can't add item");
       return;
     }
+
     // добавить итем в чек (+ имя, +цена, +количество)
-    console.log(this.#qtySum);
     for (let [key, value] of Object.entries(this.#shoppingList)) {
       let name = key;
       let price = value;
@@ -136,7 +137,7 @@ order.addItem(item2, 3); // add 'Oculus Rift S' / 3 pcs / 6₽
 
 order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' / 1 pc / 2₽
 order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' / 1 pc / 1₽
-order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽
+order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
 
 // убираем 1 итем
 // order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
