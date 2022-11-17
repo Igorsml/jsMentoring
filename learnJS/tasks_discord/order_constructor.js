@@ -39,17 +39,10 @@ class Order {
       return;
     }
 
-    // добавить итем в чек (+ имя, +цена, +количество)
+    // добавить итем в чек (+ имя, +цена)
     this.#shoppingList[item.name.toUpperCase()] = item.price;
+    // добавить итем в чек (+количество)
     this.#shoppingListCount["itemQuantity"] = count ?? 1;
-
-    // считаем сумму
-
-    for (const [key, value] of Object.entries(this.#shoppingList)) {
-      if (key === item.name.toUpperCase() && value !== item.price) {
-        console.log("work");
-      }
-    }
   }
 
   removeItem(item, deleteCount) {
@@ -76,15 +69,15 @@ class Order {
   // x2 Suppserf = 3₽ | x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
   getCheck() {
     console.log("======== Big check === big dick ========");
-    for (const [key, value] of Object.entries(this.#shoppingList)) {
-      console.log(this.#shoppingListCount[key]);
-      this.#qty += this.#shoppingListCount[key];
-      this.#qtySum += this.#qty * this.#shoppingList[key];
+    for (const key in this.#shoppingList) {
+      this.#qty = this.#shoppingListCount[key];
+      this.#qtySum = this.#qty * this.#shoppingList[key];
       this.#discountLeft = this.#qtySum - 100000;
       if (this.#qty >= 1)
         console.log(
           `x${this.#itemCount} ${key} = ${this.#qtySum}${this.#currency}`
         );
+      console.log(this.#qty);
     }
     console.log("================================");
     if (this.#sum > 100000) {
@@ -135,8 +128,8 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' / 1 pc / 1₽
 order.addItem(item2, 3); // add 'Oculus Rift S' / 3 pcs / 6₽
 
-order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' / 1 pc / 2₽
-order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' / 1 pc / 1₽
+// order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' / 1 pc / 2₽
+// order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' / 1 pc / 1₽
 order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
 
 // убираем 1 итем
