@@ -12,54 +12,81 @@ const item2 = {
 
 class Order {
   #shoppingList = {};
-  // Item
-  #itemCount = {};
-  #itemQuantity = 0;
   // Order
-  #orderQuantity = 0;
-  #orderSum = 0;
-  #sumDiscount = 0;
+  get #orderQuantity() {
+    return Object.values(this.#shoppingList).reduce((sum, item) => {
+      return (sum += item.count);
+    }, 0);
+  }
+  get #itemsTotal() {
+    return Object.values(this.#shoppingList).reduce((sum, item) => {
+      return (sum += item.price * item.count);
+    }, 0);
+  }
+  get #orderSum() {
+    return this.#itemsTotal > 100000
+      ? this.#itemsTotal - (this.#itemsTotal / 100) * this.#discount
+      : this.#itemsTotal;
+  }
+  get #sumDiscount() {
+    return this.#itemsTotal > 100000
+      ? (this.#itemsTotal / 100) * this.#discount
+      : 0;
+  }
+  get #discountLeft() {
+    // осталось добрать суммы заказа до 100 000₽
+    return 100000 - this.#itemsTotal;
+  }
+
   #isLocked = false;
   // размер скидки 10% при достижении суммы заказа 100 000₽
   #discount = 10;
-  // осталось добрать суммы заказа до 100 000₽
-  #discountLeft = 0;
   // валюта чека
   #currency = "₽";
 
-  addItem(item, count) {
+  // добавляем в item имя, цена, кол-во итема
+  addItem(item, count = 1) {
     if (this.#isLocked) {
-      console.log("You can't add item");
+      console.error("You can't add item");
       return;
     }
-    // добавить итем в чек (+ имя, +цена, +количество)
-    if (
-      item.name.toUpperCase() === item.name.toUpperCase() &&
-      item.price !== item.price
-    ) {
-      this.#shoppingList[item.name] = item.price + item.price;
-      this.#itemCount[item.name] = count ?? 1 + count ?? 1;
-    } else {
-      this.#shoppingList[item.name] = item.price;
-      this.#itemCount[item.name] = count ?? 1;
-    }
+    const itemOldCount =
+      this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`]?.count ||
+      0;
+    this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`] = {
+      ...item,
+      count: itemOldCount + count,
+    };
   }
 
   removeItem(item, deleteCount) {
+    if (this.#isLocked) {
+      console.error("You can't remove items");
+      return;
+    }
+    const itemOldCount =
+      this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`].count;
     // Нельзя убрать больше чем было в чеке
-    if (this.#isLocked || this.#itemCount[item.name] < deleteCount) {
-      console.log("You can't delete items more then is in check");
+    if (itemOldCount < deleteCount) {
+      console.log("You don't have enough items to remove them");
       return;
     }
 
     // убрать из чека this.#count итемов (если не указано сколько - убрать все)
     if (!deleteCount || typeof deleteCount !== "number") {
-      this.#shoppingList = [];
-      this.#itemCount[item.name] = 0;
-      this.#orderSum = 0;
-    } else {
-      this.#itemCount[item.name] -= deleteCount;
-      this.#orderSum -= this.#shoppingList[item.name];
+      delete this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`];
+      return;
+    }
+
+    this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`] = {
+      ...item,
+      count: itemOldCount - deleteCount,
+    };
+    if (
+      this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`]
+        ?.deleteCount === 0
+    ) {
+      delete this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`];
     }
   }
 
@@ -67,21 +94,17 @@ class Order {
   // общую цену, опционаольно цену за каждую позицию (за 3 пивка - 300р).
   getCheck() {
     console.log("======== Big check === big dick ========");
-    for (const [key, value] of Object.entries(this.#shoppingList)) {
-      // check the same item name, but different price
-      this.#itemQuantity = this.#itemCount[key];
-      this.#orderQuantity += this.#itemCount[key];
-      this.#orderSum = this.#itemQuantity * this.#shoppingList[key];
-      this.#discountLeft = this.#orderSum - 100000;
-      if (this.#itemQuantity >= 1)
-        console.log(
-          `x${this.#itemQuantity} ${key} = ${this.#orderSum}${this.#currency}`
-        );
-    }
+    const itemsString = Object.values(this.#shoppingList)
+      .map((item) => {
+        return `x${item.count} ${item.name} = ${item.price * item.count}${
+          this.#currency
+        }`;
+      })
+      .join("\n");
+    console.log(itemsString);
+
     console.log("================================");
     if (this.#orderSum > 100000) {
-      this.#sumDiscount = this.#orderSum / this.#discount;
-      this.#orderSum = this.#sumDiscount;
       console.log(
         `Your discount is ${this.#discount}% (${this.#sumDiscount}${
           this.#currency
@@ -99,25 +122,11 @@ class Order {
   }
 
   lockOrder() {
-    try {
-      this.#isLocked = true;
-      if (this.#isLocked === true) {
-        throw new Error("Error: oops, looks like order is locked!");
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
+    this.#isLocked = true;
   }
 
   unlockOrder() {
-    try {
-      this.#isLocked = false;
-      if (this.#isLocked !== true) {
-        throw new Error("Confirmed: order is unlocked!");
-      }
-    } catch (err) {
-      console.log(err.message);
-    }
+    this.#isLocked = false;
   }
 }
 
@@ -127,12 +136,14 @@ const order = new Order(item1);
 order.addItem(item1); // add 'Suppserf' / 1 pc / 1₽
 order.addItem(item2, 3); // add 'Oculus Rift S' / 3 pcs / 6₽
 
-order.addItem({ name: "Suppserf", price: 2 }); // add 'Oculus Rift S' / 1 pc / 2₽
+order.addItem({ name: "Suppserf", price: 200000 }); // add 'Oculus Rift S' / 1 pc / 2₽
 order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' / 1 pc / 1₽
-order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
+// order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
 
 // убираем 1 итем
 // order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
+// order.removeItem(item2); // remove 'Suppserf' 1 pc
+order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
 
 // убираем все итемы
 // order.removeItem(item1); // clear all item
