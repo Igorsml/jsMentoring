@@ -53,6 +53,7 @@ class Order {
     const itemOldCount =
       this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`]?.count ||
       0;
+
     this.#shoppingList[`${item.name.toUpperCase()}-${item.price}`] = {
       ...item,
       count: itemOldCount + count,
@@ -138,15 +139,15 @@ order.addItem(item2, 3); // add 'Oculus Rift S' / 3 pcs / 6₽
 
 order.addItem({ name: "Suppserf", price: 200000 }); // add 'Oculus Rift S' / 1 pc / 2₽
 order.addItem({ name: "Oculus Rift S", price: 1 }); // add 'Oculus Rift S' / 1 pc / 1₽
-// order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
+order.getCheck(); //
 
 // убираем 1 итем
 // order.removeItem(item1, 1); // remove 'Suppserf' 1 pc
 // order.removeItem(item2); // remove 'Suppserf' 1 pc
-order.getCheck(); // x2 Suppserf = 3₽ / x4 Oculus Rift S = 7₽ | Order quantity = 6, sum = 10₽
 
 // убираем все итемы
 // order.removeItem(item1); // clear all item
+order.getCheck(); //
 
 // тестируем если удаляем больше итемов чем в чеке
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
