@@ -11,7 +11,7 @@ const pet = {
 
 const dog = Object.create(pet, {
   jumps: {
-    value: true,
+    zopa: true,
   },
 });
 console.log(dog.loveWatermelon); // true

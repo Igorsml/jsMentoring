@@ -15,6 +15,7 @@ class Order {
   // Order
   get #orderQuantity() {
     return Object.values(this.#shoppingList).reduce((sum, item) => {
+      console.log(this.#shoppingList);
       return (sum += item.count);
     }, 0);
   }
@@ -147,7 +148,7 @@ order.getCheck(); //
 
 // убираем все итемы
 // order.removeItem(item1); // clear all item
-order.getCheck(); //
+// order.getCheck(); //
 
 // тестируем если удаляем больше итемов чем в чеке
 // order.removeItem(item1, 1); // remove add 'Suppserf' 1 pc
