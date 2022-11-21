@@ -1,5 +1,6 @@
 "usr strict";
 // Псевдомассив - объект, структурно похож на массив (есть индексы с 0 и length);
+// The main difference between a pseudo-array and an array is its prototype inheritance, that is, a property __proto__.
 
 const pseudoArray = {
   0: "value0",

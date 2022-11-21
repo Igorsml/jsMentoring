@@ -2,16 +2,13 @@
 // Перерешать через Set
 
 function killer(suspectInfo, dead) {
-  let killerSet;
+  let killerSet = new Set();
 
   for (const killerName in suspectInfo) {
-    killerSet = new Set();
-
     dead.forEach((elem) =>
       killerSet.add(suspectInfo[killerName].includes(elem))
     );
 
-    console.log(killerSet);
     if (killerSet.size === 1 && killerSet.has(true)) {
       return killerName;
     }
