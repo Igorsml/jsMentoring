@@ -1,5 +1,5 @@
 // https://www.codewars.com/kata/5f709c8fb0d88300292a7a9d/train/javascript
-// Перерешать через Set
+// Понять почему new Set() должна быть внутри for | Потому что при новой итерации мы будем искать убийцу и чтобы србаотала проверка if, нужно именно одно значение, в противном случае попадет еще false
 
 function killer(suspectInfo, dead) {
   let killerSet = new Set();
@@ -15,6 +15,8 @@ function killer(suspectInfo, dead) {
   }
 }
 
+//
+
 console.log(
   killer(
     {
@@ -25,3 +27,5 @@ console.log(
     ["Lucas", "Bill"]
   )
 ); // 'James'
+
+console.log(killer({ Brad: [], Megan: ["Ben", "Kevin"], Finn: [] }, ["Ben"])); //
