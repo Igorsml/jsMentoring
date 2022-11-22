@@ -85,11 +85,11 @@ try {
 
 // EvalError ???__________________________________________________
 try {
-  console.log(eval(0 / 0)); // may throw three types of exceptions
+  eval("throw new EvalError()"); // may throw three types of exceptions
 } catch (err) {
   if (err instanceof EvalError) {
     throw new EvalError("Oopsie, here you are your error", { cause: err });
-    // Oopsie, here you are your error. [cause]: ReferenceError: something is not defined
+    // EvalError: Oopsie, here you are your error. [cause]: EvalError
   } else {
     // statements to handle any unspecified exceptions
     console.log(err); // pass exception object to error handler
