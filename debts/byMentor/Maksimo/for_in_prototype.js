@@ -8,6 +8,7 @@ const human = {
   walk() {
     console.log(`${this.name} walking`);
   },
+  num: 1,
 };
 
 const person = {
@@ -16,23 +17,29 @@ const person = {
   __proto__: human,
 };
 
+console.log(Object.keys(person)); // [ 'name', 'weight' ]
+
+// #1 Проверить что прототип итерируется по прототипу (human)
 for (const property in person) {
-  if (Object.hasOwn(person, property)) {
-    console.log(`Own properties is ${property}`);
-  }
-} // Own properties is name, weight
+  console.log(property);
+} // Own properties: name, weight | inherits: walk(), num
 
-// зафиксить enumerable чтобы было false, только свойства инстанса
-for (const key in person) {
-  const isOwn = person.hasOwnProperty(key);
-  isOwn ? console.log(`Own key ${key}`) : console.log(`Inherit key ${key}`);
-} // Own key: name, weight, Inherit: walk (как метод протоипа human)
+console.log(human.propertyIsEnumerable("walk")); // true
 
-console.log(person.propertyIsEnumerable("walk")); // false
+// #2 зафиксить enumerable чтобы было false, только свойства инстанса
+Object.defineProperties(human, {
+  walk: {
+    enumerable: false,
+  },
+  num: {
+    enumerable: false,
+  },
+});
+console.log("walk:", human.propertyIsEnumerable("walk")); // false
+console.log("num:", human.propertyIsEnumerable("num")); // false
 
-// Debt 2: Зафиксить чтобы были только enumrable false в прототипе
+// #3 Зафиксить чтобы были только enumrable false в прототипе
 
-// Убедиться в enumurable false в классе
 // Свойства которые enumrable true убедиться что они выведутся
 
 class Item {
@@ -43,13 +50,42 @@ class Item {
   } // метод прототипа Item.prototype
 
   static data = 20; // статическое свойство класса Item
-  static get() {} // статический метод класса Item
+  static gets() {} // статический метод класса Item
 }
 
-const item = new Item();
-console.log(Object.getOwnPropertyDescriptors(Item.prototype)); //  get, name2 enumerable: false
+const instance = new Item();
 
-// почему нету get, попробовать enumurable true
-for (const key in item) {
-  console.log(key); // static data
+// #4 Убедиться в enumurable false в классе
+console.log(Object.getOwnPropertyDescriptors(Item.prototype)); //  get(), name2 enumerable: false
+console.log(Object.getOwnPropertyDescriptors(Item)); //  gets(), data enumerable: false
+
+// Итериуремся по классу
+for (const key in Item) {
+  console.log(key); //  data у класса
 }
+
+// #5 Убедиться что если true, то выведутся в for...in
+Object.defineProperties(Item, {
+  gets: {
+    enumerable: true,
+  },
+  data: {
+    enumerable: true,
+  },
+});
+
+for (const key in Item) {
+  console.log(key); //
+}
+
+// #5 почему нету get, попробовать enumurable true
+Object.defineProperties(Item, {
+  get: {
+    enumerable: true,
+  },
+  name2: {
+    enumerable: true,
+  },
+}); // не отрабатывает с false на true
+
+console.log(Object.getOwnPropertyDescriptors(Item)); // gets(), name2 — enumerable: true

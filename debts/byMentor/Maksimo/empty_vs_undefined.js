@@ -8,6 +8,7 @@ newArr[2] = 5;
 
 console.log(newArr); // [ <2 empty items>, 5 ]
 newArr.map((elem) => elem * 2); // [ <2 empty items>, 10 ]
+console.log(newArr.length);
 
 // undefined
 let newArr = [undefined, undefined, 3];
