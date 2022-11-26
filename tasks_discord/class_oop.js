@@ -34,4 +34,4 @@ log({ ...item }); // { data: 10 }
 log({ ...Item }); // { data: 20 }
 console.log(Item.hasOwnProperty("name2")); //
 
-// console.log("new Item", Object.getOwnPropertyDescriptors(Item.prototype)); //
+console.log("new Item", Object.getOwnPropertyDescriptors(Item.prototype)); //
