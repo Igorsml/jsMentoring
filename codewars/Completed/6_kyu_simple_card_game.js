@@ -46,41 +46,33 @@ console.log(winner(["T", "7", "8"], ["K", "5", "9"]));
 
 // потом переписать на объект ключ-значение, убедиться что работает
 function winner(deckSteve, deckJosh) {
-  const ranks = [
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "T",
-    "J",
-    "Q",
-    "K",
-    "A",
-  ];
-
-  const ranksObj = { ...ranks };
-  const deckSteveObj = { ...deckSteve };
-  const deckJoshObj = { ...deckJosh };
+  const deckLength = deckSteve.length;
+  const ranks = {
+    2: 1,
+    3: 2,
+    4: 3,
+    5: 4,
+    6: 5,
+    7: 6,
+    8: 7,
+    9: 8,
+    T: 9,
+    J: 10,
+    Q: 11,
+    K: 12,
+    A: 13,
+  };
 
   let steve = 0,
     josh = 0;
 
-  for (const value in deckSteveObj) {
-    console.log(deckSteveObj[value]);
-    if (
-      ranksObj.indexOf(deckSteveObj[value]) >
-      ranksObj.indexOf(deckJoshObj[value])
-    ) {
+  for (let i = 0; i < deckLength; i++) {
+    let steveMap = ranks[deckSteve[i]];
+    let joshMap = ranks[deckJosh[i]];
+
+    if (steveMap > joshMap) {
       steve += 1;
-    }
-    if (
-      ranksObj.indexOf(deckSteveObj[value]) <
-      ranksObj.indexOf(deckJoshObj[value])
-    ) {
+    } else if (steveMap < joshMap) {
       josh += 1;
     }
   }
@@ -91,8 +83,8 @@ function winner(deckSteve, deckJosh) {
     ? `Josh wins ${josh} to ${steve}`
     : "Tie";
 }
-
-console.log(winner(["T", "7", "8"], ["K", "5", "9"]));
+console.log(winner(["T", "9"], ["T", "8"])); // Steve wins 1 to 0
+console.log(winner(["T", "7", "8"], ["K", "5", "9"])); // Josh
 
 // previous variant
 function winner(deckSteve, deckJosh) {
