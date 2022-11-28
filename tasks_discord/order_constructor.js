@@ -15,7 +15,7 @@ class Order {
   // Order
   get #orderQuantity() {
     return Object.values(this.#shoppingList).reduce((sum, item) => {
-      console.log(this.#shoppingList);
+      // console.log(this.#shoppingList);
       return (sum += item.count);
     }, 0);
   }
@@ -108,9 +108,9 @@ class Order {
     console.log("================================");
     if (this.#orderSum > 100000) {
       console.log(
-        `Your discount is ${this.#discount}% (${this.#sumDiscount}${
-          this.#currency
-        })`
+        `Your discount is ${this.#discount}% (${Math.round(
+          (this.#sumDiscount * 10) / 10
+        )}${this.#currency})`
       );
     } else {
       console.log(`For discount left ${this.#discountLeft}${this.#currency}`);
@@ -120,7 +120,9 @@ class Order {
     }
 
     console.log(`Order quantity: ${this.#orderQuantity} pcs`);
-    console.log(`Order sum is: ${this.#orderSum}${this.#currency}`);
+    console.log(
+      `Order sum is: ${Math.round((this.#orderSum * 10) / 10)}${this.#currency}`
+    );
   }
 
   lockOrder() {
