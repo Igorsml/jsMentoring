@@ -67,12 +67,12 @@ function winner(deckSteve, deckJosh) {
     josh = 0;
 
   for (let i = 0; i < deckLength; i++) {
-    let steveMap = ranks[deckSteve[i]];
-    let joshMap = ranks[deckJosh[i]];
+    let steveValue = ranks[deckSteve[i]];
+    let joshValue = ranks[deckJosh[i]];
 
-    if (steveMap > joshMap) {
+    if (steveValue > joshValue) {
       steve += 1;
-    } else if (steveMap < joshMap) {
+    } else if (steveValue < joshValue) {
       josh += 1;
     }
   }
