@@ -133,4 +133,4 @@ class ListItem {
   }
 }
 
-export { LinkedList };
+modules.exports = { LinkedList };
