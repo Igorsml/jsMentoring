@@ -5,9 +5,9 @@ class Test {
   static arrow = () => {
     return this.test;
   };
-  arrow = () => {
+  arrow() {
     return this.test;
-  };
+  }
 }
 
 console.log(new Test().arrow);
