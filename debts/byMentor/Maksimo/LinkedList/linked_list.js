@@ -133,4 +133,8 @@ class ListItem {
   }
 }
 
+// const list = new LinkedList();
+
+// list.insertFirst("a").insertFirst("b").insertFirst("c");
+// console.log(JSON.stringify(list));
 module.exports = LinkedList;
