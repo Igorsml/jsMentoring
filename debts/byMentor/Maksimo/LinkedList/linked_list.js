@@ -9,6 +9,16 @@ class LinkedList {
 
   // добавление в список последнего элемента | O(1)
   insertFirst(value) {
+    const newItem = new ListItem(value, this.head);
+    this.head = newItem;
+    if (!this.tail) {
+      this.tail = newItem;
+    }
+    return this;
+  }
+
+  // вставляем в конец | O(1)
+  insertLast(value) {
     // если итемов нет в списке
     const newItem = new ListItem(value);
     if (!this.head || !this.tail) {
@@ -21,16 +31,6 @@ class LinkedList {
     // если итемы в списке были
     this.tail.next = newItem;
     this.tail = newItem;
-    return this;
-  }
-
-  // вставляем в конец | O(1)
-  insertLast(value) {
-    const newItem = new ListItem(value, this.head);
-    this.head = newItem;
-    if (!this.tail) {
-      this.tail = newItem;
-    }
     return this;
   }
 
@@ -133,4 +133,4 @@ class ListItem {
   }
 }
 
-modules.exports = { LinkedList };
+module.exports = LinkedList;
