@@ -36,6 +36,7 @@ class LinkedList {
 
   // вставить в конкретное место | O(n)
   insertAt(value, prevItem) {
+    // ничего не добавляем, возвращаем список
     if (prevItem === null) {
       return this;
     }

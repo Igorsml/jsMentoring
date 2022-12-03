@@ -40,12 +40,22 @@ describe("Linked List tests:", () => {
     expect(list.find("x")).toBe(null);
   });
 
+  test("Delete multiple", () => {
+    let list = init();
+
+    list.insertFirst("a");
+    expect(list.delete("a").toString()).toBe("a");
+    expect(list.toString()).toBe("b,c,d");
+    expect(list.head.value).toBe("b");
+    expect(list.tail.value).toBe("d");
+  });
+
   test("Insert in the middle", () => {
     let list = init();
 
     let prev = list.find("b");
     list.insertAt("x", prev);
-    expect(list.toString().toBe("a,b,x,c,d"));
+    expect(list.toString()).toBe("a,b,x,c,d");
   });
 
   test("Insert in the end", () => {
@@ -53,7 +63,7 @@ describe("Linked List tests:", () => {
 
     let prev = list.find("d");
     list.insertAt("x", prev);
-    expect(list.toString().toBe("a,b,c,d,x"));
+    expect(list.toString()).toBe("a,b,c,d,x");
     expect(list.tail.value).toBe("x");
   });
 });
