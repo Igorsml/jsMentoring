@@ -35,9 +35,6 @@ function foo(callback) {
   // let b = 1000;
   let result = "result";
 
-  // for (let i = 0; i <= b; i++) {
-  //   result = "result";
-  // }
   // И здесь появляется наш Callback! Он подождет пока вычисления в цикле закончатся и выведет наш результат в консоль.
   setTimeout(() => {
     callback(result);
