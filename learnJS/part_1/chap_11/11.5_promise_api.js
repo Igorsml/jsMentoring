@@ -70,3 +70,37 @@ Promise.all(arrayFetchUsers)
   .catch((err) => console(err.message));
 //  сначала три запроса к API, с помощью Promise.all(), дождёмся их завершения
 // и парсинга ответа в JSON, а затем выведется имя персонажа для каждого.
+
+/* Promise.allSettled, В отличие от Promise.all(), Promise.allSettled()
+ ждёт выполнения всех промисов, при этом неважно, завершились они успешно или с ошибкой. 
+Метод применяется для запросов к API. Актуально для независимых запросов */
+const promises = [
+  new Promise((resolve) => setTimeout(() => resolve(1), 1e3)),
+  new Promise((resolve, reject) => setTimeout(() => reject("error"), 1e2)),
+  new Promise((resolve) => setTimeout(() => resolve(3), 1e1)),
+];
+
+Promise.allSettled(promises).then(([response1, response2, response3]) => {
+  console.log(response1); // {status: 'fulfilled', value: 1}
+  console.log(response2); // {status: 'rejected', reason: 'error'}
+  console.log(response3); // {status: 'fulfilled', value: 3}
+});
+
+const urls = [
+  "https://jsonplaceholder.typicode.com/todos/1",
+  "https://jsonplaceholder.typicode.org/i_need_an_error",
+];
+
+const arrayFetchData = urls.map((url) => fetch(url).then((res) => res.json()));
+
+Promise.allSettled(arrayFetchData).then((res) => {
+  res.forEach((element) => {
+    console.log(element);
+  });
+});
+
+// { status: 'fulfilled', value: { userId: 1, id: 1, ... } }
+// { status: 'rejected', reason: 'TypeError: Failed to fetch...' }
+
+// Promise.any, ждёт первый успешно выполненный промис.
+// Если ни один не успешен, то Promise будет отклонён с объектом ошибки AggregateError.errors
