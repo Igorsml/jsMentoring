@@ -102,5 +102,69 @@ Promise.allSettled(arrayFetchData).then((res) => {
 // { status: 'fulfilled', value: { userId: 1, id: 1, ... } }
 // { status: 'rejected', reason: 'TypeError: Failed to fetch...' }
 
-// Promise.any, ждёт первый успешно выполненный промис.
-// Если ни один не успешен, то Promise будет отклонён с объектом ошибки AggregateError.errors
+// Promise.race - первый выполненный
+const slowest = new Promise((resolve) => setTimeout(() => resolve(1), 6000));
+const fast = new Promise((resolve) => setTimeout(() => resolve(2), 3000));
+const theFastest = new Promise((resolve) => setTimeout(() => resolve(3), 1000));
+
+Promise.race([slowest, fast, theFastest]).then((value) => {
+  console.log(value); // 3
+});
+
+// Если передать в Promise.race() пустой список, то промис навсегда зависнет в состоянии pending:
+Promise.race([])
+  .then((value) => {
+    console.log(value);
+  }) // then никогда не сработает
+  .catch((err) => {
+    console.log(err.message);
+  }); // catch никогда не сработает
+
+/* Promise.any, первый успешно выполненный. После того как один из промисов будет исполнен,
+метод не будет дожидаться исполнения остальных.
+Если ни один не успешен, то Promise будет отклонён с объектом ошибки AggregateError.errors
+Для примера, если нужно отобразить любую из картинок которая загрузится быстре: */
+
+function fetchAndDecode(url) {
+  return fetch(url).then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    } else {
+      return response.blob();
+    }
+  });
+}
+
+const dog = fetchAndDecode(
+  "https://sun9-73.userapi.com/impg/YQp8yUIup5qfqoQXXTkzvjPmFn-3lf0luQKrOg/2N1exNB8zRU.jpg?size=998x522&quality=96&sign=83d301f29acb90cbf1f8b6489b9be41a&type=album"
+);
+const cat = fetchAndDecode(
+  "https://sun9-11.userapi.com/impg/vUYX_GPBG-SzKZa8LJWgHF4CKOvCef8DUGTGEw/wz612yJ5dDo.jpg?size=464x460&quality=96&sign=64d619f2bcd4ead21684238663478a78&type=album"
+);
+
+Promise.any([dog, cat])
+  .then((value) => {
+    const objectUrl = URL.createObjectURL(value);
+    const image = dicument.createElement("img");
+
+    image.src = objectUrl;
+    document.body.appendChild(image);
+  })
+  .catch((err) => {
+    console.log(err.message);
+  });
+
+// Если в Promise.any() передать не промисы, он вернёт первый переданный аргумент,
+// независимо от его типа, в результат выполнения как есть (под капотом при этом
+// произойдёт его преобразование с помощью метода Promise.resolve()).
+
+const number = 42;
+const obj = {
+  key: "value",
+};
+const bool = false;
+const nulled = null;
+
+Promise.any([number, obj, bool, nulled]).then((result) => {
+  console.log(result); // 42
+});
