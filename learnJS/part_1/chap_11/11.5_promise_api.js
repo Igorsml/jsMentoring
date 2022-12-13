@@ -136,16 +136,16 @@ function fetchAndDecode(url) {
 }
 
 const dog = fetchAndDecode(
-  "https://sun9-73.userapi.com/impg/YQp8yUIup5qfqoQXXTkzvjPmFn-3lf0luQKrOg/2N1exNB8zRU.jpg?size=998x522&quality=96&sign=83d301f29acb90cbf1f8b6489b9be41a&type=album"
+  "https://sun9-59.userapi.com/impg/SntCPJuo2nJoaEIcwv2Qjt5ItTKdTXEeRdQ1ww/2hNrS9gLj3Y.jpg?size=205x194&quality=96&sign=f43c48d67f5267193cee7318afb42f48&type=album"
 );
 const cat = fetchAndDecode(
-  "https://sun9-11.userapi.com/impg/vUYX_GPBG-SzKZa8LJWgHF4CKOvCef8DUGTGEw/wz612yJ5dDo.jpg?size=464x460&quality=96&sign=64d619f2bcd4ead21684238663478a78&type=album"
+  "https://sun9-82.userapi.com/impg/-w_g_Af1X0JmkAOOtLaSQd_56lh0oWd4V-kLcA/_ht5KfVpuDE.jpg?size=199x279&quality=96&sign=14df47d540aeaed40e153c7f6aab5afb&type=album"
 );
 
 Promise.any([dog, cat])
   .then((value) => {
     const objectUrl = URL.createObjectURL(value);
-    const image = dicument.createElement("img");
+    const image = document.createElement("img");
 
     image.src = objectUrl;
     document.body.appendChild(image);
@@ -153,6 +153,8 @@ Promise.any([dog, cat])
   .catch((err) => {
     console.log(err.message);
   });
+
+// deploy https://codepen.io/Igorsml/pen/OJEYKaM
 
 // Если в Promise.any() передать не промисы, он вернёт первый переданный аргумент,
 // независимо от его типа, в результат выполнения как есть (под капотом при этом
