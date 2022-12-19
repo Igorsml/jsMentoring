@@ -62,5 +62,3 @@ function generateScreenshot() {
 
   return window.open(`${path}${char}${randomNum}`).focus();
 }
-
-generateScreenshot();

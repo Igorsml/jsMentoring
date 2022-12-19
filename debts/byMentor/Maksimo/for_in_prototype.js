@@ -19,7 +19,7 @@ const person = {
 
 console.log(Object.keys(person)); // [ 'name', 'weight' ]
 
-// #1 Проверить что прототип итерируется по прототипу (human)
+// #1 Проверить что итерируется по прототипу (person)
 for (const property in person) {
   console.log(property);
 } // Own properties: name, weight | inherits: walk(), num
@@ -38,10 +38,7 @@ Object.defineProperties(human, {
 console.log("walk:", human.propertyIsEnumerable("walk")); // false
 console.log("num:", human.propertyIsEnumerable("num")); // false
 
-// #3 Зафиксить чтобы были только enumrable false в прототипе
-
-// Свойства которые enumrable true убедиться что они выведутся
-
+// Свойства которые enumrable true убедиться что они выведутся в классе
 class Item {
   data = 10; // свойство инстанса
   get() {} //  метод прототипа Item.prototype
@@ -49,7 +46,7 @@ class Item {
     return "Igor";
   } // метод прототипа Item.prototype
 
-  static data = 20; // статическое свойство класса Item
+  static data2 = 20; // статическое свойство класса Item
   static gets() {} // статический метод класса Item
 }
 
@@ -61,7 +58,7 @@ console.log(Object.getOwnPropertyDescriptors(Item)); //  gets(), data enumerable
 
 // Итериуремся по классу
 for (const key in Item) {
-  console.log(key); //  data у класса
+  console.log(key); // static data2 у класса
 }
 
 // #5 Убедиться что если true, то выведутся в for...in
@@ -75,17 +72,5 @@ Object.defineProperties(Item, {
 });
 
 for (const key in Item) {
-  console.log(key); //
+  console.log(key); // static gets, static data2, data
 }
-
-// #5 почему нету get, попробовать enumurable true
-Object.defineProperties(Item, {
-  get: {
-    enumerable: true,
-  },
-  name2: {
-    enumerable: true,
-  },
-}); // не отрабатывает с false на true
-
-console.log(Object.getOwnPropertyDescriptors(Item)); // gets(), name2 — enumerable: true

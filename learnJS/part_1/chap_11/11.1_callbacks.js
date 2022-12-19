@@ -44,3 +44,27 @@ function foo(callback) {
 foo(function (res) {
   console.log(res);
 });
+
+// пример callback hell #1
+setTimeout(() => {
+  setTimeout(() => {
+    setTimeout(() => {
+      setTimeout(() => {
+        console.log("Hello!");
+      }, 5000);
+    }, 5000);
+  }, 5000);
+}, 5000);
+
+// пример callback hell #2
+function request(url, onSuccess) {
+  /*...*/
+}
+
+request("/api/users/1", function (user) {
+  request(`/api/photos/${user.id}/`, function (photo) {
+    request(`/api/crop/${photo.id}/`, function (response) {
+      console.log(response);
+    });
+  });
+});
