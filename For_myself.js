@@ -1,4 +1,4 @@
 const adaptiveNameTask = (str) =>
   str.toLowerCase().replaceAll(" ", "_") + ".js";
 
-console.log(adaptiveNameTask("7 kyuWho is the killer?"));
+console.log(adaptiveNameTask("6 kyu Mexican Wave"));

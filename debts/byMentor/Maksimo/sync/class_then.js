@@ -1,53 +1,32 @@
 class Deferred {
-  constructor(name) {
-    this.name = this.constructor.name;
-  }
-  thenCallbacks = [];
-
-  resolve(value) {
-    return console.log(value);
+  constructor() {
+    this.arrWithCallBacks = [];
   }
 
-  then(cb) {
-    return cb();
+  then(calback) {
+    this.arrWithCallBacks.push(calback);
+  }
+
+  resolve(word) {
+    this.arrWithCallBacks.forEach((element, index) => {
+      index === 0
+        ? (this.variable = element(word))
+        : (this.variable = element(this.variable));
+    });
   }
 }
 
-let deferred = new Deferred();
-
-deferred.then((res) => {
-  console.log("1 ", res);
+let d = new Deferred();
+d.then(function (res) {
+  console.log("1", res);
   return "a";
 });
-
-deferred.then((res) => {
-  console.log("2 ", res);
+d.then(function (res) {
+  console.log("2", res);
   return "b";
 });
-
-deferred.then((res) => {
-  console.log("3 ", res);
+d.then(function (res) {
+  console.log("3", res);
   return "c";
 });
-
-deferred.resolve("hello");
-
-/* Implement the Deferred class so that the following code outputs this text once 'resolve' will be called:
-1 hello
-2 a
-3 b 
-
-now:
-1 a
-2 b 
-3 c
-
-let promise = new Promise();
-
-
-promise.then((res) => {
-  console.log("1 ", res);
-  return "a";
-});
-promise.resolve("hello"); // TypeError: Promise resolver undefined is not a function
-*/
+d.resolve("hello");
