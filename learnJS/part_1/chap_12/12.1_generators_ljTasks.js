@@ -19,6 +19,15 @@ next = previous * 16807 % 2147483647
 Задачей является создать функцию-генератор pseudoRandom(seed), которая получает seed и создаёт генератор с указанной формулой.
 
 Пример использования: */
+
+function* pseudoRandom(num) {
+  let previous = (num * 16807) % 2147483647;
+  yield previous;
+
+  yield previous;
+  yield previous;
+}
+
 let generator = pseudoRandom(1);
 
 console.log(generator.next().value); // 16807
