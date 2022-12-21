@@ -21,11 +21,27 @@ next = previous * 16807 % 2147483647
 Пример использования: */
 
 function* pseudoRandom(num) {
-  let previous = (num * 16807) % 2147483647;
-  yield previous;
+  let result;
 
-  yield previous;
-  yield previous;
+  yield (result = (num * 16807) % 2147483647);
+  yield (result = result * 16807) % 2147483647;
+  yield (result = result * 16807) % 2147483647;
+}
+
+let generator = pseudoRandom(1);
+
+console.log(generator.next().value); // 16807
+console.log(generator.next().value); // 282475249
+console.log(generator.next().value); // 1622650073
+
+// asnwer
+function* pseudoRandom(seed) {
+  let value = seed;
+
+  while (true) {
+    value = (value * 16807) % 214748364;
+    yield value;
+  }
 }
 
 let generator = pseudoRandom(1);
