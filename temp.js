@@ -1,16 +1,6 @@
-function generateScreenshot() {
-  const caps = [...Array(26)].map((val, i) => String.fromCharCode(i + 65));
-  const alphabet = caps.concat(caps.map((letter) => letter.toLowerCase()));
-
-  const path = "https://prnt.sc/";
-  const randomNum = Math.floor(Math.random() * 1e6);
-  const shuffledAlphabet = [...alphabet].sort(() => 0.5 - Math.random());
-  const char = shuffledAlphabet.slice(0, 2).join("");
-
-  return window.open(`${path}${char}${randomNum}`).focus();
+function sortArray(arr) {
+  const odds = arr.filter((item) => item % 2).sort((a, b) => a - b);
+  return arr.map((item) => (item % 2 ? odds.shift() : item));
 }
 
-// generate 3 random screenshots
-generateScreenshot();
-generateScreenshot();
-generateScreenshot();
+console.log(sortArray([5, 3, 2, 8, 1, 4])); // [1, 3, 2, 8, 5, 4]
