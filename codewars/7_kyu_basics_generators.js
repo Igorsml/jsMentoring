@@ -1,15 +1,13 @@
 function* generator() {
-  let num;
   let count = 1;
+  let num;
 
-  console.log(num);
+  for (let i = 1; i < 999999; i++) {
+    count = yield i;
 
-  while (count) {
-    yield count++;
-  }
-
-  if (count !== num) {
-    let num = yield;
+    if ((num = count)) {
+      yield num;
+    }
   }
 }
 
@@ -18,3 +16,5 @@ let gen = generator();
 gen.next().value; // "Gen => 1"
 gen.next().value; // "Gen => 2"
 gen.next(10).value; // "Gen => 10"
+
+// https://www.codewars.com/kata/5636840bd87777688b00006c/train/javascript
