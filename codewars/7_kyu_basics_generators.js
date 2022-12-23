@@ -1,13 +1,10 @@
 function* generator() {
   let count = 1;
-  let num;
 
-  for (let i = 1; i < 999999; i++) {
-    count = yield i;
+  while (true) {
+    let introNum = yield count++;
 
-    if ((num = count)) {
-      yield num;
-    }
+    if (introNum) count = introNum;
   }
 }
 
