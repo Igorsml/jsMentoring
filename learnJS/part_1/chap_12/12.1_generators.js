@@ -20,26 +20,22 @@ console.log(JSON.stringify(generator.next())); // {"value":2,"done":false}
 console.log(JSON.stringify(generator.next())); // {"value":3,"done":true}
 console.log(JSON.stringify(generator.next())); // {"done":true}
 
-// find favorite color
-function* getFavColor() {
-  const reply = yield "What is your favorite color?";
-  console.log("Reply:", reply);
-  if (reply !== "yellow") return "Wrong!";
-  return "You may pass.";
+// for vs for...of
+function* generator() {
+  for (let i = 0; true; i++) {
+    const { done, value } = gen.next();
+    if (i === 2 || done) break;
+  }
 }
 
-{
-  const iter = getFavColor();
-  const question = iter.next().value; // Iterator yields question
-  iter.next().value;
-  iter.next().value;
-  console.log("Q:", question);
-  const answer = iter.next("black").value; // Pass reply back into generator
-  console.log("A:", answer);
+// for...of
+for (let value of gen) {
+  if (value === 2) break;
+  console.log(value);
 }
 
-const iter = crossBridge();
-const q = iter.next().value;
-console.log(q);
-const a = iter.next("yellow").value;
-console.log(a);
+const gen = generator();
+
+console.log(gen.next().value);
+console.log(gen.next().value);
+console.log(gen.next().value);
