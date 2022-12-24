@@ -22,7 +22,7 @@ async function loadJson(url) {
 
   if (response.status == 200) {
     let result = await response.json();
-    return result;
+    return console.log(result);
   }
   throw new Error(response.status);
 }
@@ -43,33 +43,33 @@ class HttpError extends Error {
   }
 }
 
-function loadJson(url) {
-  return fetch(url).then((response) => {
-    if (response.status == 200) {
-      return response.json();
-    } else {
-      throw new HttpError(response);
-    }
-  });
+async function loadJson(url) {
+  let response = await fetch(url);
+
+  if (response.status == 200) {
+    return response.json();
+  } else {
+    throw new HttpError(response);
+  }
 }
 
 // Запрашивать логин, пока github не вернёт существующего пользователя.
-function demoGithubUser() {
-  let name = prompt("Введите логин?", "iliakan");
+async function demoGithubUser() {
+  let user;
+  while (true) {
+    let name = prompt("Введите логин?", "iliakan");
 
-  return loadJson(`https://api.github.com/users/${name}`)
-    .then((user) => {
-      alert(`Полное имя: ${user.name}.`);
-      return user;
-    })
-    .catch((err) => {
+    try {
+      user = await loadJson(`https://api.github.com/users/${name}`);
+      break;
+    } catch (err) {
       if (err instanceof HttpError && err.response.status == 404) {
         alert("Такого пользователя не существует, пожалуйста, повторите ввод.");
-        return demoGithubUser();
       } else {
         throw err;
       }
-    });
+    }
+  }
 }
 
 demoGithubUser();
@@ -84,9 +84,12 @@ async function wait() {
 }
 
 function f() {
+  wait().then((result) => console.log(result));
   // ...что здесь написать?
   // чтобы вызвать wait() и дождаться результата "10" от async–функции
   // не забывайте, здесь нельзя использовать "await"
 }
+
+f();
 
 // P.S. Технически задача очень простая, но этот вопрос часто задают разработчики, недавно познакомившиеся с async/await.
