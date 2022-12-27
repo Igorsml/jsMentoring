@@ -1,20 +1,20 @@
 "use strict";
 // переписать с bind задачу по this чтобы было равно не объекту а например числу 5
 
-// current
+// наш примитив
 const lengthForBound = 5;
 
-function getThis(...args) {
-  return console.log(this, ...args);
+function getThis(arg) {
+  return console.log(this);
 }
 
 getThis(lengthForBound); // undefined
 
 // биндим примитив
-const getThisBounded = getThis.bind("this value:", lengthForBound);
-getThisBounded(); // this value: 5
+const getThisBounded = getThis.bind(lengthForBound);
+getThisBounded(lengthForBound); // 5
 
-// prevboundLength
+// изначальная задача --------------------
 let length = 4;
 
 function callback() {
@@ -28,4 +28,3 @@ const object = {
   },
 };
 object.method(callback, 1, 2); // 3 | arguments[0]() является вызовом метода callback на объекте arguments, this внутри callback равно arguments. В результате this.length внутри callback() совпадает с arguments.length - а это 3.
-console.log(object.length); // 5

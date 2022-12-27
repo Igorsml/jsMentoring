@@ -170,3 +170,12 @@ const nulled = null;
 Promise.any([number, obj, bool, nulled]).then((result) => {
   console.log(result); // 42
 });
+
+/* 
+1) Promise.all — все выполнены, если без ошибок;
+2) Promise.allSettled — ждёт выполнения всех промисов, при этом неважно, завершились они успешно или с ошибкой;
+3) Promise.race - первый выполненный;
+4) Promise.any — первый успешно выполненный;
+5) Promise.resolve(value) создаёт успешно выполненный промис с результатом value;
+6) Promise.reject(error) создаёт промис, завершённый с ошибкой error.
+*/

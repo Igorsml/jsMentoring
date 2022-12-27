@@ -7,7 +7,7 @@ class LinkedList {
     this.tail = null;
   }
 
-  // добавление в список последнего элемента | O(1)
+  // добавление в список первого элемента | O(1)
   insertFirst(value) {
     const newItem = new ListItem(value, this.head);
     this.head = newItem;
@@ -71,7 +71,7 @@ class LinkedList {
     return null;
   }
 
-  //удаляем итем | O(n)
+  // удаляем итем | O(n)
   delete(value) {
     if (!this.head) {
       return null;
@@ -103,7 +103,7 @@ class LinkedList {
     return deletedItem;
   }
 
-  // | O(n)
+  // O(n)
   toArray() {
     const Items = [];
     let currentItem = this.head;
@@ -115,7 +115,7 @@ class LinkedList {
     return Items;
   }
 
-  // | O(n)
+  // O(n)
   toString() {
     return this.toArray()
       .map((Item) => Item.toString())
@@ -134,8 +134,4 @@ class ListItem {
   }
 }
 
-// const list = new LinkedList();
-
-// list.insertFirst("a").insertFirst("b").insertFirst("c");
-// console.log(JSON.stringify(list));
 module.exports = LinkedList;

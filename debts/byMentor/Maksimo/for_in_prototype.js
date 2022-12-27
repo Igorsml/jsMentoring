@@ -66,11 +66,11 @@ Object.defineProperties(Item, {
   gets: {
     enumerable: true,
   },
-  data: {
+  data2: {
     enumerable: true,
   },
 });
 
 for (const key in Item) {
-  console.log(key); // static gets, static data2, data
+  console.log("after defineProperties:", key); // static gets, static data2
 }
