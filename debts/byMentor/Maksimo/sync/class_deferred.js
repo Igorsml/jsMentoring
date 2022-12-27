@@ -27,6 +27,7 @@ d.then((res) => {
   console.log("1 ", res);
 
   var d1 = new Deferred();
+
   setTimeout(() => {
     console.log("deferred:", d1.resolve("a"));
   }, 1000);
