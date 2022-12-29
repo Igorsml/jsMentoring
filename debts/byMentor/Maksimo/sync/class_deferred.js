@@ -6,12 +6,11 @@ class Deferred {
   }
 
   async then(callback) {
-    let result = await this.arrWithCallBacks.push(callback);
-    return result;
+    return await this.arrWithCallBacks.push(callback);
   }
 
   async resolve(word) {
-    this.arrWithCallBacks.forEach((callback, index) => {
+    await this.arrWithCallBacks.forEach((callback, index) => {
       if (index === 0) {
         return (this.variable = callback(word));
       } else {
@@ -29,7 +28,7 @@ d.then((res) => {
   var d1 = new Deferred();
 
   setTimeout(() => {
-    console.log("deferred:", d1.resolve("a"));
+    d1.resolve("a");
   }, 1000);
 
   return d1;
