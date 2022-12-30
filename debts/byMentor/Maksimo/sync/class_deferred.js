@@ -5,12 +5,12 @@ class Deferred {
     this.arrWithCallBacks = [];
   }
 
-  async then(callback) {
-    return await this.arrWithCallBacks.push(callback);
+  then(callback) {
+    return this.arrWithCallBacks.push(callback);
   }
 
-  async resolve(word) {
-    await this.arrWithCallBacks.forEach((callback, index) => {
+  resolve(word) {
+    this.arrWithCallBacks.forEach((callback, index) => {
       if (index === 0) {
         return (this.variable = callback(word));
       } else {
