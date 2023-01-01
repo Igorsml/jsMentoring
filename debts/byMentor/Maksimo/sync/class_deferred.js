@@ -6,23 +6,27 @@ class Deferred {
   }
 
   then(callback) {
-    return this.arrWithCallBacks.push(callback);
+    this.arrWithCallBacks.push(callback);
   }
 
-  resolve(word) {
-    this.arrWithCallBacks.forEach((callback, index) => {
-      if (index === 0) {
-        return (this.variable = callback(word));
-      } else {
-        return (this.variable = callback(this.variable));
-      }
-    });
+  resolve(value) {
+    const fun = this.arrWithCallBacks.shift();
+
+    if (fun) {
+      const result = fun(value);
+
+      if (result instanceof Deferred) {
+        result.then((value) => this.resolve(value));
+      } else this.resolve(result);
+    }
   }
 }
 
 var d = new Deferred();
 
+// 1
 d.then((res) => {
+  debugger;
   console.log("1 ", res);
 
   var d1 = new Deferred();
@@ -34,12 +38,16 @@ d.then((res) => {
   return d1;
 });
 
+// 2
 d.then((res) => {
+  debugger;
   console.log("2 ", res);
   return "b";
 });
 
+// 3
 d.then((res) => {
+  debugger;
   console.log("3 ", res);
   return "c";
 });
