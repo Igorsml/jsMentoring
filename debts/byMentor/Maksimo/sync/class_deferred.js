@@ -15,9 +15,9 @@ class Deferred {
     if (fun) {
       const result = fun(value);
 
-      if (result instanceof Deferred) {
-        result.then((value) => this.resolve(value));
-      } else this.resolve(result);
+      result instanceof Deferred
+        ? result.then((value) => this.resolve(value))
+        : this.resolve(result);
     }
   }
 }
@@ -26,7 +26,6 @@ var d = new Deferred();
 
 // 1
 d.then((res) => {
-  debugger;
   console.log("1 ", res);
 
   var d1 = new Deferred();
@@ -40,14 +39,12 @@ d.then((res) => {
 
 // 2
 d.then((res) => {
-  debugger;
   console.log("2 ", res);
   return "b";
 });
 
 // 3
 d.then((res) => {
-  debugger;
   console.log("3 ", res);
   return "c";
 });

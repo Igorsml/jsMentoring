@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testing modules</title>
+</head>
+
+<body>
+  <!-- всегда use strict -->
+  <script type="module">
+    num = 42 // ReferenceError: num is not defined
+    let num = 42; // переменная доступна только в этом модуле
+    console.log('meta:', (import.meta.url));
+  </script>
+
+  <!-- this на верхнем урове undefined, 
+    у обычного скрипта глобальный объект -->
+  <script type="module">
+    console.log('test this', this); // undefined
+  </script>
+
+  <!-- модели всегда defer (выполняются после загрузки страницы) -->
+  <script type="module">
+    console.log('test defer:', typeof button); // object
+
+  </script>
+  <button id="button">Pisya</button>
+
+  <script type="module">
+    console.log(num); // ReferenceError: num is not defined
+    import "./console_log.js";
+  </script>
+
+  <script type="module">
+    import "./console_log.js"; // Код в модуле выполняется только один раз при импорте
+  </script>
+
+</body>
+
+</html>
