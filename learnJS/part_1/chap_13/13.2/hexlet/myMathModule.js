@@ -6,10 +6,11 @@ A = 1/2 * h * b, где h — высота, а b — основание треу
 */
 
 export const getTrianglePerimeter = (a, b, c) => a + b + c;
+export const square = (x) => x * x;
 
-// BEGIN (write your solution here)
+const getTriangleArea = (h, b) => 0.5 * (h * b);
 
-// END
+console.log(getTriangleArea(5, 10)); // 25
+console.log(getTriangleArea(15, 12)); // 90
 
-getTriangleArea(5, 10); // 25;
-getTriangleArea(15, 12); // 90;
+export default getTriangleArea;

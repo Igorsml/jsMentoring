@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Соседи - те у кого общий родитель (head и body) -->
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test DOM</title>
+  <script src="./1.3_dom_navigation.js" defer></script>
+  <script>console.log(`Пока body не прочитан, будет ${document.body}`)</script>
+  <!-- Пока body не прочитан, будет null -->
+</head>
+
+<body>
+  <!-- Уже в body отработает [object HTMLBodyElement] -->
+  <script>
+    console.log(`Уже в body отработает ${document.body}`)
+  </script>
+
+  <!-- Дети (childNodes) тега body это div, ul -->
+  <div>Start</div>
+  <ul>
+    <!-- Потомки тега body: div, ul, li, a -->
+    <li><a href="#">Test link</a></li>
+  </ul>
+
+
+</body>
+
+</html>

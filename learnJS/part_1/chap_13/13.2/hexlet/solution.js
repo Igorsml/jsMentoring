@@ -4,4 +4,10 @@
 Экспортируйте созданную функцию по умолчанию. 
 */
 
-import square from "./square.js";
+import getTriangleArea, { square } from "./myMathModule.js";
+
+const result = (n) => getTriangleArea(n, square(n) / 2);
+
+console.log(result(10)); // 250
+
+export default result;
