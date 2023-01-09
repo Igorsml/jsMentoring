@@ -5,7 +5,7 @@ const table = document.getElementById("age-table");
 console.log("table:", table);
 
 // Все элементы label внутри этой таблицы (их три).
-const labels = table.querySelectorAll("label");
+const labels = table.querySelectorAll("#age-table label");
 console.log("labels:", labels); // [label, label, label]
 
 // Первый td в этой таблице (со словом «Age»).
