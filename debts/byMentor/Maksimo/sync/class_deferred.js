@@ -7,6 +7,7 @@ class Deferred {
 
   then(callback) {
     this.arrWithCallBacks.push(callback);
+    console.log("arr:", this.arrWithCallBacks);
   }
 
   resolve(value) {
