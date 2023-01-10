@@ -22,24 +22,26 @@ function getMainActorProfileFromMovie(id) {
 }
 
 getMainActorProfileFromMovie(1).then((profile) => {
-  console.log(profile);
+  console.log(profile); // name: 'Luke Skywalker',  height: '172', ...
 });
 
 // более плоский и понятный код
 async function getMainActorProfileFromMovie(id) {
   try {
-    const movieResponse = await fetch(`https://api.dev/api/films/${id}`);
+    const movieResponse = await fetch(`https://swapi.dev/api/films/${id}/`);
     const movie = await movieResponse.json();
 
     const characterUrl = movie.characters[0].split("//")[1];
     const characterResponse = await fetch(`https://${characterUrl}`);
     return characterResponse.json();
   } catch (err) {
-    console.log("Here your error:", err);
+    console.error("Произошла ошибка!", err);
   }
 }
 
-getMainActorProfileFromMovie(1).then((profile) => console.log(profile));
+getMainActorProfileFromMovie(1).then((profile) => {
+  console.log(profile); // name: 'Luke Skywalker',  height: '172', ...
+});
 
 // запуск новостей после получения пользователя
 async function getUser() {

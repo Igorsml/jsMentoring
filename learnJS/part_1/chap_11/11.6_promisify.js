@@ -1,6 +1,6 @@
 "use strict";
 
-//функция loadScript которая в процессе выполнения НЕ ИЗМЕНЯЕТСЯ
+// функция loadScript которая в процессе выполнения НЕ ИЗМЕНЯЕТСЯ
 function loadScript(src, callback) {
   let script = document.createElement("script");
   script.src = src;
@@ -14,7 +14,7 @@ function promisifyDecorator(f) {
   return function (src) {
     // вызов возвращает функцию-обёртку
     return new Promise((resolve, reject) => {
-      //создаем callback, затем вызываем с ним нашу НЕИЗМЕНЯЕМУЮ функцию
+      // создаем callback, затем вызываем с ним нашу НЕИЗМЕНЯЕМУЮ функцию
       function callback(err, result) {
         if (err) {
           return reject(err);
@@ -28,7 +28,7 @@ function promisifyDecorator(f) {
   };
 }
 let loadScriptPromise = promisifyDecorator(loadScript); //теперь обычная функция работает как Promise
-//вызов
+// вызов
 loadScriptPromise("my_script.js")
   .then((script) => {
     console.log(script.src); // адрес скрипта
@@ -36,10 +36,10 @@ loadScriptPromise("my_script.js")
     console.log(user.name); // Vasya
   })
   .catch((err) => console.log(err));
-//создаем в той же папке, что и наш html - JS файл  my_script.js в котором будет литерал объекта:
+// создаем в той же папке, что и наш html - JS файл  my_script.js в котором будет литерал объекта:
 let user = { name: "Vasya" };
 
-//
+// промифицируем функцию
 function calc(a, b, callback) {
   let sum = a + b;
 
@@ -55,7 +55,7 @@ function square(err, sum) {
   else console.log(sum ** 2);
 }
 
-calc(6, 2, square);
+calc(6, 2, square); // 8*8 = 64
 
 function promCalc(a, b) {
   return new Promise((res, rej) => {
@@ -68,3 +68,4 @@ function promCalc(a, b) {
 promCalc(3, 1)
   .then((res) => square(null, res))
   .catch(square);
+// 16
