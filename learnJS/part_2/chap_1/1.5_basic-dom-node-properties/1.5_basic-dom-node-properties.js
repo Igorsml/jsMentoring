@@ -41,3 +41,16 @@ document.body.innerHTML =
 // После вставки в html картинка не загрузится и тогда сработает код из onerror
 document.body.innerHTML =
   '<img src="broken-link" onerror="alert("Теперь вы точно взломаны!")">';
+
+/* outerHTML - HTML элемент целиком + сам элемент
+в отличие от innerHTML, запись в outerHTML не изменяет элемент.
+Вместо этого элемент заменяется целиком во внешнем контексте. */
+const login = document.querySelector("#login");
+login.outerHTML = "Test Login";
+console.log("outerHTML:", login.outerHTML); // содержимое старое: <input type="text" id="login" />
+
+/* nodeValue / data - содержимое текстового узла
+innerHTML есть только у узлов-элементов, у других типов узлов свойства nodeValue и data */
+const script = document.querySelector(document.body.lastChild);
+console.log(script);
+const comment = console.log("data:", login.data);
