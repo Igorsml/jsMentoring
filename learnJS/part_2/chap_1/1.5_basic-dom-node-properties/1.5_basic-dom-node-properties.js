@@ -1,5 +1,7 @@
 // DOM узлы - объекты JS, по цепочке наследуются у классов
 
+// DOM узлы - объекты JS, по цепочке наследуются у классов
+
 function checkInstanceOf(instance) {
   if (
     instance instanceof HTMLElement ||
@@ -51,6 +53,16 @@ console.log("outerHTML:", login.outerHTML); // содержимое старое
 
 /* nodeValue / data - содержимое текстового узла
 innerHTML есть только у узлов-элементов, у других типов узлов свойства nodeValue и data */
-const script = document.querySelector(document.body.lastChild);
-console.log(script);
-const comment = console.log("data:", login.data);
+const comment = form.nextSibling.nextSibling;
+console.log("data:", comment.data); // Test data
+
+// textConent - доступ к тексту элемента за вычетом тегов
+// Чтение редко, чаще безопасная запись текста без лишнего HTML
+const text = document.body.querySelector("#textContent");
+console.log(text.textContent); // 'test text Content'
+
+// hidden, аналог display:none, только проще
+const hiddenDiv = document.querySelector("#hiddenDiv");
+hiddenDiv.hidden = true;
+
+// на радость эпелипсику setInterval(() => (document.body.hidden = !document.body.hidden), 100);
