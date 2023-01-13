@@ -2,21 +2,27 @@
 // the same thing but with 2 sec delay between first and second callback:
 class Deferred {
   constructor() {
-    this.arrWithCallBacks = [];
+    this.allFunc = [];
   }
 
   then(callback) {
-    this.arrWithCallBacks.push(callback);
+    this.allFunc.push(callback);
   }
 
-  resolve(value) {
-    this.arrWithCallBacks.forEach((callback, index) => {
-      // x2 fun
-      this.fun = this.arrWithCallBacks.shift();
-      // funResult = deferred, b
-      this.funResult = this.fun(value);
-      console.log("this.funResult:", this.funResult);
-    });
+  resolve(arg) {
+    this.lastResult = arg;
+    for (let i = 0; i < this.allFunc.length; i++) {
+      const item = this.allFunc[i];
+      const res = item(this.lastResult);
+
+      if (res instanceof Deferred) {
+        const lastFuncs = this.allFunc.slice(i + 1);
+        res.allFunc = lastFuncs;
+        break;
+      } else {
+        this.lastResult = res;
+      }
+    }
   }
 }
 
