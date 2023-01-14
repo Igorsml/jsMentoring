@@ -1,12 +1,14 @@
 const inputs = document.querySelectorAll("input");
 
-inputs.addEventListener("keydown", (event) => {
-  if (event.code === "Backspace") return false;
+inputs.forEach((elem) => {
+  elem.parentNode.addEventListener("keydown", (event) => {
+    if (event.key === "Backspace") return false;
+  });
 });
 
 document.addEventListener("keydown", (event) => {
   try {
-    if (event.code === "Backspace") {
+    if (event.key === "Backspace") {
       history.back();
     }
   } catch (err) {
