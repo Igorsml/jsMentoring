@@ -1,14 +1,25 @@
 const inputs = document.querySelectorAll("input");
+let userIsTyping;
 
-inputs.forEach((elem) => {
-  elem.parentNode.addEventListener("keydown", (event) => {
-    if (event.key === "Backspace") return false;
-  });
-});
+document.addEventListener(
+  "focusin",
+  (event) => {
+    userIsTyping = true;
+  },
+  false
+);
+
+document.addEventListener(
+  "focusout",
+  (event) => {
+    userIsTyping = false;
+  },
+  false
+);
 
 document.addEventListener("keydown", (event) => {
   try {
-    if (event.key === "Backspace") {
+    if (!userIsTyping && event.code === "Backspace") {
       history.back();
     }
   } catch (err) {
@@ -25,5 +36,3 @@ document.addEventListener("mouseup", (event) => {
     throw err;
   }
 });
-
-// deploy: https://vsesoki.ru/collection/proraschivateli/product/proraschivatel-mikroferma-easygreen-egl-55
