@@ -1,20 +1,38 @@
-// forEach, push (новую длину массива), reverse, join (учесть есть аргументы или нет)
+// forEach, push, reverse, join без методов массивов
 
-class myArray {
-  forEach() {
+class MyArray {
+  myForEach() {}
+
+  myPush(element) {
+    for (let i = 0; i < arguments.length; i++) {
+      this.length = arguments.length;
+      this.length++;
+    }
+    return this.length;
+  }
+
+  myReverse() {
     //
   }
 
-  push() {}
-
-  reverse() {
-    //
-  }
-
-  join(separator) {
+  myJoin(separator) {
     this;
   }
 }
 
-const myArrayMethod = new myArray();
-const array = [1, 2, 3, 4, 5];
+const myArrayMethod = new MyArray();
+console.log(MyArray.prototype.myPush);
+
+const array = [1, 2, 3];
+
+Array.prototype.myPush = function (value) {
+  for (let i = 0; i < arguments.length; i++) {
+    this.length = arguments.length;
+    this.length++;
+  }
+  return this.length;
+};
+const length = array.myPush("end");
+
+console.log(length); //
+console.log(array); //
