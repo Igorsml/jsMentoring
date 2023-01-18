@@ -29,8 +29,8 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("mouseup", (event) => {
   try {
-    if (event.button === "3" || event.button === "4") {
-      console.log("work mouse");
+    if (event.button === 3 || event.button === 4) {
+      history.back();
     }
   } catch (err) {
     throw err;

@@ -1,13 +1,13 @@
 // forEach, push, reverse, join без методов массивов
 
-class MyArray {
+class MyArray extends Array {
   myForEach() {}
 
-  myPush(element) {
-    for (let i = 0; i < arguments.length; i++) {
-      this.length = arguments.length;
-      this.length++;
+  myPush(...args) {
+    for (let i = 0; i < args.length; i++) {
+      this[this.length] = args[i];
     }
+
     return this.length;
   }
 
@@ -20,19 +20,10 @@ class MyArray {
   }
 }
 
-const myArrayMethod = new MyArray();
-console.log(MyArray.prototype.myPush);
+const arr = new MyArray();
+arr.push(1, 2, 3);
 
-const array = [1, 2, 3];
+const length = arr.myPush("a", "b", "c");
 
-Array.prototype.myPush = function (value) {
-  for (let i = 0; i < arguments.length; i++) {
-    this.length = arguments.length;
-    this.length++;
-  }
-  return this.length;
-};
-const length = array.myPush("end");
-
-console.log(length); //
-console.log(array); //
+console.log("length:", length); // 6
+console.log("array:", arr); // [1, 2, 3, 'a', "b", "c"];
