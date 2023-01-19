@@ -31,24 +31,38 @@
 
 // join
 Array.prototype.myJoin = function (separator) {
-  if (this.length === 0) "";
+  if (this.length === 0) {
+    return "";
+  }
+
   let result = "";
 
   for (let i = 0; i < this.length; i++) {
-    if (separator) {
+    if (this[i] === undefined || this[i] === null) {
+      result += "";
+    } else if (separator) {
       result += this[i] + separator;
+    } else if (separator === "") {
+      result += this[i];
+    } else {
+      result += this[i] + ",";
     }
-    result += this[i] + ",";
   }
 
-  result = result.slice(0, -1);
+  if (result.length > this.length) {
+    result = result.slice(0, -1);
+  }
+
   return result;
 };
 
-const array = ["a", "b", "c"];
+const array = ["a", "b", "c", null, undefined];
 console.log(array.myJoin()); // 'a,b,c'
 console.log(array.myJoin("")); // 'abc'
 console.log(array.myJoin("-")); // 'a-b-c'
+
+const emptyArr = [];
+console.log("empty:", emptyArr.myJoin()); // ''
 
 // Does it mutate?
 console.log("array:", array); // ["a", "b", "c"]
