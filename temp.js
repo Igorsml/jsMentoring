@@ -29,40 +29,26 @@
 // console.log("length:", length); // 6
 // console.log("array:", array); // [ 1, 2, 3, 'end', 'end2', 'end3' ];
 
-// join
-Array.prototype.myJoin = function (separator) {
-  if (this.length === 0) {
-    return "";
+// myReverse
+Array.prototype.myReverse = function () {
+  for (let i = this.length - 1; i >= 0; i--) {
+    this[this.length] = this[i];
   }
-
-  let result = "";
 
   for (let i = 0; i < this.length; i++) {
-    if (this[i] === undefined || this[i] === null) {
-      result += "";
-    } else if (separator) {
-      result += this[i] + separator;
-    } else if (separator === "") {
-      result += this[i];
-    } else {
-      result += this[i] + ",";
-    }
+    this.length = this.length - 1;
   }
 
-  if (result.length > this.length) {
-    result = result.slice(0, -1);
-  }
-
-  return result;
+  return this;
 };
 
-const array = ["a", "b", "c", null, undefined];
-console.log(array.myJoin()); // 'a,b,c'
-console.log(array.myJoin("")); // 'abc'
-console.log(array.myJoin("-")); // 'a-b-c'
+const arr = ["a", 1, undefined, true, null];
+console.log(arr.myReverse()); // [ null, true, undefined, 1, 'a']
 
-const emptyArr = [];
-console.log("empty:", emptyArr.myJoin()); // ''
+// myForEach
+// Array.prototype.forEach = function (function callback(value, index, array) {
+//   //
+// };
 
-// Does it mutate?
-console.log("array:", array); // ["a", "b", "c"]
+// const arr = [1, 2, 3];
+// console.log(arr.forEach((element) => element * 2));
