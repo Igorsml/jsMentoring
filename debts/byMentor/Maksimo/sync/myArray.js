@@ -1,7 +1,13 @@
 // forEach, push, reverse, join без методов массивов
 
 class MyArray extends Array {
-  myForEach() {}
+  myForEach(callback) {
+    for (let i = 0; i < this.length; i++) {
+      callback(this[i], i, this);
+    }
+
+    return undefined;
+  }
 
   myPush(...args) {
     for (let i = 0; i < args.length; i++) {
@@ -11,8 +17,19 @@ class MyArray extends Array {
     return this.length;
   }
 
+  // O(n)
   myReverse() {
-    //
+    let tempArray = [];
+
+    for (let i = this.length - 1; i >= 0; i--) {
+      tempArray[tempArray.length] = this[i];
+    }
+
+    for (let i = 0; i < this.length; i++) {
+      this[i] = tempArray[i];
+    }
+
+    return this;
   }
 
   myJoin(separator) {
@@ -67,3 +84,24 @@ console.log("empty:", emptyArr.myJoin()); // ''
 
 // Does it mutate?
 console.log("array:", array); // ["a", "b", "c"]
+
+// test myReverse
+const arrayForReverse = ["a", 1, undefined, true, null];
+Object.setPrototypeOf(arrayForReverse, arr);
+console.log("myReverse:", arrayForReverse.myReverse()); // [ null, true, undefined, 1, 'a']
+
+// test myForEach
+const arrForForeach = [1, 2, 3];
+Object.setPrototypeOf(arrForForeach, arr);
+
+arrForForeach.myForEach((num, index, arr) => {
+  if (index === 0) {
+    num += 1;
+  } else if (index === arr.length - 1) {
+    num *= 2;
+  }
+  console.log("num:", num); // 1, 2, 3
+  console.log("arr:", arr); // [1, 2, 3]
+  console.log("index:", index); // 0, 1, 2
+  console.log(num); // 2, 2, 6
+});

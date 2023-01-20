@@ -29,26 +29,24 @@
 // console.log("length:", length); // 6
 // console.log("array:", array); // [ 1, 2, 3, 'end', 'end2', 'end3' ];
 
-// myReverse
-Array.prototype.myReverse = function () {
-  for (let i = this.length - 1; i >= 0; i--) {
-    this[this.length] = this[i];
-  }
-
+Array.prototype.myForEach = function (callback) {
   for (let i = 0; i < this.length; i++) {
-    this.length = this.length - 1;
+    callback(this[i], i, this);
   }
 
-  return this;
+  return undefined;
 };
 
-const arr = ["a", 1, undefined, true, null];
-console.log(arr.myReverse()); // [ null, true, undefined, 1, 'a']
+const arr = [1, 2, 3];
 
-// myForEach
-// Array.prototype.forEach = function (function callback(value, index, array) {
-//   //
-// };
-
-// const arr = [1, 2, 3];
-// console.log(arr.forEach((element) => element * 2));
+arr.myForEach((num, index, arr) => {
+  if (index === 0) {
+    num += 1;
+  } else if (index === arr.length - 1) {
+    num *= 2;
+  }
+  console.log("num:", num);
+  console.log("arr:", arr);
+  console.log("index:", index);
+  console.log(num); // 2, 2, 6
+});
