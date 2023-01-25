@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App, { Welcome, WelcomeClass, Item, TodoList } from "./App";
+import App, { Welcome, WelcomeClass, Item, TodoList, List } from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <List />
     <App />
     <Welcome name="Igor" />
     <WelcomeClass name="Nika" />

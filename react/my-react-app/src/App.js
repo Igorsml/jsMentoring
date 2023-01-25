@@ -1,10 +1,12 @@
 import React from "react";
 import "./App.css";
+import { people } from "./data.js";
+import { getImageUrl } from "./utils.js";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">1</header>
+      <header className="App-header">App render</header>
     </div>
   );
 }
@@ -26,19 +28,51 @@ function Item(props) {
 }
 
 function TodoList() {
-  const todos = [
-    "закончить документацию",
-    "отправить пулреквест",
-    "снова напомнить Дэну про ревью",
-  ];
+  const todos = ["task 1", "task 2", "task 3"];
   return (
-    <ul>
-      {todos.map((message) => (
-        <Item key={message} message={message} />
-      ))}
-    </ul>
+    <header className="App-header">
+      {" "}
+      <ul>
+        {todos.map((message, index) => (
+          <Item key={message + index} message={message} />
+        ))}
+      </ul>{" "}
+    </header>
+  );
+}
+function ListSection({ title, people }) {
+  return (
+    <>
+      <h2>{title}</h2>
+      <ul>
+        {people.map((person) => (
+          <li key={person.id}>
+            <img src={getImageUrl(person)} alt={person.name} />
+            <p>
+              <b>{person.name}:</b>
+              {" " + person.profession + " "}
+              known for {person.accomplishment}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+function List() {
+  const chemists = people.filter((people) => people.profession === "chemist");
+  const everyoneElse = people.filter(
+    (person) => person.profession !== "chemist"
+  );
+
+  return (
+    <header className="App-header">
+      <ListSection title="Chemist" people={chemists} />
+      <ListSection title="Everyone else" people={everyoneElse} />
+    </header>
   );
 }
 
 export default App;
-export { Welcome, WelcomeClass, Item, TodoList };
+export { Welcome, WelcomeClass, Item, TodoList, List, ListSection };
