@@ -42,7 +42,7 @@ function TodoList() {
 }
 function ListSection({ title, people }) {
   return (
-    <>
+    <header className="App-header">
       <h2>{title}</h2>
       <ul>
         {people.map((person) => (
@@ -56,7 +56,7 @@ function ListSection({ title, people }) {
           </li>
         ))}
       </ul>
-    </>
+    </header>
   );
 }
 
