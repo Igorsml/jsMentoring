@@ -14,8 +14,3 @@ function mostFrequent(arr) {
 }
 
 console.log(mostFrequent([3, "c", "c", "c", 2, 3, "c", 3, "c", 2, 4, 9, 3])); // c встречается 5 раз
-
-/*
-
-  const duplicates = arr.filter((elem, i) => arr.indexOf(elem) !== i);
-   */
