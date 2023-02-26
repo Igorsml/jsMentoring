@@ -1,29 +1,36 @@
 class MySet {
   constructor(iterableValue, size = 0) {
     if (iterableValue === null) return;
-    this.obj = {};
+    this._Set = {};
 
-    for (const value of iterableValue) {
-      if (value in this.obj) continue;
-      this.obj[value] = value;
+    for (const value in iterableValue) {
+      if (value in this._Set) {
+        continue;
+      } else {
+        this._Set[value] = value;
+      }
     }
 
-    this.size = Object.keys(this.obj).length;
+    this.size = Object.keys(this).length;
   }
 
-  static add(value) {
+  add(value) {
     if (value === null) return;
-    this._Set = value;
-    this.size++;
+
+    const result = Array.from(arguments)
+      .map((value) => value)
+      .filter((value, index, self) => self.indexOf(value) === index);
+
+    return { ...this, ...result };
   }
 
-  static has() {
+  has() {
     for (const arg of arguments) {
       return Object.values(this._Set).indexOf(arg) > -1 ? true : false;
     }
   }
 
-  static delete() {
+  delete() {
     for (const arg of arguments) {
       if (Object.values(this._Set).indexOf(arg) > -1) {
         delete this._Set[arg];
@@ -35,8 +42,8 @@ class MySet {
     }
   }
 
-  static clear() {
-    for (const element in this._Set) {
+  clear() {
+    for (const element of this._Set) {
       delete this._Set[element];
       this.size = 0;
     }
@@ -45,25 +52,25 @@ class MySet {
   }
 }
 
-let set = new MySet([1, 2, 1]);
+let set = new MySet([1, 2, 1, 1]);
 
 // Cat cross-check:
 // #1 доступ к свойствам из класса Set() за пределами класса. Нарушение принципа инкапсуляции.
-console.log(set.iterableValue); // undefined
-console.log(set.length); // undefined
-console.log(set); // MySet { _Set: { '0': 0, '1': 1 } }
-console.log(set.size); // 2
+// console.log(set.iterableValue); // undefined
+// console.log(set.length); // undefined
+// console.log(set); // MySet { _Set: { '0': 0, '1': 1 } }
+// console.log(set.size); // 2
 
 // #2
 // console.log("clear:", set.clear()); // undefined
 // console.log(set.size); // 0
 
 // #3
-// let setEmpty = new MySet();
-// console.log(setEmpty.add(null));
-// console.log(setEmpty.add(1));
-// console.log(setEmpty.size); // 1
-// console.log(setEmpty); // MySet { _Set: 1, size: 1 }
+let setEmpty = new MySet();
+console.log("test null:", setEmpty.add(null)); // undefined
+console.log("test add:", setEmpty.add(1, 1, 2));
+console.log(setEmpty.size); // 1
+
 // end cross-check
 
 // console.log(set.add(2, 3));
