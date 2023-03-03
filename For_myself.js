@@ -1,4 +1,4 @@
 const adaptiveNameTask = (str) =>
   str.toLowerCase().replaceAll(" ", "_") + ".js";
 
-console.log(adaptiveNameTask("5 kyu Simple Pig Latin"));
+console.log(adaptiveNameTask("7 kyu Trimming a string"));

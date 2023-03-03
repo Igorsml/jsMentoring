@@ -1,27 +1,29 @@
 class MySet {
-  constructor(iterableValue, size = 0) {
+  constructor(iterableValue) {
     if (iterableValue === null) return;
-    this._Set = {};
+    this.size = 0;
 
     for (const value in iterableValue) {
-      if (value in this._Set) {
+      if (value in this) {
         continue;
       } else {
-        this._Set[value] = value;
+        this[value] = iterableValue[value];
       }
     }
+    this._length = 0;
 
-    this.size = Object.keys(this).length;
+    return this;
   }
 
   add(value) {
     if (value === null) return;
 
-    const result = Array.from(arguments)
+    this = Array.from(arguments)
       .map((value) => value)
       .filter((value, index, self) => self.indexOf(value) === index);
 
-    return { ...this, ...result };
+    this.size += this.length;
+    return this;
   }
 
   has() {
@@ -56,20 +58,20 @@ let set = new MySet([1, 2, 1, 1]);
 
 // Cat cross-check:
 // #1 доступ к свойствам из класса Set() за пределами класса. Нарушение принципа инкапсуляции.
-// console.log(set.iterableValue); // undefined
-// console.log(set.length); // undefined
-// console.log(set); // MySet { _Set: { '0': 0, '1': 1 } }
-// console.log(set.size); // 2
+console.log(set.iterableValue); // undefined
+console.log(set.length); // undefined
+console.log(set); // MySet { _Set: { '0': 0, '1': 1 } }
+console.log(set.size); // 2
 
 // #2
 // console.log("clear:", set.clear()); // undefined
 // console.log(set.size); // 0
 
 // #3
-let setEmpty = new MySet();
-console.log("test null:", setEmpty.add(null)); // undefined
-console.log("test add:", setEmpty.add(1, 1, 2));
-console.log(setEmpty.size); // 1
+// let setEmpty = new MySet();
+// console.log("test null:", setEmpty.add(null)); // undefined
+// console.log("test add:", setEmpty.add(1, 1, 2));
+// console.log(setEmpty.size); // 2
 
 // end cross-check
 
