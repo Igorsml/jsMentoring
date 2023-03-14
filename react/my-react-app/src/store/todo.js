@@ -1,0 +1,42 @@
+import { makeAutoObservable } from "mobx";
+
+class Todo {
+  todosLimit = 12;
+  todos = [
+    { id: 1, title: "breath", completed: true },
+    { id: 2, title: "end sprint", completed: false },
+    { id: 3, title: "walk with dogs", completed: true },
+  ];
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  addTodo(todo) {
+    this.todos.push(todo);
+  }
+
+  removeTodo(id) {
+    this.todos = this.todos.filter((todo) => todo.id !== id);
+  }
+
+  completeTodo(id) {
+    console.log("complete");
+    this.todos = this.todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+  }
+
+  // в mobx не нужно доп. обработки для асинхронных action'ов, в redux нужно устанавливать redux fang, redux saga
+  fetchTodos() {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((response) => response.json())
+      .then((json) => {
+        this.todos = [...this.todos, ...json];
+        this.todos.length = this.todosLimit;
+      });
+  }
+}
+
+const todo = new Todo();
+export default todo;
