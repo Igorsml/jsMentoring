@@ -9,12 +9,10 @@ class Counter {
 
   increment() {
     this.count += 1;
-    console.log("this.count:", this.count);
   }
 
   decrement() {
     this.count -= 1;
-    console.log("this.count:", this.count);
   }
 
   get total() {
@@ -22,4 +20,5 @@ class Counter {
   }
 }
 
-export default new Counter();
+const counter = new Counter();
+export default counter;

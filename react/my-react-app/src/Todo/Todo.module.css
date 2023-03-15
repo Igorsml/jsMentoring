@@ -1,0 +1,51 @@
+
+.btn {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(56, 56, 56);
+  width: 50%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity .2s linear;
+  margin-bottom: 2em;
+}
+
+.btn:hover {
+  opacity: .8;
+  transition: opacity .2s linear;
+}
+
+.btn:active {
+  opacity: 1;
+}
+
+.deleteButton {
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(56, 56, 56);
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity .2s linear;
+  margin: 0 0 1em 1em;
+}
+
+.deleteButton:hover {
+  opacity: .8;
+  transition: opacity .2s linear;
+}
+
+.deleteButton:active {
+  opacity: 1;
+}
+
+input.largerCheckbox {
+  transform : scale(1.7);
+  margin: 1em;
+}

@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 export const Counter = observer(() => {
   return (
     <div className={css.counter}>
-      {`Count: ${counter.total}`}
+      {counter.total}
       <div className={css.counterButtons}>
         <button className={css.btn} onClick={() => counter.decrement()}>
           -
