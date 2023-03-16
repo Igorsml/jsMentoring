@@ -7,9 +7,14 @@ export const Todo = observer(() => {
   console.log("render");
   return (
     <div>
-      <button className={css.btn} onClick={() => todo.fetchTodos()}>
-        Get todo's
-      </button>
+      <div className={css.btnWrap}>
+        <button className={css.btn} onClick={() => todo.fetchTodos()}>
+          Get todo's
+        </button>
+        <button className={css.btn} onClick={() => todo.deleteAllTodos()}>
+          Remove todo's
+        </button>
+      </div>
       {todo.todos.map((todoElem) => (
         <div className="todo" key={todoElem.id}>
           <input
