@@ -26,6 +26,10 @@ class Todo {
     );
   }
 
+  deleteAllTodos() {
+    this.todos = [];
+  }
+
   // в mobx не нужно доп. обработки для асинхронных action'ов, в redux нужно устанавливать redux fang, redux saga
   fetchTodos() {
     fetch("https://jsonplaceholder.typicode.com/todos")
