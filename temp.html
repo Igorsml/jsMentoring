@@ -1,0 +1,87 @@
+<div class="product-wrap">
+  <div
+    class="prod-block {% unless wide %}{% cycle 'group1' : '','','side' %}{% else %}{% cycle 'group1' : '','','','side' %}{% endunless %}">
+    {% include 'lights' %}
+    {% comment %}
+    {% if product.properties.status.characteristics.size %}
+    <span class="status"><span>{{ product.properties.status.characteristics.first.name }}</span></span>
+    {% endif %}
+    {% endcomment %}
+    <a href="{{product.url}}" class="img">
+      <img src="{{product.first_image.medium_url}}" />
+    </a>
+    <div class="prod-category">
+      <p class="title">
+        <a href="{{product.url}}">
+          {{product.title}}
+        </a>
+      </p>
+      {% comment %}
+      <div class="descr">
+        {% if template == 'product' %}
+        {{product.description }}
+        {% else %}
+
+        {% endif %}
+      </div>
+      {% endcomment %}
+      <div class="buyzone">
+        <p class="price fl product_price">{{product.sale_price | money }}
+          <!--<span
+					style="font-weight:normal;">руб.</span> -->
+        </p>
+        {% if product.old_price > product.variants.first.price %}
+        <p class="old-price fl">{{product.old_price | money }}
+          <!--<span
+					style="font-weight:normal;">руб.</span> -->
+        </p>
+        {% endif %}
+      </div>
+
+      <div class="ctg-buy-wrap">
+        <form action="{{ cart_url }}" method="post" data-product-id="{{ product.id }}" id="order{{product.id}}">
+          <input type="hidden" class="buy buybutton" />
+          <a onclick="roistat.event.send('collection_cart_add', {'name':'{{product.title}}'})"
+            href="javascript:void(0);" {% if product.available %}title="Добавить в корзину (товар в наличии)" {% else
+            %}title="Доступно под заказ" {% endif %} data-item-add class="ctgbuy
+					{% if product.available %}{% else %}not_aval{% endif %}" {% if product.related_products.size> 0 %}data-rel="{% for
+            prod in product.related_products %}{{ prod.id }}{% unless forloop.last %},{% endunless %}{% endfor %}"
+            {% endif %}></a>
+          <input type="hidden" class="qty" name="quantity" value="1" />
+          <input type="hidden" name="variant_id" value="{{ product.variants.first.id }}" />
+          <span class="oneclick ">
+            <a onclick="roistat.event.send('collection_click_one_click', {'name':'{{product.title}}'})"
+              href="javascript:void(0);" data-set="oneclick" data-buy data-item-add class="ctgclick" {% if
+              product.related_products.size> 0 %}data-rel="{% for prod in
+              product.related_products %}{{ prod.id }}{%
+              unless forloop.last %},{% endunless %}{% endfor %}"{% endif %}></a>
+          </span>
+        </form>
+      </div>
+
+      <div class="clear"></div>
+      <div style="position: relative;margin-left:-2px; display:flex; justify-content: space-between;" class="rait">
+        <a href="{{product.url}}#mc-review-view" class="lnk_rating">
+        </a>
+        <span class="crr-cnt" data-crr-chan="{{product.id}}" style="height: 28px;"></span>
+        <a class="sku small">Артикул: <span class="sku-field" id="sku-field">{{product.sku}}</span></a>
+      </div>
+      <div class="clear"></div>
+      <div class="brief_buts">
+        <a href="/page/wishlist" class="but_wishlist wishlistcat fl" {% comment
+          %}onclick="saveProduct('{{product.id}}');return false;" {% endcomment %}
+          data-id="{{product.id}}"><i></i><span>В закладки</span></a>
+
+
+        <a class="tocompare fr" href="/compares" style="display: none; border-color:rgb(239, 3, 3);"
+          rel="{{ product.id }}" class="lolwrap"><i></i><span>К сравнению</span></a>
+        <a href="#" class="compare fr compared leeeest" href="javascript:;"
+          rel="{{ product.id }}"><i></i><span>Сравнить</span></a>
+        <div class="clear"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
