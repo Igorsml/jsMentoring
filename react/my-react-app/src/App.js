@@ -3,6 +3,7 @@ import "./App.css";
 import "./index.css";
 import { Counter } from "./Counter/Counter";
 import { Todo } from "./Todo/Todo";
+import { Timer } from "./Timer/Timer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Counter />
         <h2>Todo:</h2>
         <Todo />
+        <Timer />
       </header>
     </div>
   );
