@@ -1,0 +1,22 @@
+body {
+  text-align: center;
+}
+
+.form {
+  width: 100vw;
+  height: 300px;
+  border: 1px solid #ccc;
+}
+
+.div {
+  width: 80vw;
+  height: 200px;
+  border: 1px solid #ccc;
+}
+
+.p {
+  display: block;
+  width: 60vw;
+  height: 100px;
+  border: 1px solid #ccc;
+}

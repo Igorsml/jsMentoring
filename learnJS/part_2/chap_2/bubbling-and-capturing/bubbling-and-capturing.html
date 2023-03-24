@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test bubbling</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <!-- p → div → form -->
+  <form onclick="console.log('form')" class='form' action="">
+    form
+    <div onclick="console.log('div')" class=" div">
+      div
+      <p onclick="console.log('p')" class="p">p</p>
+    </div>
+  </form>
+
+  <div onclick="console.log('div')" class=" div">
+    <p onclick="console.log('p')" class="p">
+
+      <!-- focus не всплывает,  -->
+      <input onclick="getFocus(); console.log('focus')" class='textField' type="password" value='test'>
+      <button class="testStopPropagation">Click to set focus</button>
+    </p>
+  </div>
+
+  <div class="testCapturingDiv ">
+    <button class="testCapturing">Send</button>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+
+</html>
