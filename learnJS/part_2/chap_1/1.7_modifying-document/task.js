@@ -1,37 +1,62 @@
 /* #1 У нас есть пустой DOM-элемент elem и строка text.
 Какие из этих 3-х команд работают одинаково? */
 
-elem.append(document.createTextNode(text)); // this
-elem.innerHTML = text;
-elem.textContent = text; // this
+// elem.append(document.createTextNode(text)); // this
+// elem.innerHTML = text;
+// elem.textContent = text; // this
 
 // Task #2 Создайте функцию clear(elem), которая удаляет всё содержимое из elem.
-function clear(elem) {
-  /* ваш код */
+const olTask = document.querySelectorAll("#elem > li");
+
+function clear(elements) {
+  for (const el of elements) {
+    el.remove();
+  }
 }
 
-clear(elem); // очищает список
+clear(olTask); // очищает список
+
+// ответы с LJ
+function clear(elem) {
+  while (elem.firstChild) {
+    elem.firstChild.remove();
+  }
+}
+
+function clear(elem) {
+  elem.innerHTML = "";
+}
 
 /* Task #3 Почему остаётся "aaa"?
 В примере ниже вызов table.remove() удаляет таблицу из документа.
 Но если вы запустите его, вы увидите, что текст "aaa" все еще виден.
 Почему так происходит? */
-console.log(table); // таблица, как и должно быть
 
 table.remove();
-// почему в документе остался текст "ааа"?
+// почему в документе остался текст "ааа"? Answer: aaa без тега, ошибка
 
 /* Task #4 
 Напишите интерфейс для создания списка.
-
-Для каждого пункта:
-
 Запрашивайте содержимое пункта у пользователя с помощью prompt.
 Создавайте элемент <li> и добавляйте его к <ul>.
 Продолжайте до тех пор, пока пользователь не отменит ввод (нажатием клавиши Esc или введя пустую строку).
 Все элементы должны создаваться динамически.
-
 Если пользователь вводит HTML-теги, они должны обрабатываться как текст. */
+
+function createList() {
+  let answers;
+
+  answers = prompt("Enter item list");
+  table.after(answers);
+
+  if (!answers) {
+    alert("cancelled");
+  }
+
+  alert("Empty input, please re-try");
+}
+
+createList();
 
 /* Task #5 
 Напишите функцию createTree, которая создаёт вложенный список ul/li из объекта. 
@@ -53,6 +78,10 @@ let data = {
     },
   },
 };
+
+function createTree(container, data) {
+  //
+}
 
 let container = document.getElementById("container");
 createTree(container, data); // создаёт дерево в контейнере
