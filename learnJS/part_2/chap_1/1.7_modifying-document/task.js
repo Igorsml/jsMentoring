@@ -42,25 +42,26 @@ table.remove();
 Продолжайте до тех пор, пока пользователь не отменит ввод (нажатием клавиши Esc или введя пустую строку).
 Все элементы должны создаваться динамически.
 Если пользователь вводит HTML-теги, они должны обрабатываться как текст. */
+const task4List = document.querySelector("#task4");
 
 function createList() {
-  let answers;
+  while (true) {
+    let answers = prompt("Enter item list", "");
+    if (answers === null) {
+      return;
+    }
 
-  answers = prompt("Enter item list");
-  table.after(answers);
-
-  if (!answers) {
-    alert("cancelled");
+    let newLi = document.createElement("li");
+    newLi.textContent = answers;
+    task4List.append(newLi);
   }
-
-  alert("Empty input, please re-try");
 }
 
-createList();
+// createList();
 
 /* Task #5 
-Напишите функцию createTree, которая создаёт вложенный список ul/li из объекта. 
-Например: */
+Напишите функцию createTree, которая создаёт вложенный список ul/li из объекта. */
+
 let data = {
   Рыбы: {
     форель: {},
@@ -78,12 +79,27 @@ let data = {
     },
   },
 };
+console.log(data);
+let container = document.getElementById("task5");
 
 function createTree(container, data) {
-  //
+  for (const elem in data) {
+    let newLi = document.createElement("li");
+    newLi.textContent = elem;
+    container.append(newLi);
+
+    if (typeof data[elem] === "object") {
+      let newUl = document.createElement("ul");
+      newUl.textContent = data[elem];
+      container.append(newUl);
+      //   let foundValue = createTree(elem, data);
+      //   console.log(foundValue);
+      //   if (foundValue) {
+      //     return foundValue;
+    }
+  }
 }
 
-let container = document.getElementById("container");
 createTree(container, data); // создаёт дерево в контейнере
 
 /* Выберите один из двух способов решения этой задачи:
