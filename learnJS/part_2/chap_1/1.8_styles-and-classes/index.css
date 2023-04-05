@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+}
+
+.base {
+  height: 100vh;
+  transition: 500ms;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 3px;
+  background: rgb(49, 49, 49);
+}
+
+.themeButton {
+  font-size: 2em;
+  font-weight: 600;
+  color: rgb(56, 56, 56);
+  min-width: 200px;
+  width: 100vw;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity .2s linear;
+}
+
+.themeButton:hover {
+  opacity: .8;
+  transition: opacity .2s linear;
+}
+
+.themeButton:active {
+  opacity: 1;
+}
+
+.lightTheme {
+  background: rgb(192, 192, 192);
+}
+
+.test-inline {
+  border-radius: 1em;
+}
