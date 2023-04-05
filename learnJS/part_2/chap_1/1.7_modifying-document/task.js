@@ -1,22 +1,28 @@
 /* #1 У нас есть пустой DOM-элемент elem и строка text.
 Какие из этих 3-х команд работают одинаково? */
 
-elem.append(document.createTextNode(text)); // this
-elem.innerHTML = text;
-elem.textContent = text; // this
+// elem.append(document.createTextNode(text)); // this
+// elem.innerHTML = text;
+// elem.textContent = text; // this
 
 // Task #2 Создайте функцию clear(elem), которая удаляет всё содержимое из elem.
-function clear(elem) {
-  /* ваш код */
-}
+const ulTask = document.getElementById("elem");
+console.log(ulTask);
 
-clear(elem); // очищает список
+function clear(elem) {
+  console.log("work", elem.length);
+  for (let li of elem) {
+    console.log("test", li);
+    li.remove();
+  }
+}
+clear(ulTask); // очищает список
 
 /* Task #3 Почему остаётся "aaa"?
 В примере ниже вызов table.remove() удаляет таблицу из документа.
 Но если вы запустите его, вы увидите, что текст "aaa" все еще виден.
 Почему так происходит? */
-console.log(table); // таблица, как и должно быть
+// console.log(table); // таблица, как и должно быть
 
 table.remove();
 // почему в документе остался текст "ааа"?
@@ -55,7 +61,7 @@ let data = {
 };
 
 let container = document.getElementById("container");
-createTree(container, data); // создаёт дерево в контейнере
+// createTree(container, data); // создаёт дерево в контейнере
 
 /* Выберите один из двух способов решения этой задачи:
 
