@@ -6,6 +6,7 @@
 // elem.textContent = text; // this
 
 // Task #2 Создайте функцию clear(elem), которая удаляет всё содержимое из elem.
+<<<<<<< HEAD
 const ulTask = document.getElementById("elem");
 console.log(ulTask);
 
@@ -17,31 +18,68 @@ function clear(elem) {
   }
 }
 clear(ulTask); // очищает список
+=======
+const olTask = document.querySelectorAll("#elem > li");
+
+function clear(elements) {
+  for (const el of elements) {
+    el.remove();
+  }
+}
+
+clear(olTask); // очищает список
+
+// ответы с LJ
+function clear(elem) {
+  while (elem.firstChild) {
+    elem.firstChild.remove();
+  }
+}
+
+function clear(elem) {
+  elem.innerHTML = "";
+}
+>>>>>>> fe1378693c61283b5603aa79e1e98b9b2064dd03
 
 /* Task #3 Почему остаётся "aaa"?
 В примере ниже вызов table.remove() удаляет таблицу из документа.
 Но если вы запустите его, вы увидите, что текст "aaa" все еще виден.
 Почему так происходит? */
+<<<<<<< HEAD
 // console.log(table); // таблица, как и должно быть
+=======
+>>>>>>> fe1378693c61283b5603aa79e1e98b9b2064dd03
 
 table.remove();
-// почему в документе остался текст "ааа"?
+// почему в документе остался текст "ааа"? Answer: aaa без тега, ошибка
 
 /* Task #4 
 Напишите интерфейс для создания списка.
-
-Для каждого пункта:
-
 Запрашивайте содержимое пункта у пользователя с помощью prompt.
 Создавайте элемент <li> и добавляйте его к <ul>.
 Продолжайте до тех пор, пока пользователь не отменит ввод (нажатием клавиши Esc или введя пустую строку).
 Все элементы должны создаваться динамически.
-
 Если пользователь вводит HTML-теги, они должны обрабатываться как текст. */
+const task4List = document.querySelector("#task4");
+
+function createList() {
+  while (true) {
+    let answers = prompt("Enter item list", "");
+    if (answers === null) {
+      return;
+    }
+
+    let newLi = document.createElement("li");
+    newLi.textContent = answers;
+    task4List.append(newLi);
+  }
+}
+
+// createList();
 
 /* Task #5 
-Напишите функцию createTree, которая создаёт вложенный список ul/li из объекта. 
-Например: */
+Напишите функцию createTree, которая создаёт вложенный список ul/li из объекта. */
+
 let data = {
   Рыбы: {
     форель: {},
@@ -59,9 +97,33 @@ let data = {
     },
   },
 };
+console.log(data);
+let container = document.getElementById("task5");
 
+function createTree(container, data) {
+  for (const elem in data) {
+    let newLi = document.createElement("li");
+    newLi.textContent = elem;
+    container.append(newLi);
+
+    if (typeof data[elem] === "object") {
+      let newUl = document.createElement("ul");
+      newUl.textContent = data[elem];
+      container.append(newUl);
+      //   let foundValue = createTree(elem, data);
+      //   console.log(foundValue);
+      //   if (foundValue) {
+      //     return foundValue;
+    }
+  }
+}
+
+<<<<<<< HEAD
 let container = document.getElementById("container");
 // createTree(container, data); // создаёт дерево в контейнере
+=======
+createTree(container, data); // создаёт дерево в контейнере
+>>>>>>> fe1378693c61283b5603aa79e1e98b9b2064dd03
 
 /* Выберите один из двух способов решения этой задачи:
 
