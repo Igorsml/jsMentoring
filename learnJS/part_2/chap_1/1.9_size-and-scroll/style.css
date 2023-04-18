@@ -12,3 +12,14 @@
   padding: 20px;
   overflow: auto;
 }
+
+#field {
+  width: 200px;
+  border: 10px groove black;
+  background-color: #bdbdbd;
+  position: relative;
+}
+
+#ball {
+  position: absolute;
+}

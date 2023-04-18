@@ -6,17 +6,18 @@ P.S. Проверьте: если прокрутки нет вообще или 
 const result = document.querySelector("#task1");
 
 function getScrollBottom() {
-  let scrollBottom = 0;
-  console.log("scrollHeight:", children.scrollHeight);
-  // console.log("children.scrollTop:", children.scrollTop);
-  console.log("children.clientHeight:", children.clientHeight);
+  let scrollBottom = children.scrollHeight - children.clientHeight + 1;
 
-  if (children.scrollHeight === children.clientHeight) {
+  if (scrollBottom === 1) {
+    console.log("work");
+    result.innerHTML = `<p>ScrollBottom: 0</p>`;
+  } else {
     result.innerHTML = `<p>ScrollBottom: ${scrollBottom}</p>`;
   }
 
   children.addEventListener("scroll", (event) => {
-    scrollBottom = children.scrollHeight - children.scrollTop;
+    scrollBottom =
+      children.scrollHeight - children.scrollTop - children.clientHeight + 1;
 
     result.innerHTML = `<p>ScrollBottom: ${scrollBottom}</p>`;
   });
@@ -32,6 +33,21 @@ console.log("================");
 Для Windows она обычно колеблется от 12px до 20px. Если браузер не выделяет место под полосу прокрутки (так тоже бывает, она может быть прозрачной над текстом), тогда значение может быть 0px.
 
 P.S. Ваш код должен работать в любом HTML-документе, независимо от его содержимого. */
+console.log("scrollbar width:", children.offsetWidth - children.clientWidth); // 27px
+
+// создадим элемент с прокруткой
+let div = document.createElement("div");
+
+div.style.overflowY = "scroll";
+div.style.width = "50px";
+div.style.height = "50px";
+
+children.append(div);
+let scrollWidth = div.offsetWidth - div.clientWidth;
+
+div.remove();
+
+console.log(scrollWidth); // 17px
 
 /* Поместите мяч в центр поля
 Каковы координаты центра поля?
@@ -39,6 +55,16 @@ P.S. Ваш код должен работать в любом HTML-докуме
 Элемент должен позиционироваться за счёт JavaScript, а не CSS.
 Код должен работать с любым размером мяча (10, 20, 30 пикселей) и любым размером поля без привязки к исходным значениям.
 P.S. Да, центрирование можно сделать при помощи чистого CSS, но задача именно на JavaScript. Далее будут другие темы и более сложные ситуации, когда JavaScript будет уже точно необходим, это – своего рода «разминка». */
+const ball = document.querySelector("#ball");
+const field = document.querySelector("#field");
+
+const positionBallHeight = field.clientHeight / 2;
+const positionBallWidth = field.clientWidth / 2;
+const ballWidth = ball.clientWidth / 2;
+const ballHeight = ball.clientHeight / 2;
+
+ball.style.top = positionBallHeight - ballWidth + "px";
+ball.style.left = positionBallWidth - ballHeight + "px";
 
 /* В чём отличие между getComputedStyle(elem).width и elem.clientWidth?
 Укажите хотя бы 3 отличия, лучше – больше. */
