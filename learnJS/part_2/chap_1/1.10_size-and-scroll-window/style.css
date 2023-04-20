@@ -1,0 +1,54 @@
+.container {
+  height: 250vh;
+}
+
+.resizeInfo {
+  position: fixed;
+
+}
+
+.buttons-container {
+  display: flex;
+  top: 30%;
+}
+
+.back-to-top-button {
+  position: fixed;
+  bottom: 150px;
+  right: 58px;
+  opacity: 0;
+  transition: background-color .3s,
+    opacity .5s, visibility .5s;
+  background-color: #2fb644;
+  border-radius: 5px;
+  font-family: Arial;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1em;
+  cursor: pointer;
+  border: none;
+  padding: 14px 25px;
+}
+
+.back-to-top-button::after {
+  content: "\f077";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 50px;
+  color: #fff;
+}
+
+.back-to-top-button:hover {
+  background-color: #34ca4c;
+}
+
+.back-to-top-button:active {
+  background-color: #48d05d;
+}
+
+.show {
+  opacity: 1;
+  display: block;
+}
