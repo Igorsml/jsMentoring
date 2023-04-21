@@ -4,7 +4,6 @@
 
 .resizeInfo {
   position: fixed;
-
 }
 
 .buttons-container {
@@ -15,19 +14,16 @@
 .back-to-top-button {
   position: fixed;
   bottom: 150px;
-  right: 58px;
+  right: 55px;
   opacity: 0;
-  transition: background-color .3s,
-    opacity .5s, visibility .5s;
+  transition: background-color .3s, opacity .5s, visibility .5s;
   background-color: #2fb644;
-  border-radius: 5px;
-  font-family: Arial;
-  color: #fff;
+  border-radius: 50%;
   font-weight: 700;
-  font-size: 1em;
+  font-size: 1.5em;
   cursor: pointer;
   border: none;
-  padding: 14px 25px;
+  padding: 5px 10px;
 }
 
 .back-to-top-button::after {
@@ -36,7 +32,6 @@
   font-weight: normal;
   font-style: normal;
   font-size: 2em;
-  line-height: 50px;
   color: #fff;
 }
 
@@ -50,5 +45,4 @@
 
 .show {
   opacity: 1;
-  display: block;
 }

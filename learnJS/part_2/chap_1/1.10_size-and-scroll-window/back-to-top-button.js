@@ -1,6 +1,7 @@
 const backToTopBtn = document.querySelector(".back-to-top-button");
 
 function scrollToTop() {
+  console.log("click");
   window.addEventListener("scroll", (e) => {
     window.pageYOffset > 500
       ? backToTopBtn.classList.add("show")
