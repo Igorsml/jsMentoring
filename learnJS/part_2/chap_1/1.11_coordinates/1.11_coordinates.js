@@ -11,17 +11,29 @@ getBoundingClientRect();
 // коордианты могут быть с десятичной частью и отрицательными, если elem ушел вверх за пределы окна (elem.getBoundingClientRect().top)
 
 // elementFromPoint(x, y)
-const buttonFromPoint = document.elementFromPoint(0, 0);
-console.log("getBoundingClientRect:", buttonFromPoint.getBoundingClientRect());
-console.log("buttonFromPoint:", buttonFromPoint);
+let pos;
 
-// function changeText(newText) {
-//   console.log("work");
+document.addEventListener("mousemove", ({ pageX, pageY }) => {
+  pos = `(${pageX}, ${pageY})`;
+});
 
-//   if (buttonFromPoint.value === "Initial text") {
-//     console.log("if");
-//     buttonFromPoint.value = newText;
-//   } else {
-//     buttonFromPoint.value = "Initial text";
-//   }
-// }
+console.log(document.elementFromPoint(20, 40)); // outer
+console.log(document.elementFromPoint(45, 65)); // inner
+console.log(document.elementsFromPoint(20, 40)); // [div.outer, div.testFromPoint, div.container, body, html]
+console.log(document.elementFromPoint(4500, 65)); // null
+
+// css координаты соответствуют position: fixed | координаты документа position: absolute;
+
+// document.addEventListener(
+//   "click",
+//   (event) => {
+//     console.log("Позиция x относительно документа:", event.pageX);
+//     console.log("Позиция y относительно документа:", event.pageY);
+
+//     console.log("Позиция x относительно экрана:", event.clientX);
+//     console.log("Позиция y относительно экрана:", event.clientY);
+//   },
+//   false
+// );
+
+// { x: ..., y: ..., top: ..., left: ..., right: ..., bottom: ... }

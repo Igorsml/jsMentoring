@@ -1,9 +1,7 @@
 function getHappyNumber(num) {
   let obj = {};
   let resultArr = [];
-  const arr = String(num)
-    .split("")
-    .sort((a, b) => a - b);
+  const arr = String(num).split("");
 
   arr.forEach((elem) => (obj[elem] = (obj[elem] || 0) + 1));
 

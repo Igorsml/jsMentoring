@@ -6,7 +6,7 @@
 // elem.textContent = text; // this
 
 // Task #2 Создайте функцию clear(elem), которая удаляет всё содержимое из elem.
-<<<<<<< HEAD
+
 const ulTask = document.getElementById("elem");
 console.log(ulTask);
 
@@ -18,7 +18,7 @@ function clear(elem) {
   }
 }
 clear(ulTask); // очищает список
-=======
+
 const olTask = document.querySelectorAll("#elem > li");
 
 function clear(elements) {
@@ -39,16 +39,13 @@ function clear(elem) {
 function clear(elem) {
   elem.innerHTML = "";
 }
->>>>>>> fe1378693c61283b5603aa79e1e98b9b2064dd03
 
 /* Task #3 Почему остаётся "aaa"?
 В примере ниже вызов table.remove() удаляет таблицу из документа.
 Но если вы запустите его, вы увидите, что текст "aaa" все еще виден.
 Почему так происходит? */
-<<<<<<< HEAD
+
 // console.log(table); // таблица, как и должно быть
-=======
->>>>>>> fe1378693c61283b5603aa79e1e98b9b2064dd03
 
 table.remove();
 // почему в документе остался текст "ааа"? Answer: aaa без тега, ошибка
@@ -118,12 +115,10 @@ function createTree(container, data) {
   }
 }
 
-<<<<<<< HEAD
 let container = document.getElementById("container");
 // createTree(container, data); // создаёт дерево в контейнере
-=======
+
 createTree(container, data); // создаёт дерево в контейнере
->>>>>>> fe1378693c61283b5603aa79e1e98b9b2064dd03
 
 /* Выберите один из двух способов решения этой задачи:
 

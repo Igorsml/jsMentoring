@@ -17,12 +17,14 @@ const str =
 function setData(str) {
   let arrFromStr = str.split("&");
   let objResult = {};
+  let splittedArr = arrFromStr.join().split("");
   console.log(arrFromStr);
 
-  for (let i = 0; i < arrFromStr.length; i++) {
-    console.log(arrFromStr[i].substring(arrFromStr[i].lastIndexOf(".") + 1));
+  for (let i = 0; i < splittedArr.length; i++) {
+    if (splittedArr[i].match(".")) {
+      objResult[arrFromStr[i]] = arrFromStr[i];
+    }
   }
-
   return objResult;
 }
 
