@@ -63,15 +63,28 @@ document.addEventListener(
 "bottom" – расположить elem прямо под anchor
 Она используется внутри функции showNote(anchor, position, html), которая уже есть в исходном коде задачи. Она создаёт и показывает элемент-«заметку» с текстом html на заданной позиции position рядом с элементом anchor. */
 function positionAt(anchor, position, elem) {
-  if (anchor === "top")
-    function showNote(anchor, position, html) {
-      let note = document.createElement("div");
-      note.className = "note";
-      note.innerHTML = html;
-      document.body.append(note);
+  const coords = anchor.getBoundingClientRect();
+  console.log(coords);
 
-      positionAt(anchor, position, note);
-    }
+  if (position === "top") {
+    elem.style.top = `${coords.top - elem.offsetHeight}px`;
+    elem.style.left = `${coords.left}px`;
+  } else if (position === "bottom") {
+    elem.style.top = `${coords.bottom}px`;
+    elem.style.left = `${coords.left}px`;
+  } else {
+    elem.style.top = `${coords.top}px`;
+    elem.style.left = `${coords.right}px`;
+  }
+}
+
+function showNote(anchor, position, html) {
+  let note = document.createElement("div");
+  note.className = "note";
+  note.innerHTML = html;
+  document.body.append(note);
+
+  positionAt(anchor, position, note);
 }
 
 // test it
@@ -88,6 +101,49 @@ showNote(blockquote, "bottom", "note below");
 Это предотвратит расхождение элементов при прокрутке страницы.
 
 Используйте решение предыдущего задания для начала. Чтобы проверить решение в условиях с прокруткой, добавьте стиль элементу <body style="height: 2000px">. */
+function positionAt(anchor, position, elem) {
+  const coords = anchor.getBoundingClientRect();
+  elem.style.cssText = "position: absolute;";
+
+  if (position === "top") {
+    elem.style.top = `${coords.top - elem.offsetHeight}px`;
+    elem.style.left = `${coords.left}px`;
+  } else if (position === "bottom") {
+    elem.style.top = `${coords.bottom}px`;
+    elem.style.left = `${coords.left}px`;
+  } else if (position === "top-in") {
+    elem.style.top = `${coords.top}px`;
+    elem.style.left = `${coords.left}px`;
+  } else if (position === "right-in") {
+    elem.style.top = `${coords.top}px`;
+    elem.style.left = `${coords.right - elem.offsetWidth}px`;
+  } else if (position === "bottom-in") {
+    elem.style.top = `${coords.bottom - elem.offsetHeight}px`;
+    elem.style.left = `${coords.left}px`;
+  } else {
+    elem.style.top = `${coords.top}px`;
+    elem.style.left = `${coords.right}px`;
+  }
+}
+
+function showNote(anchor, position, html) {
+  let note = document.createElement("div");
+  note.className = "note";
+  note.innerHTML = html;
+  document.body.append(note);
+
+  positionAt(anchor, position, note);
+}
+
+// test it
+let blockquote2 = document.querySelector("blockquote");
+
+showNote(blockquote, "top", "note above");
+showNote(blockquote, "right", "note at the right");
+showNote(blockquote, "bottom", "note below");
+showNote(blockquote, "top-in", "top-in");
+showNote(blockquote, "right-in", "right-in");
+showNote(blockquote, "bottom-in", "bottom-in");
 
 /* Task #4
 Расположите заметку внутри элемента (абсолютное позиционирование)
@@ -98,3 +154,5 @@ showNote(blockquote, "bottom", "note below");
 top-out, right-out, bottom-out – работают так же, как раньше, они вставляют elem сверху/справа/снизу anchor.
 top-in, right-in, bottom-in – вставляют elem внутрь anchor: приклеивают его к верхнему/правому/нижнему краю.
 Например: */
+
+// result: https://prnt.sc/OAy8Pv9bUeEt
