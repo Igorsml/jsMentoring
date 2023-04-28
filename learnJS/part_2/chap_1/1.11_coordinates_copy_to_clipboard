@@ -1,0 +1,28 @@
+                {% if product.sku %}
+                <div style="display: flex; font-size: 14px; color: #848488; width: 100%; justify-content: flex-end;">
+                  (арт.&nbsp;
+                  <div onclick="showPopup()" class="popup" id="sku-field">
+                    <span style="font-size: 14px;" onclick="copyToClipboard('demo{{product.id}}')">{{ product.sku
+                      }}</span>
+                    <span id="popup" class="popuptext">Скопировано</span>)
+                  </div>
+                </div>
+
+                <script>
+                  function copyToClipboard() {
+                    document.execCommand("copy");
+                  }
+                  span.addEventListener("copy", (event) => {
+                    event.preventDefault();
+                    if (event.clipboardData) {
+                      event.clipboardData.setData("text/plain", span.textContent);
+                    }
+                  });
+
+                  function showPopup() {
+                    const span = document.querySelector("#popup");
+                    span.classList.add("show");
+                    setTimeout(() => span.classList.remove("show"), 1e3);
+                  }
+                </script>
+                {% endif %}
