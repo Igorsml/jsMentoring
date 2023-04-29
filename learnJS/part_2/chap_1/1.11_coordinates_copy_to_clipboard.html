@@ -1,4 +1,3 @@
-
                 {% if product.sku %}
                 <div style="display: flex; font-size: 14px; color: #848488; width: 100%; justify-content: flex-end;">
                   (арт.&nbsp;
@@ -12,7 +11,7 @@
                 <script>
                   $('.click').on('click', function () {
                     value = $(this).data('clipboard-text');
-                    var $temp = $("<input>");
+                    const $temp = $("<input>");
                     $("body").append($temp);
                     $temp.val(value).select();
                     document.execCommand("copy");
