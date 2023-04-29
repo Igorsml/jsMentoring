@@ -1,23 +1,28 @@
+
                 {% if product.sku %}
                 <div style="display: flex; font-size: 14px; color: #848488; width: 100%; justify-content: flex-end;">
                   (арт.&nbsp;
                   <div onclick="showPopup()" class="popup" id="sku-field">
-                    <span style="font-size: 14px;" onclick="copyToClipboard('demo{{product.id}}')">{{ product.sku
-                      }}</span>
+                    <span class="click" id="variant-sku" style="font-size: 14px;" data-clipboard-text="{{ product.sku
+                    }}">{{ product.sku}}</span>
                     <span id="popup" class="popuptext">Скопировано</span>)
                   </div>
                 </div>
 
                 <script>
-                  function copyToClipboard() {
+                  $('.click').on('click', function () {
+
+                    value = $(this).data('clipboard-text');
+
+                    var $temp = $("<input>");
+                    $("body").append($temp);
+
+                    $temp.val(value).select();
+
                     document.execCommand("copy");
-                  }
-                  span.addEventListener("copy", (event) => {
-                    event.preventDefault();
-                    if (event.clipboardData) {
-                      event.clipboardData.setData("text/plain", span.textContent);
-                    }
-                  });
+                    $temp.remove();
+
+                  })
 
                   function showPopup() {
                     const span = document.querySelector("#popup");
