@@ -4,13 +4,13 @@ function palindrome(str) {
   return str === reverseStr ? true : false;
 }
 
-// console.log(palindrome("12321")); // true;
-// console.log(palindrome("aboba")); // true
-// console.log(palindrome("anna")); // true;
-// console.log(palindrome("ya ebal ,a, labe ay")); // true;
-// console.log(palindrome(".!!.")); // true;
-// console.log(palindrome("123456")); // false;
-// console.log(palindrome("walter")); // false;
+console.log(palindrome("12321")); // true;
+console.log(palindrome("aboba")); // true
+console.log(palindrome("anna")); // true;
+console.log(palindrome("ya ebal ,a, labe ay")); // true;
+console.log(palindrome(".!!.")); // true;
+console.log(palindrome("123456")); // false;
+console.log(palindrome("walter")); // false;
 
 // Задача 2. Анаграмма - перестановка букв слова, что бы в результате получить другое слово
 function anagram(s1, s2) {
@@ -23,14 +23,14 @@ function anagram(s1, s2) {
   return sortedStr === sortedStr2 ? true : false;
 }
 
-// console.log(anagram("", "")); // true
-// console.log(anagram("123", "123")); // true
-// console.log(anagram("aboba", "baoab")); // true
-// console.log(anagram("bumdle", "dumble")); // true
-// console.log(anagram("a", "")); // false
-// console.log(anagram("ab", "a")); // false
-// console.log(anagram("ab", "cd")); // false
-// console.log(anagram("codewars", "hackerrank")); //false
+console.log(anagram("", "")); // true
+console.log(anagram("123", "123")); // true
+console.log(anagram("aboba", "baoab")); // true
+console.log(anagram("bumdle", "dumble")); // true
+console.log(anagram("a", "")); // false
+console.log(anagram("ab", "a")); // false
+console.log(anagram("ab", "cd")); // false
+console.log(anagram("codewars", "hackerrank")); //false
 
 // Задача 3. Панаграмма - текст, использующий все буквы алфавита (усложненная версия https://www.codewars.com/kata/545cedaa9943f7fe7b000048)
 function isPangram(string) {
@@ -46,15 +46,15 @@ function isPangram(string) {
   return true;
 }
 
-// console.log(isPangram("This isnt a pangram!")); // false
-// console.log(isPangram("abcdefghijklmopqrstuvwxyz")); // false
-// console.log(isPangram("Detect Pangram")); // false
-// console.log(isPangram("abcdefghijk lmnopqrstuvwxyz")); // true
-// console.log(isPangram("Cwm fjord bank glyphs vext quiz")); // true
-// console.log(isPangram("Pack my box with five dozen liquor jugs.")); // true
-// console.log(isPangram("How quickly daft jumping zebras vex.")); // true
-// console.log(isPangram("ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ")); // true
-// console.log(isPangram("AbCdEfGhIjKlM zYxWvUtSrQpOn")); // true
+console.log(isPangram("This isnt a pangram!")); // false
+console.log(isPangram("abcdefghijklmopqrstuvwxyz")); // false
+console.log(isPangram("Detect Pangram")); // false
+console.log(isPangram("abcdefghijk lmnopqrstuvwxyz")); // true
+console.log(isPangram("Cwm fjord bank glyphs vext quiz")); // true
+console.log(isPangram("Pack my box with five dozen liquor jugs.")); // true
+console.log(isPangram("How quickly daft jumping zebras vex.")); // true
+console.log(isPangram("ABCD45EFGH,IJK,LMNOPQR56STUVW3XYZ")); // true
+console.log(isPangram("AbCdEfGhIjKlM zYxWvUtSrQpOn")); // true
 
 // Задание 4. Палиндром (с доп условиями)
 // - Не учитывать пробелы и знаки
