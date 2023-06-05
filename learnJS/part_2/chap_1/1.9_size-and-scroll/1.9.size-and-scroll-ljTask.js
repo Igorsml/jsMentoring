@@ -63,8 +63,8 @@ const positionBallWidth = field.clientWidth / 2;
 const ballWidth = ball.clientWidth / 2;
 const ballHeight = ball.clientHeight / 2;
 
-ball.style.top = positionBallHeight - ballWidth + "px";
-ball.style.left = positionBallWidth - ballHeight + "px";
+ball.style.top = positionBallHeight - ballHeight + "px";
+ball.style.left = positionBallWidth - ballWidth + "px";
 
 /* В чём отличие между getComputedStyle(elem).width и elem.clientWidth?
 Укажите хотя бы 3 отличия, лучше – больше. */

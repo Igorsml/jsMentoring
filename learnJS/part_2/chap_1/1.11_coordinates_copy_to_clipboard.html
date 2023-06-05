@@ -1,0 +1,27 @@
+                {% if product.sku %}
+                <div style="display: flex; font-size: 14px; color: #848488; width: 100%; justify-content: flex-end;">
+                  (арт.&nbsp;
+                  <div onclick="showPopup()" class="popup" id="sku-field">
+                    <span class="click" id="variant-sku" style="font-size: 14px;" data-clipboard-text="{{ product.sku
+                    }}">{{ product.sku}}</span>
+                    <span id="popup" class="popuptext">Скопировано</span>)
+                  </div>
+                </div>
+
+                <script>
+                  $('.click').on('click', function () {
+                    value = $(this).data('clipboard-text');
+                    const $temp = $("<input>");
+                    $("body").append($temp);
+                    $temp.val(value).select();
+                    document.execCommand("copy");
+                    $temp.remove();
+                  })
+
+                  function showPopup() {
+                    const span = document.querySelector("#popup");
+                    span.classList.add("show");
+                    setTimeout(() => span.classList.remove("show"), 1e3);
+                  }
+                </script>
+                {% endif %}
