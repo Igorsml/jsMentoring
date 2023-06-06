@@ -1,0 +1,146 @@
+html,
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  header {
+    flex-shrink: 0;
+  }
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  header {
+    background-color: #333;
+    padding: 10px;
+  }
+
+  code {
+    background: rgb(250, 250, 250);
+    color: rgb(56, 58, 66);
+    font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 2;
+    hyphens: none;
+    padding: 1em;
+    margin: 0.5em 0px;
+    overflow: auto;
+    border-radius: 0.3em;
+  }
+
+  .main {
+    display: flex;
+    align-items: space-between;
+  }
+
+  .main .img-item {
+    margin: 0 10px;
+  }
+
+  .main .img-item img {
+    width: 300px;
+    height: 220px;
+    margin-bottom: 90px;
+  }
+
+  h1 {
+    margin: 10px;
+    color: #fff;
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .accordion {
+    background-color: #ffffff;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: 1px solid rgb(165, 165, 165);
+    border-radius: 10px;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    transition: 0.4s;
+  }
+
+  .accordion.active,
+  .accordion:hover {
+    background-color: #e7f1ff;
+    color: #0c63e4;
+  }
+
+  .panel {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+
+  .panel.show {
+    max-height: 500px;
+  }
+
+  .btn-section {
+    background-color: #f0efef;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    margin: 10px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color .2s linear;
+  }
+
+  .btn:hover {
+    background-color: #72c775;
+  }
+
+  .actual {
+    border: 1px solid rgba(255, 0, 0, 0.7);
+  }
+
+  footer {
+    background-color: #333;
+    padding: 30px;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  footer p {
+    color: white;
+    font-size: 25px;
+    margin: 0;
+  }
+
+  footer span {
+    display: block;
+    color: rgb(165, 165, 165);
+    font-size: 15px;
+    margin-top: 10px;
+  }

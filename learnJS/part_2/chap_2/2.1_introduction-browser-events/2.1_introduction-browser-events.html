@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <a href="javascript:void(0);" onclick="razmeryScroll();">ЗДЕСЬ</a>
+
+
+  <h2>Task #1. Скрыть элемент по нажатию кнопки</h2>
+  <p>Добавьте JavaScript к кнопке button, чтобы при нажатии
+    div id="text" исчезал. элемент></p>
+
+  <button id="textHide" onclick="hideText()">Исчезновение</button>
+  <div id="text">Исчезни меня</div>
+
+  <script>
+    const text = document.querySelector('#text');
+    const button = document.querySelector('#textHide');
+
+    const hideText = () => text.remove();
+    text.addEventListener('click', hideText);
+  </script>
+
+  <code>
+    const text = document.querySelector('#text');
+    const button = document.querySelector('#textHide');
+
+    const hideText = () => text.remove();
+    text.addEventListener('click', hideText);
+    </code>
+
+  <h2>Task #2. Спрятать себя</h2>
+  Создайте кнопку, которая будет скрывать себя по нажатию.</p>
+
+  <button id="hideMe" onclick="removeButton()">Hide me</button>
+
+  <script>
+    const button2 = document.querySelector('#hideMe');
+
+    const removeButton = () => button2.addEventListener('click', button2.remove());
+  </script>
+
+  <code>
+    const button2 = document.querySelector('#hideMe');
+    const removeButton = () => button2.addEventListener('click', button2.remove());
+    </code>
+
+  <div id="razmery">РАЗМЕРЫ</span>
+
+
+    <script>
+      const razmeryTab = document.querySelector('#razmery');
+      // console.log('razmeryTab:', razmeryTab)
+      const razmeryTabActive = document.querySelector('.prop-Razmery');
+      // console.log('razmeryTabActive:', razmeryTabActive)
+
+      function razmery() {
+        razmeryTabActive.style.display = 'block';
+        razmeryTab.addEventListener('click', razmeryTab.scrollIntoView({
+          behavior: 'smooth'
+        }))
+      };
+    </script>
+    <h2>Task #3. Какой обработчик запустится?</h2>
+    <p>В переменной button находится кнопка. Изначально на ней нет обработчиков.
+      Который из обработчиков запустится? Что будет выведено при клике после выполнения кода?</p>
+
+    <code>
+      button.addEventListener("click", () => alert("1"));
+      button.removeEventListener("click", () => alert("1"));
+      button.onclick = () => alert(2);
+
+      Answer: 1, 2. onclick сработает вне зависимости от addEventListener. Чтобы сработывал addEventListener и removeEventListener корректно нужно добавить отдельную функцию вторым аргументом.
+    </code>
+
+    <h2>Task #4. Передвиньте мяч по полю</h2>
+    <p>Пусть мяч перемещается при клике на поле, туда, куда был клик, вот так:
+      Требования:
+      Центр мяча должен совпадать с местом нажатия мыши (если это возможно без пересечения краёв поля);
+      CSS-анимация желательна, но не обязательна;
+      Мяч ни в коем случае не должен пересекать границы поля;
+      При прокрутке страницы ничего не должно ломаться;
+      Код должен уметь работать с различными размерами мяча и поля, не привязываться к каким-либо фиксированным
+      значениям.
+      Используйте свойства event.clientX/event.clientY для определения координат мыши при клике.</p>
+    Нажмите на поле для перемещения мяча.
+    <br> Мяч не должен выходить за границы поля.
+
+
+    <div id="field">
+      <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+      . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+
+    <style>
+      #field {
+        width: 200px;
+        height: 150px;
+        border: 10px solid black;
+        background-color: #00FF00;
+        overflow: hidden;
+      }
+    </style>
+
+    <script>
+      const field = document.querySelector('#filed');
+      const ball = document.querySelector('#ball');
+
+      field.addEventListener('click', 
+    </script>
+
+    <h2>Task #5. Cоздать раскрывающееся меню</h2>
+    <p>Создать меню, которое по нажатию открывается либо закрывается:
+      P.S. HTML/CSS исходного документа можно и нужно менять.</p>
+
+
+    <h2>Task #6.Добавить кнопку закрытия</h2>
+    Есть список сообщений.
+    При помощи JavaScript для каждого сообщения добавьте в верхний правый угол кнопку закрытия.
+
+
+    <h2>Task #7.Карусель</h2>
+    <p>Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки. В дальнейшем
+      к ней можно будет добавить анимацию, динамическую подгрузку и другие возможности.
+      P.S. В этой задаче разработка структуры HTML/CSS составляет 90% решения.</p>
+</body>
+
+</html>
