@@ -94,45 +94,65 @@
     <br> Мяч не должен выходить за границы поля.
 
 
-    <div id="field">
-      <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-      . . . . . . . . . . .
-      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-      . . . . . . . . . . . . . . . . . . . . . . .
-    </div>
+    <!-- <div id="field"> -->
+    <!-- <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . -->
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
 
-    <style>
-      #field {
-        width: 200px;
-        height: 150px;
-        border: 10px solid black;
-        background-color: #00FF00;
-        overflow: hidden;
-      }
-    </style>
+  <style>
+    #field {
+      width: 200px;
+      height: 150px;
+      border: 10px solid black;
+      background-color: #00FF00;
+      overflow: hidden;
+    }
+  </style>
 
-    <script>
-      const field = document.querySelector('#filed');
-      const ball = document.querySelector('#ball');
+  <script>
+    const field = document.querySelector('#filed');
+    const ball = document.querySelector('#ball');
 
-      field.addEventListener('click', 
-    </script>
+      // field.addEventListener('click', 
+  </script>
 
-    <h2>Task #5. Cоздать раскрывающееся меню</h2>
-    <p>Создать меню, которое по нажатию открывается либо закрывается:
-      P.S. HTML/CSS исходного документа можно и нужно менять.</p>
+  <h2>Task #5. Cоздать раскрывающееся меню</h2>
+  <p>Создать меню, которое по нажатию открывается либо закрывается:
+    P.S. HTML/CSS исходного документа можно и нужно менять.</p>
 
 
-    <h2>Task #6.Добавить кнопку закрытия</h2>
-    Есть список сообщений.
+  <h2>Task #6.Добавить кнопку закрытия</h2>
+  <p>Есть список сообщений.
     При помощи JavaScript для каждого сообщения добавьте в верхний правый угол кнопку закрытия.
+    Сладости (нажми меня)!</p>
+  <a class="sweetLink" href="javascript:void(0);" id="sweet">Сладости (нажми меня)!</a>
+  <ul class="sweetList" id="sweet-list">
+    <li>Пирожное</li>
+    <li>Пончик</li>
+    <li>Мёд</li>
+  </ul>
 
+  <script>
+    const href = document.querySelector('#sweet');
+    const list = document.querySelector('#sweet-list');
 
-    <h2>Task #7.Карусель</h2>
-    <p>Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки. В дальнейшем
-      к ней можно будет добавить анимацию, динамическую подгрузку и другие возможности.
-      P.S. В этой задаче разработка структуры HTML/CSS составляет 90% решения.</p>
+    href.addEventListener('click', () => list.classList.toggle('hide'));
+  </script>
+
+  <code>
+    const href = document.querySelector('#sweet');
+    const list = document.querySelector('#sweet-list');
+
+    href.addEventListener('click', () => list.classList.toggle('hide'));
+  </code>
+
+  <h2>Task #7.Карусель</h2>
+  <p>Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки. В дальнейшем
+    к ней можно будет добавить анимацию, динамическую подгрузку и другие возможности.
+    P.S. В этой задаче разработка структуры HTML/CSS составляет 90% решения.</p>
 </body>
 
 </html>
