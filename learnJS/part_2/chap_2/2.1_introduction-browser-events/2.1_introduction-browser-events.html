@@ -233,6 +233,7 @@
 
   <script>
     const buttonLeft = document.querySelector('.arrow-left');
+    buttonLeft.disabled = true;
     const buttonRight = document.querySelector('.arrow-right');
     const slides = document.querySelectorAll('.carousel-img');
 
@@ -241,8 +242,17 @@
     let currentSlide = 0;
     const maxSlidesCount = slides.length - 1;
 
+    const disableButton = () => {
+      buttonLeft.disabled = true;
+    };
+
+    const enableButton = () => {
+      buttonLeft.disabled = false;
+    };
+
     buttonRight.addEventListener('click', event => {
       currentSlide === maxSlidesCount ? currentSlide = 0 : currentSlide += 1;
+      enableButton();
 
       slides.forEach((slide, indx) => {
         slide.style.transform = `translateX(${100 * (indx - currentSlide)}%)`;
@@ -251,8 +261,7 @@
 
     buttonLeft.addEventListener('click', event => {
       if (currentSlide === 0) {
-        currentSlide = maxSlide;
-        buttonLeft.style.disbaled = true;
+        disableButton();
       } else {
         currentSlide -= 1;
       }
@@ -264,7 +273,43 @@
   </script>
 
   <code>
+    const buttonLeft = document.querySelector('.arrow-left');
+    const buttonRight = document.querySelector('.arrow-right');
+    const slides = document.querySelectorAll('.carousel-img');
 
+    slides.forEach((slide, index) => slide.style.transform = `translateX(${index * 100}%`);
+
+    let currentSlide = 0;
+    const maxSlidesCount = slides.length - 1;
+
+    const disableButton = () => {
+      buttonLeft.disabled = true;
+    };
+
+    const enableButton = () => {
+      buttonLeft.disabled = false;
+    };
+
+    buttonRight.addEventListener('click', event => {
+      currentSlide === maxSlidesCount ? currentSlide = 0 : currentSlide += 1;
+      enableButton();
+
+      slides.forEach((slide, indx) => {
+        slide.style.transform = `translateX(${100 * (indx - currentSlide)}%)`;
+      });
+    });
+
+    buttonLeft.addEventListener('click', event => {
+      if (currentSlide === 0) {
+        disableButton();
+      } else {
+        currentSlide -= 1;
+      }
+
+      slides.forEach((slide, indx) => {
+        slide.style.transform = `translateX(${100 * (indx - currentSlide)}%)`;
+      });
+    });
     </code>
 </body>
 

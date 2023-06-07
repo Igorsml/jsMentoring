@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;600;700&display=swap');
+
 html,
   body {
     margin: 0;
@@ -22,12 +24,10 @@ html,
     padding: 10px;
   }
 
-  code {
-    display: block;
-    width: 100%;
-    min-height: 15%;
-    background: rgb(250, 250, 250);
-    color: rgb(56, 58, 66);
+  
+   code {
+    background: rgb(250, 223, 169);
+    color: rgb(56, 56, 56);
     font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
     direction: ltr;
     text-align: left;
@@ -41,6 +41,7 @@ html,
     margin: 0.5em 0px;
     overflow: auto;
     border-radius: 0.3em;
+    box-shadow: #333;
   }
 
   hr {
@@ -93,6 +94,13 @@ html,
   button:active {
     background-color: #4ceeb0;
   }
+
+  button:disabled,
+  button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
 
   .hide {
     display: none;
@@ -192,10 +200,10 @@ html,
 
 .arrow-left {
   top: 45%;
-  left: 2%;
+  left: 0%;
 }
 
 .arrow-right {
   top: 45%;
-  right: 2%;
+  right: 0%;
 }
