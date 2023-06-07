@@ -10,9 +10,6 @@
 </head>
 
 <body>
-  <a href="javascript:void(0);" onclick="razmeryScroll();">ЗДЕСЬ</a>
-
-
   <h2>Task #1. Скрыть элемент по нажатию кнопки</h2>
   <p>Добавьте JavaScript к кнопке button, чтобы при нажатии
     div id="text" исчезал. элемент></p>
@@ -36,6 +33,8 @@
     text.addEventListener('click', hideText);
     </code>
 
+  <hr>
+
   <h2>Task #2. Спрятать себя</h2>
   Создайте кнопку, которая будет скрывать себя по нажатию.</p>
 
@@ -43,7 +42,6 @@
 
   <script>
     const button2 = document.querySelector('#hideMe');
-
     const removeButton = () => button2.addEventListener('click', button2.remove());
   </script>
 
@@ -52,82 +50,79 @@
     const removeButton = () => button2.addEventListener('click', button2.remove());
     </code>
 
-  <div id="razmery">РАЗМЕРЫ</span>
+  <hr>
 
+  <h2>Task #3. Какой обработчик запустится?</h2>
+  <p>В переменной button находится кнопка. Изначально на ней нет обработчиков.
+    Который из обработчиков запустится? Что будет выведено при клике после выполнения кода?</p>
 
-    <script>
-      const razmeryTab = document.querySelector('#razmery');
-      // console.log('razmeryTab:', razmeryTab)
-      const razmeryTabActive = document.querySelector('.prop-Razmery');
-      // console.log('razmeryTabActive:', razmeryTabActive)
-
-      function razmery() {
-        razmeryTabActive.style.display = 'block';
-        razmeryTab.addEventListener('click', razmeryTab.scrollIntoView({
-          behavior: 'smooth'
-        }))
-      };
-    </script>
-    <h2>Task #3. Какой обработчик запустится?</h2>
-    <p>В переменной button находится кнопка. Изначально на ней нет обработчиков.
-      Который из обработчиков запустится? Что будет выведено при клике после выполнения кода?</p>
-
-    <code>
+  <code>
       button.addEventListener("click", () => alert("1"));
       button.removeEventListener("click", () => alert("1"));
       button.onclick = () => alert(2);
 
-      Answer: 1, 2. onclick сработает вне зависимости от addEventListener. Чтобы сработывал addEventListener и removeEventListener корректно нужно добавить отдельную функцию вторым аргументом.
+      Answer: 1, 2. onclick сработает вне зависимости от addEventListener. 
+      Чтобы сработывал addEventListener и removeEventListener 
+      корректно нужно добавить отдельную функцию вторым аргументом.
     </code>
 
-    <h2>Task #4. Передвиньте мяч по полю</h2>
-    <p>Пусть мяч перемещается при клике на поле, туда, куда был клик, вот так:
-      Требования:
-      Центр мяча должен совпадать с местом нажатия мыши (если это возможно без пересечения краёв поля);
-      CSS-анимация желательна, но не обязательна;
-      Мяч ни в коем случае не должен пересекать границы поля;
-      При прокрутке страницы ничего не должно ломаться;
-      Код должен уметь работать с различными размерами мяча и поля, не привязываться к каким-либо фиксированным
-      значениям.
-      Используйте свойства event.clientX/event.clientY для определения координат мыши при клике.</p>
-    Нажмите на поле для перемещения мяча.
-    <br> Мяч не должен выходить за границы поля.
+  <hr>
+
+  <h2>Task #4. Передвиньте мяч по полю</h2>
+  <p>Пусть мяч перемещается при клике на поле, туда, куда был клик, вот так:
+    Требования:
+    Центр мяча должен совпадать с местом нажатия мыши (если это возможно без пересечения краёв поля);
+    CSS-анимация желательна, но не обязательна;
+    Мяч ни в коем случае не должен пересекать границы поля;
+    При прокрутке страницы ничего не должно ломаться;
+    Код должен уметь работать с различными размерами мяча и поля, не привязываться к каким-либо фиксированным
+    значениям.
+    Используйте свойства event.clientX/event.clientY для определения координат мыши при клике.</p>
+  Нажмите на поле для перемещения мяча.
+  <br> Мяч не должен выходить за границы поля.
 
 
-    <!-- <div id="field"> -->
-    <!-- <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . -->
+  <div id="field">
+    <img src="https://ru.js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     . . . . . . . . . . .
     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     . . . . . . . . . . . . . . . . . . . . . . .
   </div>
 
-  <style>
-    #field {
-      width: 200px;
-      height: 150px;
-      border: 10px solid black;
-      background-color: #00FF00;
-      overflow: hidden;
-    }
-  </style>
-
   <script>
-    const field = document.querySelector('#filed');
+    const field = document.querySelector('#field');
     const ball = document.querySelector('#ball');
+    const ballGetBounding = ball.getBoundingClientRect();
 
-      // field.addEventListener('click', 
+
+    field.addEventListener('click', event => {
+      const xPosition = event.clientX - field.getBoundingClientRect().left - (ball.clientWidth / 2);
+      const yPosition = event.clientY - field.getBoundingClientRect().top - (ball.clientHeight / 2);
+
+      ball.style.left = xPosition + "px";
+      ball.style.top = yPosition + "px";
+    })
   </script>
 
+  <code>
+    const field = document.querySelector('#field');
+    const ball = document.querySelector('#ball');
+    const ballGetBounding = ball.getBoundingClientRect();
+
+    field.addEventListener('click', event => {
+      const xPosition = event.clientX - field.getBoundingClientRect().left - (ball.clientWidth / 2);
+      const yPosition = event.clientY - field.getBoundingClientRect().top - (ball.clientHeight / 2);
+
+      ball.style.left = xPosition + "px";
+      ball.style.top = yPosition + "px";
+    })
+  </code>
+
+  <hr>
+
   <h2>Task #5. Cоздать раскрывающееся меню</h2>
-  <p>Создать меню, которое по нажатию открывается либо закрывается:
-    P.S. HTML/CSS исходного документа можно и нужно менять.</p>
-
-
-  <h2>Task #6.Добавить кнопку закрытия</h2>
-  <p>Есть список сообщений.
-    При помощи JavaScript для каждого сообщения добавьте в верхний правый угол кнопку закрытия.
-    Сладости (нажми меня)!</p>
+  <p>Создать меню, которое по нажатию открывается либо закрывается:</p>
   <a class="sweetLink" href="javascript:void(0);" id="sweet">Сладости (нажми меня)!</a>
   <ul class="sweetList" id="sweet-list">
     <li>Пирожное</li>
@@ -143,16 +138,134 @@
   </script>
 
   <code>
-    const href = document.querySelector('#sweet');
-    const list = document.querySelector('#sweet-list');
+      const href = document.querySelector('#sweet');
+      const list = document.querySelector('#sweet-list');
+  
+      href.addEventListener('click', () => list.classList.toggle('hide'));
+    </code>
 
-    href.addEventListener('click', () => list.classList.toggle('hide'));
+  <hr>
+
+  <h2>Task #6. Добавить кнопку закрытия</h2>
+  <p>Есть список сообщений.
+    При помощи JavaScript для каждого сообщения добавьте в верхний правый угол кнопку закрытия.
+    Результат должен выглядеть, как показано здесь:</p>
+
+
+  <div class="container">
+    <div class="pane">
+      <h3>Лошадь</h3>
+      <p>Домашняя лошадь — животное семейства непарнокопытных, одомашненный и единственный сохранившийся подвид дикой
+        лошади, вымершей в дикой природе, за исключением небольшой популяции лошади Пржевальского.</p>
+      <button class="remove-button">[x]</button>
+    </div>
+    <div class="pane">
+      <h3>Осёл</h3>
+      <p>Домашний осёл (лат. Equus asinus asinus), или ишак, — одомашненный подвид дикого осла (Equus asinus), сыгравший
+        важную историческую роль в развитии хозяйства и культуры человека и по-прежнему широко в хозяйстве многих
+        развивающихся стран.</p>
+      <button class="remove-button">[x]</button>
+    </div>
+    <div class="pane">
+      <h3>Кошка</h3>
+      <p>Кошка, или домашняя кошка (лат. Felis silvestris catus), — домашнее животное, одно из наиболее
+        популярных(наряду с собакой) «животных-компаньонов». Являясь одиночным охотником на грызунов и других мелких
+        животных, кошка — социальное животное, использующее для общения широкий диапазон звуковых сигналов.</p>
+      <button class="remove-button">[x]</button>
+    </div>
+  </div>
+
+  <script>
+    const deleteButton = document.querySelectorAll('.remove-button');
+    const pane = document.querySelectorAll('.pane');
+
+    document.querySelectorAll('.remove-button').forEach(item => {
+      item.addEventListener('click', function () {
+        item.closest('div').remove();
+      })
+    })
+  </script>
+
+  <code>
+    const deleteButton = document.querySelectorAll('.remove-button');
+    const pane = document.querySelectorAll('.pane');
+
+    document.querySelectorAll('.remove-button').forEach(item => {
+      item.addEventListener('click', function () {
+        item.closest('div').remove();
+      })
+    })
   </code>
 
-  <h2>Task #7.Карусель</h2>
+  <hr>
+
+  <h2>Task #7. Карусель</h2>
   <p>Создайте «Карусель» –- ленту изображений, которую можно листать влево-вправо нажатием на стрелочки. В дальнейшем
     к ней можно будет добавить анимацию, динамическую подгрузку и другие возможности.
     P.S. В этой задаче разработка структуры HTML/CSS составляет 90% решения.</p>
+
+
+  <div class="carousel">
+    <button class="arrow-left">➜</button>
+    <div class="slide">
+
+    </div>
+    <div class="slide">
+      <img class='carousel-img' src="./src/img1.webp" alt="img1" loading="lazy" />
+    </div>
+    <div class="slide">
+      <img class='carousel-img' src="./src/img2.webp" alt="img2" loading="lazy" />
+    </div>
+    <div class="slide">
+      <img class='carousel-img' src="./src/img3.webp" alt="img3" loading="lazy" />
+    </div>
+    <div class="slide">
+      <img class='carousel-img' src="./src/img4.webp" alt="img4" loading="lazy" />
+    </div>
+    <div class="slide">
+      <img class='carousel-img' src="./src/img5.webp" alt="img5" loading="lazy" />
+    </div>
+    <div class="slide">
+      <img class='carousel-img' src="./src/img6.webp" alt="img6" loading="lazy" />
+    </div>
+    <button class="arrow-right">➜</button>
+  </div>
+
+  <script>
+    const buttonLeft = document.querySelector('.arrow-left');
+    const buttonRight = document.querySelector('.arrow-right');
+    const slides = document.querySelectorAll('.carousel-img');
+
+    slides.forEach((slide, index) => slide.style.transform = `translateX(${index * 100}%`);
+
+    let currentSlide = 0;
+    const maxSlidesCount = slides.length - 1;
+
+    buttonRight.addEventListener('click', event => {
+      currentSlide === maxSlidesCount ? currentSlide = 0 : currentSlide += 1;
+
+      slides.forEach((slide, indx) => {
+        slide.style.transform = `translateX(${100 * (indx - currentSlide)}%)`;
+      });
+    });
+
+    buttonLeft.addEventListener('click', event => {
+      if (currentSlide === 0) {
+        currentSlide = maxSlide;
+        buttonLeft.style.disbaled = true;
+      } else {
+        currentSlide -= 1;
+      }
+
+      slides.forEach((slide, indx) => {
+        slide.style.transform = `translateX(${100 * (indx - currentSlide)}%)`;
+      });
+    });
+  </script>
+
+  <code>
+
+    </code>
 </body>
 
 </html>
