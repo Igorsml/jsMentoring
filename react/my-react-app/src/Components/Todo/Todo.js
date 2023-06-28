@@ -6,7 +6,7 @@ import css from "./Todo.module.css";
 export const Todo = observer(() => {
   return (
     <div>
-      <h2>Todo:</h2>
+      <h2>Todo. Mobx</h2>
       <div className={css.btnWrap}>
         <button className={css.btn} onClick={() => todo.fetchTodos()}>
           Get todo's

@@ -10,8 +10,9 @@ export const Input = () => {
 
   return (
     <div>
+      <h2>Input. useState</h2>
       <input placeholder="just typing" onChange={onChange} />
-      {inputValue}
+      <div>{inputValue}</div>
     </div>
   );
 };

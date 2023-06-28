@@ -9,17 +9,17 @@ export class Timer extends React.Component {
   }
 
   componentDidMount() {
-    console.log("componentDidMount");
+    // console.log("componentDidMount");
     this.timerId = setInterval(() => this.tick(), 1000);
   }
 
   componentWillUnmount() {
-    console.log("componentWillUnmount");
+    // console.log("componentWillUnmount");
     clearInterval(this.timerId);
   }
 
   tick() {
-    console.log("tick");
+    // console.log("tick");
     this.setState({ date: new Date() });
   }
 
