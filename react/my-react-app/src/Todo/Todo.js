@@ -4,9 +4,9 @@ import todo from "../store/todo";
 import css from "./Todo.module.css";
 
 export const Todo = observer(() => {
-  console.log("render");
   return (
     <div>
+      <h2>Todo:</h2>
       <div className={css.btnWrap}>
         <button className={css.btn} onClick={() => todo.fetchTodos()}>
           Get todo's
