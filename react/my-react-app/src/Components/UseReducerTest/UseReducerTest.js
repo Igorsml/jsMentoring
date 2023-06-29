@@ -18,6 +18,7 @@ export const UseReducerTest = () => {
 
   return (
     <div>
+      <h2>useReducer</h2>
       {/* <h2>{count}</h2> */}
       <h2>{state.count}</h2>
       <button

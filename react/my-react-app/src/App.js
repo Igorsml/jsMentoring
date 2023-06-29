@@ -4,7 +4,7 @@ import "./index.css";
 import { Counter } from "./Components/Counter/Counter";
 import { Todo } from "./Components/Todo/Todo";
 import { Timer } from "./Components/Timer/Timer";
-import { Input } from "./Components/Input/Input";
+import { UseStateTest } from "./Components/UseStateTest/UseStateTest";
 import { UseReducerTest } from "./Components/UseReducerTest/UseReducerTest";
 import { UseEffectTest } from "./Components/UseEffectTest/UseEffectTest";
 import { UseRefTest } from "./Components/UseRefTest/UseRefTest";
@@ -15,15 +15,24 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Counter />
-        <Timer />
-        <Input />
-        <UseReducerTest />
-        <UseEffectTest />
+        <UseStateTest />
+        <hr />
         <UseRefTest />
+        <hr />
+        <UseReducerTest />
+        <hr />
+        <UseEffectTest />
+        <hr />
         <UseLayoutEffectTest />
+        <hr />
         <UseContextTest />
+        <hr />
+        <Timer />
+        <hr />
+        <Counter />
+        <hr />
         <Todo />
+        <hr />
       </header>
     </div>
   );

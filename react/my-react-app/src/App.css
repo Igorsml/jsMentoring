@@ -10,7 +10,6 @@
 
 .App-header {
   background-color: #282c34;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,9 +32,46 @@
   }
 }
 
+input[type="text"] {
+  border-radius: 0.3em;
+    caret-color: #6faeff;
+    font-size: 1em;
+    height: 1vh;
+    margin-right: 1em;
+    outline: none;
+    padding: 1em;
+    width: 30vw;
+    margin-bottom: 1em;
+}
+
 hr {
   margin: 30px 0;
   border: 0;
   height: 2px;
+  width: 80%;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgb(213, 213, 213), rgba(0, 0, 0, 0));
+}
+
+button {
+  display: inline-block;
+  text-decoration: none;
+  margin: 10px;
+  width: fit-content;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color .2s linear;
+}
+
+button:hover {
+  background-color: #72c775;
+}
+
+button:active {
+  background-color: #4ceeb0;
 }

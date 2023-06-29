@@ -6,7 +6,10 @@ const Login = (props) => {
 
   return (
     <div>
-      <input onChange={(event) => setUserName(event.target?.value)}></input>
+      <input
+        type="text"
+        onChange={(event) => setUserName(event.target?.value)}
+      ></input>
 
       {/* <input
         onChange={(event) => props?.setUserName(event.target?.value)}

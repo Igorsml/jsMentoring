@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Input = () => {
+export const UseStateTest = () => {
   const [inputValue, SetInputValue] = useState("Abob");
 
   let onChange = (event) => {
@@ -10,8 +10,8 @@ export const Input = () => {
 
   return (
     <div>
-      <h2>Input. useState</h2>
-      <input placeholder="just typing" onChange={onChange} />
+      <h2>useState</h2>
+      <input type="text" laceholder="just typing" onChange={onChange} />
       <div>{inputValue}</div>
     </div>
   );

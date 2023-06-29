@@ -6,7 +6,7 @@ const User = (props) => {
 
   return (
     <div>
-      <h1>User: {userName}</h1>
+      <h3>User: {userName}</h3>
 
       {/* <h1>User: {props?.userName}</h1> */}
     </div>

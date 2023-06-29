@@ -12,23 +12,28 @@
 }
 
 .btn {
-  font-size: 20px;
+  font-size: 2em;
   font-weight: 500;
+  background-color: #fff;
   color: rgb(54, 54, 54);
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 35px;
   border-radius: 10px;
+  padding: 0;
   border: 1px solid #ccc;
   cursor: pointer;
   opacity: 1;
-  transition: opacity .2s linear;
+  transition: background-color .2s linear;
 }
 
 .btn:hover {
-  opacity: .8;
-  transition: opacity .2s linear;
+  background-color: rgb(95, 95, 95);
+  color: #fff;
+  transition: background-color .2s linear;
 }
 
 .btn:active {
-  opacity: 1;
+  background-color: #fff;
+  color: rgb(54, 54, 54);
+  background-color: 1;
 }
