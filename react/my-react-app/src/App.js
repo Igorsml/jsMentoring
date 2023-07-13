@@ -10,12 +10,21 @@ import { UseEffectTest } from "./Components/UseEffectTest/UseEffectTest";
 import { UseRefTest } from "./Components/UseRefTest/UseRefTest";
 import { UseLayoutEffectTest } from "./Components/UseLayoutEffectTest/UseLayoutEffectTest";
 import { UseContextTest } from "./Components/UseContextTest/UseContextTest";
+import { ReactMemo } from "./Components/ReactMemo/ReactMemo";
+import { CenteredBox } from "./Components/Children/CenteredBox.tsx";
+import { Box } from "./Components/Children/Box.tsx";
+import { Button } from "./Components/Children/Button.tsx";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <UseStateTest />
+        <hr />
+        <ReactMemo />
+        <Box />
+        <CenteredBox />
+        <Button />
+        {/* <UseStateTest />
         <hr />
         <UseRefTest />
         <hr />
@@ -32,7 +41,7 @@ function App() {
         <Counter />
         <hr />
         <Todo />
-        <hr />
+        <hr /> */}
       </header>
     </div>
   );
