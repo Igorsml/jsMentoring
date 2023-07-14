@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/jsMentoring/static/css/main.95fab403.css",
-    "main.js": "/jsMentoring/static/js/main.e734dff1.js",
+    "main.css": "/jsMentoring/static/css/main.f046579d.css",
+    "main.js": "/jsMentoring/static/js/main.21fdc327.js",
     "index.html": "/jsMentoring/index.html",
-    "main.95fab403.css.map": "/jsMentoring/static/css/main.95fab403.css.map",
-    "main.e734dff1.js.map": "/jsMentoring/static/js/main.e734dff1.js.map"
+    "main.f046579d.css.map": "/jsMentoring/static/css/main.f046579d.css.map",
+    "main.21fdc327.js.map": "/jsMentoring/static/js/main.21fdc327.js.map"
   },
   "entrypoints": [
-    "static/css/main.95fab403.css",
-    "static/js/main.e734dff1.js"
+    "static/css/main.f046579d.css",
+    "static/js/main.21fdc327.js"
   ]
 }
