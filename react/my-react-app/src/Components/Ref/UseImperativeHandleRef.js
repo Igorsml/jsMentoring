@@ -1,4 +1,5 @@
 import { useRef, forwardRef, useImperativeHandle } from "react";
+import scss from "./Ref.module.scss";
 
 export const UseImperativeHandleRef = () => {
   const methodsRef = useRef();
@@ -33,5 +34,5 @@ const FocusableInput = forwardRef(function (props, ref) {
     []
   );
 
-  return <input type="text" ref={inputRef} />;
+  return <input className={scss.inputRef} type="text" ref={inputRef} />;
 });

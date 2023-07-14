@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import scss from './Box';
 
 type BoxProps ={
   className?: string;
-  children: any;
+  children: ReactNode; // люлбое кол-во элементов, если нет чилндренов то нельзя
 }
 
-export const Box = ({children, className}: BoxProps) => {
+const Box = ({children, className}: BoxProps) => {
   return (
     <div className={className}>
       {children}
@@ -15,3 +15,11 @@ export const Box = ({children, className}: BoxProps) => {
 };
 
 
+export const BoxChildren = () => {
+  return (
+    <Box>
+      <p>Test1</p>
+      <button>Puck</button> 
+     </Box> 
+  )
+}

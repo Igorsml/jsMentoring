@@ -4,18 +4,17 @@ import RefChildForwarded from "./RefChild";
 // import { UseImperativeHandleRef } from "./UseImperativeHandleRef";
 
 export const Ref = () => {
-  const ref = useRef < HTMLDivElement > null;
+  const ref = useRef(null);
 
   useEffect(() => {
-    console.log("ref:", ref.current); // undefined
+    console.log("ref:", ref.current); // undefined если без forwardRef и Hello, Aboba forwardRef> если c
   }, []);
 
   return (
     <div>
-      <p>Parent</p>
+      <h1>Ref</h1>
       <RefChild ref={ref} />
       <RefChildForwarded ref={ref} />
-      {/* <UseImperativeHandleRef ref={ref} /> */}
     </div>
   );
 };

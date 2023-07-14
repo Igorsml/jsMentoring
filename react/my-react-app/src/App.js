@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "./index.css";
 import { Counter } from "./Components/Counter/Counter";
@@ -11,27 +11,32 @@ import { UseRefTest } from "./Components/UseRefTest/UseRefTest";
 import { UseLayoutEffectTest } from "./Components/UseLayoutEffectTest/UseLayoutEffectTest";
 import { UseContextTest } from "./Components/UseContextTest/UseContextTest";
 import { ReactMemo } from "./Components/ReactMemo/ReactMemo";
-import { CenteredBox } from "./Components/Children/CenteredBox.tsx";
-import { Box } from "./Components/Children/Box.tsx";
+import { BoxChildren } from "./Components/Children/Box.tsx";
 import { Button } from "./Components/Children/Button.tsx";
 import { Ref } from "./Components/Ref/Ref";
 import { UseImperativeHandleRef } from "./Components/Ref/UseImperativeHandleRef";
+import PortalModal from "./Components/PortalModal/PortalModal";
 
 function App() {
+  const [open, setOpen] = useState(false);
   return (
     <div className="App">
       <header className="App-header">
+        <button onClick={() => setOpen(true)}> Open / Close</button>
+        <PortalModal open={open} onClose={() => setOpen(false)}>
+          Zopa
+        </PortalModal>
+        <hr />
         <UseImperativeHandleRef />
         <hr />
         <Ref />
         <hr />
         <ReactMemo />
         <hr />
-        <Box />
+        <BoxChildren />
         <hr />
-        <CenteredBox />
-        <hr />
-        <Button />
+
+        {/* <Button /> */}
         {/* <UseStateTest />
         <hr />
         <UseRefTest />

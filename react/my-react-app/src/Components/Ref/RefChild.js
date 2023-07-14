@@ -13,9 +13,11 @@ export const RefChild = (props, { ref }) => {
 const RefChildForwarded = forwardRef((props, ref) => {
   return (
     <div ref={ref}>
-      <p>Hello, Aboba</p>
+      <p>Hello, Aboba forwardRef</p>
     </div>
   );
 });
+
+RefChild.displayName = "RefChild";
 
 export default RefChildForwarded;
