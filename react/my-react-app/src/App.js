@@ -14,15 +14,23 @@ import { ReactMemo } from "./Components/ReactMemo/ReactMemo";
 import { CenteredBox } from "./Components/Children/CenteredBox.tsx";
 import { Box } from "./Components/Children/Box.tsx";
 import { Button } from "./Components/Children/Button.tsx";
+import { Ref } from "./Components/Ref/Ref";
+import { UseImperativeHandleRef } from "./Components/Ref/UseImperativeHandleRef";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <UseImperativeHandleRef />
+        <hr />
+        <Ref />
         <hr />
         <ReactMemo />
+        <hr />
         <Box />
+        <hr />
         <CenteredBox />
+        <hr />
         <Button />
         {/* <UseStateTest />
         <hr />
