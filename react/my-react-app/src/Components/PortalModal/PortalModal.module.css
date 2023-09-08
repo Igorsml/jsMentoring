@@ -1,0 +1,23 @@
+.modalBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  filter: blur(2.2);
+}
+
+.modalCard {
+  background-color: white;
+  padding: 100px;
+  font-size: 3em;
+  border: 2px solid #ccc;
+  box-shadow: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+}/*# sourceMappingURL=PortalModal.module.css.map */

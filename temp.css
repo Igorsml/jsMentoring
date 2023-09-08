@@ -1,0 +1,56 @@
+:root {
+  --grey: #212121;
+  --grey-light: #f2f2f2;
+  --spot: #68ebbc;
+}
+
+details {
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+  font-size: 14px;
+  color: var(--grey);
+  background: var(--grey-light);
+  border-radius: 10px;
+  overflow: hidden;
+}
+details[open] {
+  padding-bottom: 20px;
+}
+details[open] summary {
+  margin-bottom: 10px;
+}
+details[open] summary::before {
+  transform: rotate(-135deg) translate(-30%, 0%);
+}
+details:not(:first-child) {
+  margin-top: 10px;
+}
+
+summary {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 16px;
+  transition: margin 0.3s ease-out;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+summary::before {
+  content: "";
+  display: block;
+  height: 6px;
+  flex: 0 0 6px;
+  margin-right: 20px;
+  border-right: 2px solid var(--grey);
+  border-bottom: 2px solid var(--grey);
+  transition: all 0.3s;
+  transform: rotate(45deg) translate(0, -30%);
+}
+
+.content {
+  padding: 0 20px;
+}/*# sourceMappingURL=temp.css.map */

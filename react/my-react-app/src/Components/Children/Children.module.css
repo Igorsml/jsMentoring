@@ -1,0 +1,12 @@
+.box {
+  padding: 2em;
+  border: 1px solid peru;
+}
+
+.centeredBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2em;
+  border: 3px solid green;
+}/*# sourceMappingURL=Children.module.css.map */
